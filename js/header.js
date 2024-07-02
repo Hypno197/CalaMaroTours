@@ -1,7 +1,11 @@
 const template =document.createElement('template')
 template.innerHTML =` <header>
     <!-- Navbar -->
+<<<<<<< HEAD
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+=======
+    <nav class="navbar navbar-expand-lg  ">
+>>>>>>> caf513a6fdf3eb6eca15247b6a73c2c2e0a2968a
       <!-- Container wrapper -->
       <div class="container-fluid">
         <!-- Toggle button -->
