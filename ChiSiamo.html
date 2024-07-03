@@ -2,17 +2,13 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="Css/Style.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi Siamo</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-
         .container {
             width: 80%;
             margin: 0 auto;
@@ -21,6 +17,11 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+        }
+
+        .colori {
+
+            background-color: (srgb #6e038c #E59114 #E6D3C0 #c35a42 #bc1304)
         }
 
         .section {
@@ -41,82 +42,81 @@
             padding: 0 20px;
         }
 
-        .carousel {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .carousel-item {
-            flex: 0 0 calc(33.33% - 20px);
-            margin-right: 20px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 300px;
-            border-radius: 8px;
-        }
-
-        .carousel-item .caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .carousel-item:hover .caption {
-            opacity: 1;
-        }
-
         .titolo {
-            color: red;
+            color: #E59114;
             text-align: center;
-        
+
+        }
+
+        .Sottotitolo {
+            color: #E59114;
+        }
+
+
+        /* Grandezza immagini cards */
+        .card-img-top-madda {
+            width: 100%;
+            height: 15vw;
+            object-fit: cover;
+
+        }
+
+        /* Centrare scritta delle cards */
+        .card-footer {
+            display: flex;
+            justify-content: center;
+            background-color: #E59114;
+        }
+
+        .colorelink {
+            text-decoration: none;
+            color: red;
+        }
+
+        /* Colori testo */
+        .minitesto {
+            color: #bc1304;
+            font-weight: bolder;
         }
     </style>
 </head>
 
 <body>
-<div class="titolo">
-    <h1>Chi siamo</h1>
-</div>
+    <script src="js/header.js"></script>
+    <div class="titolo">
+        <h1>Chi siamo</h1>
+    </div>
 
     <div class="container">
         <div class="section">
             <img src="img ChiSiamo/Roma2.jpg" alt="Immagine a sinistra">
             <div class="text">
-                <p>Cala Marò Tour Operator è un'azienda leader nel settore turistico, specializzata nella creazione di
-                    esperienze di viaggio indimenticabili in tutto il mondo. Fondata con la passione per l'esplorazione
+                <p>
+                    <span class="minitesto">Cala Marò Tour Operator</span>
+                    è un'azienda leader nel settore turistico, specializzata nella creazione di
+                    esperienze di viaggio indimenticabili in tutto il mondo.
+                    <br>
+                    Fondata con la passione per l'esplorazione
                     e la cura per i dettagli, ci impegniamo a offrire ai nostri clienti un servizio impeccabile e
                     un'ampia gamma di destinazioni affascinanti.
                     <br>
                     <br>
-                    La Nostra Storia:
+                    <span class="minitesto">La Nostra Storia: </span>                    
+                    <br>
                     Fondata nel 1998, Cala Marò Tour Operator è il frutto della passione di Luca Barreca
                     per il viaggio e la scoperta. Da allora, abbiamo costantemente ampliato il nostro portfolio di
                     destinazioni, collaborando con partner locali e internazionali per garantire esperienze autentiche e
                     personalizzate.
-                    br
-                    La Nostra Missione:
+                    <br>
+                    <br>
+                    <span class="minitesto">La Nostra Missione:</span>                    
+                    <br>
                     La missione di Cala Marò Tour Operator è quella di trasformare i sogni di viaggio dei nostri clienti
                     in
                     realtà. Ci impegniamo a superare le aspettative attraverso un servizio clienti impeccabile,
                     itinerari ben studiati e una cura per i dettagli che rende ogni viaggio unico e memorabile.
                     <br>
                     <br>
-                    Cosa Offriamo:
-                    Offriamo una vasta gamma di pacchetti turistici che spaziano dalle avventure all'aria aperta ai
-                    viaggi culturali e gastronomici. Ogni itinerario è progettato per soddisfare le esigenze e i
-                    desideri dei nostri clienti, garantendo sempre il massimo comfort e sicurezza.
 
 
             </div>
@@ -124,51 +124,98 @@
 
         <div class="section">
             <div class="text">
-                <p>Perché Sceglierci
+                <div class="Sottotitolo">
+                    <h3>Perché Sceglierci</h3>
+                </div>
+
+                <p>
                     <br>
+                    <span class="minitesto">Esperienza:</span>
                     <br>
-                    Esperienza: Con anni di esperienza nel settore, abbiamo una conoscenza approfondita delle migliori
+                    Con anni di esperienza nel settore, abbiamo una conoscenza approfondita delle migliori
                     destinazioni e attività.
                     Ogni viaggio è personalizzato per rispondere alle esigenze specifiche dei nostri
                     clienti.
                     <br>
                     <br>
-                    Supporto 24/7: Il nostro team dedicato è disponibile per assistervi in ogni fase del vostro viaggio.
+                    <span class="minitesto">Supporto 24/7:</span>
+                    <br>
+                    Il nostro team dedicato è disponibile per assistervi in ogni fase del vostro viaggio.
                     <br>
                     <br>
-                    Soddisfazione del Cliente: I feedback positivi dei nostri clienti testimoniano la qualità del nostro
+                    <span class="minitesto">Soddisfazione del Cliente:</span>
+                    <br>
+                    I feedback positivi dei nostri clienti testimoniano la qualità del nostro
                     servizio e la nostra dedizione.
                     Siamo orgogliosi di essere il vostro partner di fiducia nella scoperta del mondo. Unisciti a noi in
-                    un viaggio verso esperienze straordinarie e scoperte senza limiti con Cala Marò Tour Operator.
+                    un viaggio verso esperienze straordinarie con Cala Marò Tour Operator.
                     <br>
-                <p>
-                    La Nostra Filosofia
+                    <br>
+                    <span class="minitesto">La Nostra Filosofia:</span>
+                    <br>
                     Presso Cala Marò Tour Operator, crediamo che ogni viaggio rappresenti una possibilità di crescita
-                    personale e
-                    culturale. Ci impegniamo a promuovere il turismo responsabile, rispettando l'ambiente e contribuendo
-                    positivamente alle comunità locali che visitiamo.
+                    personale e culturale. Ci impegniamo a promuovere il turismo.
 
                 </p>
             </div>
             <img src="img ChiSiamo/Tokyo.jpg" alt="Immagine a destra">
         </div>
 
-        <div class="carousel">
-            <div class="carousel-item">
-                <img src="img ChiSiamo/Amsterdam.jpg" alt="Immagine 1">
-                <div class="caption">Visita Amsterdam</div>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img ChiSiamo/Cina.png" class="card-img-top img-fluid card-img-top-madda" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Visita la Cina</h5>
+                        <p class="card-text">La Cina offre meraviglie naturali come le Montagne Huangshan e le
+                            formazioni karstiche di Guilin. I fiumi Yangtze e Giallo attraversano paesaggi mozzafiato.
+                            Tesori storici includono la Grande Muraglia, la Città Proibita e l'Esercito di Terracotta.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="colorelink" href="destinazioni.html">
+                            <small class="text-body-secondary">Vai alla ricerca</small>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="carousel-item">
-                <img src="img ChiSiamo/Barcellona.jpg" alt="Immagine 2">
-                <div class="caption">Visita Barcellona</div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img ChiSiamo/Liguria.jpeg" class="card-img-top card-img-top-madda img-fluid" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Visita l'Italia</h5>
+                        <p class="card-text">L'Italia vanta paesaggi mozzafiato come le Alpi e la Costiera Amalfitana.
+                            Tesori storici includono il Colosseo, la Torre di Pisa e il Duomo di Firenze. Le città
+                            d'arte come Roma, Venezia e Firenze sono ricche di cultura e storia.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="colorelink" href="destinazioni.html">
+                            <small class="text-body-secondary">Vai alla ricerca</small>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="carousel-item">
-                <img src="img ChiSiamo/Parigi.jpg" alt="Immagine 3">
-                <div class="caption">Visita Parigi</div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img ChiSiamo/Madrid.jpg" class="card-img-top card-img-top-madda img-fluid" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Visita la Spagna</h5>
+                        <p class="card-text">La Spagna è rinomata per le sue spiagge mediterranee, i Pirenei e
+                            l'Alhambra. Le città di Madrid e Barcellona offrono architettura unica e vivace vita
+                            notturna. Il flamenco, le tapas e le feste come La Tomatina arricchiscono la sua cultura
+                            vibrante.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="colorelink" href="destinazioni.html">
+                            <small class="text-body-secondary">Vai alla ricerca</small>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
+        <script src="js/bootstrap.bundle.js"></script>
 </body>
 
 </html>
