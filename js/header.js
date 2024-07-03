@@ -32,7 +32,7 @@ template.innerHTML =` <header>
                         <a href="destinazioni.html" class="btn btn-outline-secondary destBtn" >DESTINAZIONI</a>
                                                  <div class="col">
                               <div class="card">
-                                  <img src="colosseo.jpg" class="card-img-top" alt="immagine">
+                                  <img src="img/colosseo.jpg" class="card-img-top" alt="immagine">
                                   <div class="card-body">
                                       <h5 class="card-title">Italia</h5>
                                   </div>
@@ -40,7 +40,7 @@ template.innerHTML =` <header>
                           </div>
                           <div class="col ">
                               <div class="card">
-                                  <img src="immagine.jpg" class="card-img-top" alt="immagine">
+                                  <img src="img/immagine.jpg" class="card-img-top" alt="immagine">
                                   <div class="card-body">
                                       <h5 class="card-title">Le Maldive</h5>
                                
@@ -51,7 +51,7 @@ template.innerHTML =` <header>
                           </div>
                           <div class="col ">
                               <div class="card">
-                                  <img src="egitto.jpg" class="card-img-top" alt="immagine">
+                                  <img src="img/egitto.jpg" class="card-img-top" alt="immagine">
                                   <div class="card-body">
                                       <h5 class="card-title">Destinazione</h5>
                                      
@@ -62,7 +62,7 @@ template.innerHTML =` <header>
                           </div>
                           <div class="col ">
                               <div class="card">
-                                  <img src="https://placehold.co/600x400/gray/white" class="card-img-top" alt="immagine">
+                                  <img src="img/giappone.jpg" class="card-img-top" alt="immagine">
                                   <div class="card-body">
                                       <h5 class="card-title">Destinazione</h5>
                                  
