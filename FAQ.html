@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back to Top Button</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #backToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            /* Nasconde il pulsante di default */
+            z-index: 1000;
+            /* Assicura che il pulsante sia sempre sopra altri contenuti */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Contenuto della pagina -->
+    <div class="container mt-5">
+        <h1>l videogioco è ambientato in un mondo in cui la magia è ritenuta scomparsa in seguito a una guerra tra
+            creature leggendarie denominate Esper, avvenuta mille anni prima dell'inizio del gioco. Il perfido Impero
+            Gestahliano intende però riesumare i poteri delle creature per creare dei soldati magicamente potenziati ed
+            espandere il proprio dominio su tutto il mondo. La trama segue le avventure di un manipolo di quattordici
+            ribelli della Resistenza che cercano di ostacolare l'Impero.
+
+            Il gioco era conosciuto in Nord America con il titolo Final Fantasy III, per mantenere la continuità con il
+            precedente capitolo pubblicato nel paese, ovvero Final Fantasy IV, che era stato rinominato Final Fantasy
+            II. È stato il primo gioco della serie in cui Hironobu Sakaguchi, storico direttore della saga, non ha
+            ricoperto il ruolo di regista, che è stato invece assegnato a Yoshinori Kitase e Hiroyuki Itō. Yoshitaka
+            Amano si è occupato del design dei personaggi, mentre Nobuo Uematsu ha composto la colonna sonora,
+            pubblicata poi in vari album.
+
+            Final Fantasy VI ha goduto di un vasto successo di pubblico e di critica; costituisce uno dei titoli più
+            apprezzati della serie, ed è considerato uno dei giochi di ruolo, e in generale uno dei videogiochi,
+            migliori in assoluto. Le versioni Super Nintendo Entertainment System e PlayStation hanno venduto più di
+            3,48 milioni di copie in tutto il mondo, con 2,62 milioni nel solo Giappone, rendendolo uno dei videogiochi
+            più venduti in territorio nipponico. Final Fantasy VI ha segnato inoltre uno dei primi esempi di narrazione
+            videoludica complessa e matura, e per la sua influenza in molte opere successive è ritenuto un titolo di
+            riferimento dell'intero genere.</h1>
+        <p>...</p>
+        <!-- Aggiungi altro contenuto qui per creare una pagina scrollabile -->
+    </div>
+
+    <!-- Pulsante per tornare in cima -->
+    <button id="backToTopBtn" class="btn btn-primary">Torna in cima</button>
+
+    <script>
+        // Mostra il pulsante quando l'utente scrolla verso il basso di 100px
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            const backToTopBtn = document.getElementById("backToTopBtn");
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        }
+
+        // Quando l'utente clicca sul pulsante, torna in cima alla pagina
+        document.getElementById("backToTopBtn").onclick = function () {
+            document.body.scrollTop = 0; // Per Safari
+            document.documentElement.scrollTop = 0; // Per Chrome, Firefox, IE e Opera
+        };
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
