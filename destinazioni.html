@@ -35,14 +35,71 @@
         .carousel-item img {
             width: 100%;
             height: 30vw;
-            /* Puoi regolare l'altezza secondo le tue esigenze */
+           
             object-fit: cover;
         }
-        .card-destinazioni img{
+
+        .card-destinazioni img {
             width: 100%;
-            
+
             height: 200px;
             object-fit: cover;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            height: 350px;
+            margin-bottom: 20px;
+
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        .flip-card-front {
+            background-color: #f8f9fa00;
+            color: #000;
+
+        }
+
+        .flip-card-back {
+            background-color: #343a4000;
+            color: #000;
+            transform: rotateY(180deg);
+        }
+
+        .card-img-top {
+            
+            max-height: 200px;
+            object-fit: cover;
+        }
+        .card{
+          
+            height: 100%;
+        }
+        .btn-primary {
+            background-color: #c35a42;
+            --bs-btn-hover-bg:#bc1304;
+            --bs-btn-border-color: #bc1304;
+            --bs-btn-hover-border-color:#650a01;
         }
     </style>
 </head>
@@ -66,14 +123,14 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="immagine.jpg" class="d-block w-100" alt="Immagine 1">
+                <img src="img/immagine.jpg" class="d-block w-100" alt="Immagine 1">
                 <div class="carousel-caption carousel-caption-top">
                     <h5>Le Maldive</h5>
                     <p>Un esperienza indimenticabile nei resort favolosi</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="egitto.jpg" class="d-block w-100" alt="Immagine 2">
+                <img src="img/egitto.jpg" class="d-block w-100" alt="Immagine 2">
                 <div class="carousel-caption carousel-caption-top">
                     <h5>Egitto</h5>
                     <p>Un esperienza indimenticabile tra le Piramidi</p>
@@ -81,7 +138,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="garda.webp" class="d-block w-100" alt="Immagine 3">
+                <img src="img/garda.webp" class="d-block w-100" alt="Immagine 3">
                 <div class="carousel-caption carousel-caption-top">
                     <h5>LA riva del garda</h5>
                     <p>Un esperienza indimenticabile tra le montagne</p>
@@ -89,19 +146,19 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="croazia-1.jpg" class="d-block w-100" alt="Immagine 4">
+                <img src="img/croazia-1.jpg" class="d-block w-100" alt="Immagine 4">
                 <div class="carousel-caption carousel-caption-top">
                     <h5>Descrizione 4</h5>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="immagine.jpg" class="d-block w-100" alt="Immagine 5">
+                <img src="img/immagine.jpg" class="d-block w-100" alt="Immagine 5">
                 <div class="carousel-caption carousel-caption-top">
                     <h5>Descrizione 5</h5>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="immagine.jpg" class="d-block w-100" alt="Immagine 6">
+                <img src="img/immagine.jpg" class="d-block w-100" alt="Immagine 6">
                 <div class="carousel-caption carousel-caption-top">
                     <h5>Descrizione 6</h5>
                 </div>
@@ -124,53 +181,112 @@
         <br>
     </div>
 
-    
+
     <div class="container text-center card-destinazioni">
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2  row-cols-lg-4 row-cols-xl-4">
             <div class="col ">
-                <div class="card ">
-                    <img src="colosseo.jpg" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Italia</h5>
-                        <p class="card-text">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-                            consectetur, adipisci velit.</p>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card">
+                                <img src="img/colosseo.jpg" class="card-img-top" alt="immagine">
+                                <div class="card-body">
+                                    <h5 class="card-title">Italia</h5>
+                                    <p class="card-text">L'Italia, famosa per la sua storia, arte e cucina, è una meta affascinante.</p>
+            
+            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">L'Italia</h5>
+                                    <p class="card-text">L'Italia, con la sua storia millenaria, l'arte rinascimentale, i pittoreschi paesaggi e la cucina deliziosa, offre un'esperienza culturale e gastronomica unica, attirando visitatori da tutto il mondo.</p>
+                                    <a href="#" class="btn btn-primary">Scopri di più</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="col ">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card">
+                                <img src="img/immagine.jpg" class="card-img-top" alt="immagine">
+                                <div class="card-body">
+                                    <h5 class="card-title">Le Maldive</h5>
+                                    <p class="card-text">Le Maldive, con le loro spiagge di sabbia bianca e acque turchesi cristalline, sono un paradiso tropicale irresistibile.</p>
+            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Le maldive</h5>
+                                    <p class="card-text">Le Maldive incantano con le loro isole coralline punteggiate di palme, le acque cristalline ideali per lo snorkeling e il relax in resort di lusso, rendendo ogni visita un'esperienza paradisiaca indimenticabile.</p>
+                                    <a href="#" class="btn btn-primary">Scopri di più</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col ">
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card">
+                                <img src="img/egitto.jpg" class="card-img-top" alt="immagine">
+                                <div class="card-body">
+                                    <h5 class="card-title">Egitto</h5>
+                                    <p class="card-text">L'Egitto, con le sue antiche piramidi e il fiume Nilo, offre un'esperienza storica e culturale unica.</p>
 
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Egitto</h5>
+                                    <p class="card-text">L'Egitto, con le sue maestose piramidi, i templi antichi e il leggendario fiume Nilo, offre un'esperienza ricca di storia e cultura millenaria, ideale per gli appassionati di archeologia e avventura.</p>
+                                    <a href="#" class="btn btn-primary">Scopri di più</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col ">
-                <div class="card">
-                    <img src="immagine.jpg" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Le Maldive</h5>
-                        <p class="card-text">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-                            consectetur, adipisci velit.</p>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card">
+                                <img src="img/giappone.jpg" class="card-img-top" alt="immagine">
+                                <div class="card-body">
+                                    <h5 class="card-title">Il Giappone</h5>
+                                    <p class="card-text">Il giappone offre un'esperienza culturale senza pari.</p>
 
 
-                    </div>
-                </div>
-            </div>
-            <div class="col ">
-                <div class="card">
-                    <img src="egitto.jpg" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Destinazione</h5>
-                        <p class="card-text">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-                            consectetur, adipisci velit.</p>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col ">
-                <div class="card">
-                    <img src="https://placehold.co/600x400/gray/white" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Destinazione</h5>
-                        <p class="card-text">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-                            consectetur, adipisci velit.</p>
-
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Il Giappone</h5>
+                                    <p class="card-text">Il Giappone, ricco di tradizioni antiche e innovazioni moderne, è una destinazione che affascina per la sua cultura unica e la sua bellezza paesaggistica.</p>
+                                    <a href="#" class="btn btn-primary">Scopri di più</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -179,6 +295,7 @@
 
 
         </div>
+        
         <!-- <div class="container text-center">
             <div class="row">
                 <div class="col">
@@ -189,7 +306,137 @@
             </div>
         </div> -->
     </div>
+    <div class="container text-center">
+        <br>
+        <h1 style="font-size: xx-large;">Dove vuoi andare?</h1>
+        <br>
+    </div>
 
+
+    <div class="container text-center card-destinazioni">
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2  row-cols-lg-4 row-cols-xl-4">
+            <div class="col ">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card">
+                                <img src="img/colosseo.jpg" class="card-img-top" alt="immagine">
+                                <div class="card-body">
+                                    <h5 class="card-title">New York City</h5>
+                                    <p class="card-text">New York, la "città che non dorme mai", unisce cultura, grattacieli iconici, parchi storici e una gastronomia vivace.</p>
+            
+            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">New York City</h5>
+                                    <p class="card-text">È la metropoli cosmopolita che non dorme mai, incanta con la sua scintillante skyline di grattacieli, parchi storici come Central Park e una vivace scena gastronomica che riflette la diversità culturale della città.</p>
+                                    <a href="#" class="btn btn-primary">Scopri di più</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="col ">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card">
+                                <img src="img/immagine.jpg" class="card-img-top" alt="immagine">
+                                <div class="card-body">
+                                    <h5 class="card-title">Rio de Janeiro, Brasile</h5>
+                                    <p class="card-text">Rio de Janeiro, con le spiagge di Copacabana e Ipanema, il Cristo Redentore e il Carnevale, è una destinazione vibrante e culturale.</p>
+            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Rio de Janeiro, Brasile</h5>
+                                    <p class="card-text">Rio de Janeiro, con le sue spiagge iconiche, il vibrante carnavale e il panorama mozzafiato dal monte Corcovado, incanta i visitatori con la sua energia unica e la cultura vivace.</p>
+                                    <a href="#" class="btn btn-primary">Scopri di più</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col ">
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card">
+                                <img src="img/egitto.jpg" class="card-img-top" alt="immagine">
+                                <div class="card-body">
+                                    <h5 class="card-title">Patagonia, Argentina e Cile</h5>
+                                    <p class="card-text"> La Patagonia, con ghiacciai, fiordi, montagne e fauna selvatica, è un paradiso per gli amanti dell'avventura.</p>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Patagonia, Argentina e Cile</h5>
+                                    <p class="card-text"> La Patagonia, divisa tra Argentina e Cile, incanta con paesaggi selvaggi e maestosi, tra ghiacciai scintillanti, montagne imponenti e vasti spazi naturali che promettono avventure indimenticabili.</p>
+                                    <a href="#" class="btn btn-primary">Scopri di più</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col ">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card">
+                                <img src="img/giappone.jpg" class="card-img-top" alt="immagine">
+                                <div class="card-body">
+                                    <h5 class="card-title">Santorini, Grecia</h5>
+                                    <p class="card-text">Con i suoi iconici edifici bianchi dalle cupole blu, spettacolari tramonti sul mare e deliziosa cucina mediterranea, Santorini è una perla.</p>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Santorini, Grecia</h5>
+                                    <p class="card-text">Santorini, con le sue pittoresche case bianche azzurre che si affacciano su acque cristalline, offre tramonti mozzafiato e una ricca esperienza culturale mediterranea, rendendola una delle isole più affascinanti della Grecia.</p>
+                                    <a href="#" class="btn btn-primary">Scopri di più</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        
+        <!-- <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-secondary btn-lg" href="servizi.html" role="button">Scopri tutti i
+                        servizi</a>
+                </div>
+
+            </div>
+        </div> -->
+    </div>
     <script src="js/bootstrap.bundle.js"></script>
 </body>
 
