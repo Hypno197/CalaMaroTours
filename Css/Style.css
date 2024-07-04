@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap');
+luca {
 
+}
 body {
     font-family: livvic;
     font-weight: 600;
     background-color: rgba(230, 211, 192, 0.25);
 }
 .navbar {
-    background-color: #ceac88;
+
+    background-color: #efe1d2;
     border-radius: 20%;
     padding: 0.25%;
    
@@ -30,12 +33,52 @@ transition: 1s;
     font-size: 150%;
     background-color: rgba(240, 0, 0, 0.5);
 }
-.destHead {
-    position: relative;
-    width: 350px;
-    border-radius: 20%;
+@media (min-width: 991px) {
 
+    .destHead {
+        margin-top: -2px;
+        width: 350px;
+        scale: 108%;
+        border-radius: 8px 8px 0px 0px;
+        
+    }
+    .dest {
+        width: 350px;
+    }
 }
-.destDrop {
-    border-radius: 20%;
+@media (max-width: 991px) {
+    .navbar {
+        text-align: center;
+    }
+  
+    .nav-item-dropdown {
+        max-width: 98%;
+    }
+    .destHead { margin-top: -2px;
+        scale: 105%;
+        border-radius: 8px 8px 0px 0px;
+    }
+    .dest {
+
+        max-width: 98%;
+    }
+    .destCard>.card {
+        max-width: 100%;
+    }
+}
+
+.destBtn {
+    position: relative;
+    font-size: xx-large;
+    font-weight: bolder;
+    color: #e59114;
+    margin-top: -20px;
+    margin-left: -1px;
+    scale: 107%;
+    width: 100%;
+    border: none;
+    border-radius: 0%;
+}
+.destBtn:hover {
+    background-color: #e59114;
 }
