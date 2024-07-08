@@ -1,0 +1,60 @@
+footer {
+    background-color: #E59114 !important; 
+    color: #E6D3C0;
+}
+
+.social-links a {
+    display: block; 
+    font-size: 18px; 
+    transition: color 0.3s;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    text-decoration: underline; 
+}
+
+.social-links a.facebook {
+    color: #1877f2 !important; 
+}
+
+.social-links a.instagram {
+    color: #e4405f !important;
+}
+
+.social-links a.tiktok {
+    color: #000000 !important;
+}
+
+.social-icons a {
+    display: inline-block;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.form1 .card-header{
+    background-color: #e59114 !important;
+}
+.form1 input {
+    width: 100%;
+    min-height: 70px !important;
+    margin-bottom: 5%;
+    margin-top: 2;
+}
+.form1 input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form1 .form-control:focus {
+    font-size: smaller;
+    border-color: rgb(229, 145, 20);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(229, 145, 20, 0.6);
+  }
+  .form1 .btn-outline-warning {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(229, 145, 20, 0.6);
+    
+  }
+  .form1 .btn-outline-warning:hover {
+    color: antiquewhite;
+}
