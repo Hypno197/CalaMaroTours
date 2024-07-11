@@ -11,17 +11,17 @@
   </head>
   <body>
     <script src="js/header.js"></script>
-<h1 class="text-center"></h1>
+    <h1 class="text-center"> Preventivator</h1>
     <div class="container-fluid">
-        <form id="step1" class="form-control-lg needs-validation form1" onsubmit="goToStep2()">
-            <div class="card">
-                <div class="card-header text-center">
-                 Compila i campi dei tuoi dati di contatto!
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-6 border-end form1">
-                            <div class="card-header text-center">
+    <form id="step1" class="form-control-lg needs-validation form1" onsubmit="goToStep2(event)">
+        <div class="card">
+            <div class="card-header text-center">
+                Compila i campi dei tuoi dati di contatto!
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-6 border-end form1">
+                        <div class="card-header text-center">
                                 Dati personali
                             </div>
                             <div class="row mt-3 " style="margin-bottom: -5%">
@@ -118,27 +118,145 @@
     </div>
 <!-- aggiungere box shadow alle cose -->
 
-<script>
+<div class="container-fluid">
+    <form id="step2" class=" form-control-lg needs-validation form1" onsubmit=" ">
+        <div class="card">
+            <div class="card-header text-center">
+             Componi il tuo Tour!!
+            </div>            <div class="card-body">
+                <div class="row">
+                    
 
-    function goToStep2(){
-            if (checkStep1()){
-                document.getElementById("step1").classList.add('nascosto');
-                document.getElementById("step2").classList.remove('nascosto')
-            }
+
+
+                    
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 border-end form1">
+                        <div class="card-header text-center">
+                            Dati personali
+                        </div>
+                        <div class="row mt-3 " style="margin-bottom: -5%">
+                            <div class="col-12 col-md-6 ">
+                                <div class="form-floating" >
+                                    <input type="text" name="nome" class="form-control" placeholder="" id="nome" required> 
+                                    <label for="nome">Nome</label><br>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 border-start">
+                                <div class="form-floating">
+                                    <input type="text" name="cognome" class="form-control" placeholder="" id="cognome" required>
+                                    <label for="cognome">Cognome</label><br>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="email" name="email"  id="email" required placeholder=" " class="form-control" >
+                                    <label for="email">Inserisci la tua Email</label><br>
+                                </div>
+                                <div class="form-text ft1" style="margin-top: -8%">
+                                    <small>
+                                        Riceverai qui l'email di verifica e conferma della prenotazione, controlla bene i dati!
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="">
+                                    <label for="ddn">Data Di Nascita:</label>
+                                    <input type="date" name="ddn" id="ddn" class="form-control" placeholder=" " required>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="col-12 col-md-6 border-end form1">
+                        <div class="card-header text-center">
+                            Recapiti
+                        </div>
+                        <div class="row mt-3 " style="margin-bottom: -5%">
+                            <div class="col-12 col-md-6 ">
+                                <div class="form-floating">
+                                    <input type="text" name="citta" id="citta" required class="form-control" placeholder=""> 
+                                    <label for="citta">Città</label><br>
+                                </div> 
+                            </div>
+                            <div class="col-12 col-md-6 border-start">
+                                <div class="form-floating">
+                                    <input type="number" name="cap" id="cap" maxlength="5" required class="form-control" placeholder=""> 
+                                    <label for="cap">C.A.P.</label><br>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row mt-3 " style="margin-bottom: -5%">
+                        
+                        <div class="col-12 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" name="indirizzo"  id="indirizzo" required class="form-control" placeholder=" ">
+                                    <label for="indirizzo">Inserisci il tuo indirizzo</label><br>
+                                    
+                                </div>
+                                    
+                            </div>
+                        </div> 
+                    
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" name="cel" id="cel" maxlength="14" required class="form-control" placeholder=""> 
+                                    <label for="cap">Cellulare</label><br>
+                                </div>
+                                  </div>
+                                  <div class="col-12 col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" name="tel" id="tel" maxlength="15" class="form-control" placeholder=""> 
+                                        <label for="cap">Telefono</label><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="btn btn-outline-warning mb-5" id="stepSubmit"  style="width: 33%; margin-left: 33%;" >Avanti</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function goToStep2(event){
+        event.preventDefault();
+        if(datiStep1()){
+            document.getElementById("step1").classList.add('nascosto');
+            document.getElementById("step2").classList.remove('nascosto');
+            return true
+        }
+        return false
     }
 
-    function checkStep1(){
-        const nome = document.getElementById('nome').value
-        const cognome = document.getElementById('cognome').value
-        const mail = document.getElementById('email').value
-        const indirizzo = document.getElementById('indirizzo').value
-        const cap = document.getElementById('cap').value
-        const citta = document.getElementById('citta').value
-        const numTel = document.getElementById('cel').value
-        if (nome!=0 && cognome!=0 && mail!=0 && indirizzo!=0 && citta!=0 && cap!=0 && numTel!=0 )
+    function datiStep1(){
+        const user = {}
+        user.nome = document.getElementById('nome').value
+        user.cognome = document.getElementById('cognome').value
+        user.mail = document.getElementById('email').value
+        user.indirizzo = document.getElementById('indirizzo').value
+        user.ddn = document.getElementById('ddn').value
+        user.cap = document.getElementById('cap').value
+        user.citta = document.getElementById('citta').value
+        user.numTel = document.getElementById('cel').value
+        if (user.nome!=0 && user.cognome!=0 && user.mail!=0 && user.indirizzo!=0 && user.citta!=0 && user.cap!=0 && user.numTel!=0 )
         return true
     else return false
     }
+
+
+
 </script>
     <script src="js/footer.js"></script>
     <script
