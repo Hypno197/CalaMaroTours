@@ -13,7 +13,6 @@
     <style>
         .carousel-caption-top {
             position: absolute;
-
             color: rgb(255, 255, 255);
             font-size: xx-large;
             -webkit-text-stroke: 2px black;
@@ -40,10 +39,9 @@
 
         .carousel-item img {
             width: 100%;
-            height: 40vw;
+            height: 30vw;
 
             object-fit: cover;
-            object-position: top center;
         }
 
         .card-destinazioni img {
@@ -51,7 +49,6 @@
 
             height: 200px;
             object-fit: cover;
-
         }
 
         .flip-card {
@@ -113,21 +110,7 @@
         }
 
         .popUp {
-            max-height: 400px;
-        }
-
-        #cardPaginaIntera {
-            height: 650px;
-            margin-bottom: 20px;
-        }
-
-        @media only screen and (max-width: 768px) {
-            .carousel-caption {
-                display: none;
-            }
-        }
-        #col-img-pgIntera{
-            padding: 0px;
+            max-height: 500px;
         }
     </style>
 </head>
@@ -166,33 +149,29 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/canada-1.jpg" class="d-block w-100" alt="Immagine 3">
+                <img src="img/garda.webp" class="d-block w-100" alt="Immagine 3">
                 <div class="carousel-caption carousel-caption-top">
-                    <h5>Canada</h5>
-                    <p>Un esperienza indimenticabile</p>
+                    <h5>LA riva del garda</h5>
+                    <p>Un esperienza indimenticabile tra le montagne</p>
 
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="img/croazia-1.jpg" class="d-block w-100" alt="Immagine 4">
                 <div class="carousel-caption carousel-caption-top">
-                    <h5>La corazia</h5>
-                    <p>La bellezza delle coste e il mare
-                        cristallino.</p>
+                    <h5>Descrizione 4</h5>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/giappone-1.jpg" class="d-block w-100" alt="Immagine 5">
+                <img src="img/immagine.jpg" class="d-block w-100" alt="Immagine 5">
                 <div class="carousel-caption carousel-caption-top">
-                    <h5>Giappone</h5>
-                    <p>Mix affascinante di antiche tradizioni e avanzata modernità</p>
+                    <h5>Descrizione 5</h5>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/messico-1.jpg" class="d-block w-100" alt="Immagine 6">
+                <img src="img/immagine.jpg" class="d-block w-100" alt="Immagine 6">
                 <div class="carousel-caption carousel-caption-top">
-                    <h5>Messico</h5>
-                    <p>Spiagge paradisiache e una vibrante cultura culinaria</p>
+                    <h5>Descrizione 6</h5>
                 </div>
             </div>
         </div>
@@ -207,7 +186,6 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    </div>
     <div class="container text-center">
         <br>
         <h1 style="font-size: xx-large;">Dove vuoi andare?</h1>
@@ -216,14 +194,17 @@
 
     <div class="container" id="destinazioni">
         <div class="row" id="dettagliDestinazione">
-
+ 
         </div>
     </div>
-    <script src="js/footer.js"></script>
 
-    <script src="js/bootstrap.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-eMNnpaoH+V0sPHtqjIY1uAqnvfAaHG8eS2+8czuc6pUcRntfiY3UmW0I96mURRRT" crossorigin="anonymous">
+        </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
     <script>
-        const destinazioniHome = `        
+        const destinazioniHome=`        
             <div class="container text-center card-destinazioni">
                 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2  row-cols-lg-4 row-cols-xl-4">
                     <div class="col ">
@@ -555,95 +536,85 @@
         `
         dettagliDestinazione.innerHTML = destinazioniHome;
         const destinazioni = {
-            italia: {
-                titolo: "Italia",
-                immagine: "img/colosseo.jpg",
-                descrizione: "L'Italia, con la sua storia millenaria, l'arte rinascimentale, i pittoreschi paesaggi e la cucina deliziosa, offre un'esperienza culturale e gastronomica unica, attirando visitatori da tutto il mondo."
-            },
-            croazia: {
-                titolo: "Croazia",
-                immagine: "img/croazia-1.jpg",
-                descrizione: "Con le sue incantevoli città costiere, isole pittoresche e acque cristalline, la Croazia è un paradiso per gli amanti del mare e della natura."
-            },
-            maldive: {
-                titolo: "Maldive",
-                immagine: "img/immagine.jpg",
-                descrizione: "Le Maldive, con le loro spiagge bianche, acque cristalline e resort di lusso, sono la destinazione perfetta per una vacanza di relax e lusso nel cuore dell'Oceano Indiano."
-            },
-            egitto: {
-                titolo: "Egitto",
-                immagine: "img/egitto.jpg",
-                descrizione: "L'Egitto, con le sue maestose piramidi, antichi templi e la ricca storia faraonica, è una destinazione affascinante per gli amanti dell'archeologia e della storia."
-            },
-            francia: {
-                titolo: "Francia",
-                immagine: "img/francia-1.jpg",
-                descrizione: "La Francia è famosa per la sua cultura, cucina e meraviglie architettoniche. Con le sue incantevoli città come Parigi e i suoi affascinanti villaggi, è una destinazione da sogno per gli amanti della storia e della cultura."
-            },
-            grecia: {
-                titolo: "Grecia",
-                immagine: "img/grecia-1.jpg",
-                descrizione: "La Grecia è rinomata per le sue isole affascinanti e la sua storia antica. Con le sue antiche rovine e le sue spiagge mozzafiato, è una meta ideale per chi cerca cultura e bellezze naturali."
-            },
-            spagna: {
-                titolo: "Spagna",
-                immagine: "img/spagna-1.jpg",
-                descrizione: "La Spagna offre una vibrante vita notturna e splendide spiagge. Con le sue affascinanti città come Barcellona e Madrid, e le sue coste sabbiose, è perfetta per chi ama il divertimento e il relax."
-            },
-            thailandia: {
-                titolo: "Thailandia",
-                immagine: "img/thailandia-1.jpg",
-                descrizione: "La Thailandia è conosciuta per i suoi templi magnifici e le sue spiagge tropicali. Con i suoi mercati vivaci, la cucina deliziosa e le spiagge paradisiache, è una destinazione imperdibile per gli avventurieri."
-            },
-            australia: {
-                titolo: "Australia",
-                immagine: "img/australia-1.jpg",
-                descrizione: "L'Australia è celebre per i suoi paesaggi unici e la sua fauna selvatica. Con la sua Grande Barriera Corallina e i suoi vasti deserti, è una destinazione che offre avventure indimenticabili."
-            },
-            messico: {
-                titolo: "Messico",
-                immagine: "img/messico-1.jpg",
-                descrizione: "Il Messico è famoso per le sue spiagge meravigliose e la sua ricca storia culturale. Con i suoi antichi siti maya e le sue coste affascinanti, è una destinazione perfetta per chi cerca avventura e relax."
-            },
-            canada: {
-                titolo: "Canada",
-                immagine: "img/canada-1.jpg",
-                descrizione: "Il Canada è noto per i suoi spettacolari paesaggi naturali e le sue città vibranti. Con le sue montagne maestose e i suoi laghi cristallini, è una meta ideale per gli amanti della natura."
-            },
-            giappone: {
-                titolo: "Giappone",
-                immagine: "img/giappone-1.jpg",
-                descrizione: "Il Giappone è famoso per la sua tecnologia avanzata e la sua cultura tradizionale. Con i suoi templi antichi e le sue città ultramoderne, offre un mix unico di passato e futuro."
-            }
-        };
+    italia: {
+        titolo: "Italia",
+        immagine: "img/colosseo.jpg",
+        descrizione: "L'Italia, con la sua storia millenaria, l'arte rinascimentale, i pittoreschi paesaggi e la cucina deliziosa, offre un'esperienza culturale e gastronomica unica, attirando visitatori da tutto il mondo."
+    },
+    croazia: {
+        titolo: "Croazia",
+        immagine: "img/croazia-1.jpg",
+        descrizione: "Con le sue incantevoli città costiere, isole pittoresche e acque cristalline, la Croazia è un paradiso per gli amanti del mare e della natura."
+    },
+    maldive: {
+        titolo: "Maldive",
+        immagine: "img/immagine.jpg",
+        descrizione: "Le Maldive, con le loro spiagge bianche, acque cristalline e resort di lusso, sono la destinazione perfetta per una vacanza di relax e lusso nel cuore dell'Oceano Indiano."
+    },
+    egitto: {
+        titolo: "Egitto",
+        immagine: "img/egitto.jpg",
+        descrizione: "L'Egitto, con le sue maestose piramidi, antichi templi e la ricca storia faraonica, è una destinazione affascinante per gli amanti dell'archeologia e della storia."
+    },
+    francia: {
+        titolo: "Francia",
+        immagine: "img/francia-1.jpg",
+        descrizione: "La Francia è famosa per la sua cultura, cucina e meraviglie architettoniche. Con le sue incantevoli città come Parigi e i suoi affascinanti villaggi, è una destinazione da sogno per gli amanti della storia e della cultura."
+    },
+    grecia: {
+        titolo: "Grecia",
+        immagine: "img/grecia-1.jpg",
+        descrizione: "La Grecia è rinomata per le sue isole affascinanti e la sua storia antica. Con le sue antiche rovine e le sue spiagge mozzafiato, è una meta ideale per chi cerca cultura e bellezze naturali."
+    },
+    spagna: {
+        titolo: "Spagna",
+        immagine: "img/spagna-1.jpg",
+        descrizione: "La Spagna offre una vibrante vita notturna e splendide spiagge. Con le sue affascinanti città come Barcellona e Madrid, e le sue coste sabbiose, è perfetta per chi ama il divertimento e il relax."
+    },
+    thailandia: {
+        titolo: "Thailandia",
+        immagine: "img/thailandia-1.jpg",
+        descrizione: "La Thailandia è conosciuta per i suoi templi magnifici e le sue spiagge tropicali. Con i suoi mercati vivaci, la cucina deliziosa e le spiagge paradisiache, è una destinazione imperdibile per gli avventurieri."
+    },
+    australia: {
+        titolo: "Australia",
+        immagine: "img/australia-1.jpg",
+        descrizione: "L'Australia è celebre per i suoi paesaggi unici e la sua fauna selvatica. Con la sua Grande Barriera Corallina e i suoi vasti deserti, è una destinazione che offre avventure indimenticabili."
+    },
+    messico: {
+        titolo: "Messico",
+        immagine: "img/messico-1.jpg",
+        descrizione: "Il Messico è famoso per le sue spiagge meravigliose e la sua ricca storia culturale. Con i suoi antichi siti maya e le sue coste affascinanti, è una destinazione perfetta per chi cerca avventura e relax."
+    },
+    canada: {
+        titolo: "Canada",
+        immagine: "img/canada-1.jpg",
+        descrizione: "Il Canada è noto per i suoi spettacolari paesaggi naturali e le sue città vibranti. Con le sue montagne maestose e i suoi laghi cristallini, è una meta ideale per gli amanti della natura."
+    },
+    giappone: {
+        titolo: "Giappone",
+        immagine: "img/giappone-1.jpg",
+        descrizione: "Il Giappone è famoso per la sua tecnologia avanzata e la sua cultura tradizionale. Con i suoi templi antichi e le sue città ultramoderne, offre un mix unico di passato e futuro."
+    }
+};
 
 
         function scopriDiPiu(destinazione) {
             const destinazioneInfo = destinazioni[destinazione];
             const dettagliDestinazione = document.getElementById("dettagliDestinazione");
             dettagliDestinazione.innerHTML = `
-
-
-
-
-
-                <div class="col-12" id="cardPaginaIntera" >
+                <div class="col-12" style="height: 650px;">
                     <div class="card mb-3">
                         <img src="${destinazioneInfo.immagine}" class="card-img-top popUp" alt="${destinazioneInfo.titolo} style="max-height: 500px;">
                         <div class="card-body">
                             <h5 class="card-title">${destinazioneInfo.titolo}</h5>
                             <p class="card-text">${destinazioneInfo.descrizione}</p>
                             <a href="#" class="btn btn-primary" >Prenota Ora</a>
-                            <a href="#destinazioni" class="btn btn-primary" 
+                            <a href="#destinazioni" class="btn btn-primary"
                                                 onclick="tornaIndietro()">Torna indietro</a>
                         </div>
                     </div>
                 </div>
-
-
-
-
-              
             `;
         }
         function tornaIndietro() {
