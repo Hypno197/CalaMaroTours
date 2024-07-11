@@ -12,7 +12,7 @@
   <body>
     <script src="js/header.js"></script>
 
-    <div class="container container-1 mt-5">
+    <div class="container-fluid container-fluid-1 mt-5">
         <div class="row row-1 justify-content-center"> 
             <div class="gab">
                 <h1 class="text-center mb-4">Accedi o Registrati</h1>
@@ -26,10 +26,66 @@
                         <label for="registrati-tipo">Tipo di registrazione:</label>
                         <select class="form-control" id="registrati-tipo">
                             <option value="utente">Utente</option>
-                            <option value="azienda">Azienda</option>
+                            <option value="azienda">Azienda-partner</option>
+                            <option value="amministratore">Amministratore</option>
                         </select>
                     </div>
                     <button class="btn btn-warning mt-3" id="registrati-submit" style="width: 100%;">Prosegui</button>
+
+                    <!--Prova form registrazione utente-->
+                    <div id="form-utente" class="mt-4" style="display: none;">
+                        <h3 class="text-center mb-3">Registrazione Utente</h3> 
+                        <div class="form-group"> 
+                            <label for="nome-utente">Nome completo:</label> 
+                            <input type="text" class="form-control" id="nome-utente" /> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label for="cognome-utente">Cognome:</label> 
+                            <input type="text" class="form-control" id="cognome-utente" /> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label for="email-utente">E-mail:</label> 
+                            <input type="email" class="form-control" id="email-utente" /> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label for="email-utente-conferma">Conferma E-mail:</label> 
+                            <input type="email-conferma" class="form-control" id="email-utente-conferma"/> 
+                        </div>
+                        <div class="form-group"> 
+                            <label for="password-utente">Password:</label> 
+                            <input type="password" class="form-control" id="password-utente" /> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label for="password-utente-conferma">Conferma Password:</label> 
+                            <input type="password-conferma" class="form-control" id="password-utente-conferma" /> 
+                        </div>
+                        <button class="btn btn-warning mt-3" id="registrati-utente-submit" style="width: 100%;">Registrati</button> 
+                    </div>
+                    <!--Prova form registrazione utente-->
+
+                    <!--Prova form registrazione azienda-->
+                    <div id="form-azienda" class="mt-4" style="display: none;">
+                        <h3 class="text-center mb-3">Registrazione Azienda-partner</h3>
+                        <div class="form-group">
+                            <label for="nome-azienda">Nome azienda:</label>
+                            <input type="text" class="form-control" id="nome-azienda" />
+                        </div>
+                        <div class="form-group">
+                            <label for="partita-iva">Partita IVA:</label>
+                            <input type="text" class="form-control" id="partita-iva" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email-azienda">Email:</label>
+                            <input type="email" class="form-control" id="email-azienda" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password-azienda">Password:</label>
+                            <input type="password" class="form-control" id="password-azienda" />
+                        </div>
+                        <button class="btn btn-warning mt-3" id="registrati-azienda-submit" style="width: 100%;">Registrati</button>
+                    </div>
+                    <!--Prova form registrazione azienda-->
+
                 </div>
 
                 <div id="accedi-form" class="mt-4" style="display: none;">
@@ -38,7 +94,8 @@
                         <label for="accedi-tipo">Tipo di accesso:</label>
                         <select class="form-control" id="accedi-tipo">
                             <option value="utente">Utente</option>
-                            <option value="azienda">Azienda</option>
+                            <option value="azienda">Azienda-partner</option>
+                            <option value="amministratore">Amministratore</option>
                         </select>
                     </div>
                     <button class="btn btn-warning mt-3" id="accedi-submit" style="width: 100%;">Prosegui</button>
@@ -51,6 +108,11 @@
         const btnRegistrati = document.getElementById('btn-registrati');
         const btnAccedi = document.getElementById('btn-accedi');
         const registratiForm = document.getElementById('registrati-form');
+        const registratiSubmit = document.getElementById('registrati-submit');
+        const registratiTipo = document.getElementById('registrati-tipo');
+        const formUtente = document.getElementById('form-utente');
+        const formAzienda = document.getElementById('form-azienda');
+        const registratiAziendaSubmit = document.getElementById('registrati-azienda-submit');
         const accediForm = document.getElementById('accedi-form');
 
         btnRegistrati.addEventListener('click', () => {
@@ -62,6 +124,17 @@
             accediForm.style.display = 'block';
             registratiForm.style.display = 'none';
         });
+
+        //Prova form registrazione utente e azienda-partner
+        registratiSubmit.addEventListener('click', () => {
+        if (registratiTipo.value === 'utente') {
+            formUtente.style.display = 'block';
+        } else {
+            // Gestione per azienda-partner e amministratore da inserire
+            console.log('Registrazione per ' + registratiTipo.value);
+        }
+    });
+        //Prova form registrazione utente e azienda-partner
 
     </script>
 
