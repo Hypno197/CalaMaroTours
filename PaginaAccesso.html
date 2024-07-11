@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="Css/bootstrap.min.css" />
+    <link rel="stylesheet" href="Css/Style.css" />
+    <link rel="stylesheet" href="Css/StyleGabriel.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  </head>
+  <body>
+    <script src="js/header.js"></script>
+
+    <div class="container-fluid container-fluid-1 mt-5">
+        <div class="row row-1 justify-content-center"> 
+            <div class="gab">
+                <h1 class="text-center mb-4">Accedi o Registrati</h1>
+
+                <button class="btn btn-warning mb-3" id="btn-registrati" style="width: 100%;">Registrati</button>
+                <button class="btn btn-warning" id="btn-accedi" style="width: 100%;">Accedi</button>
+
+                <div id="registrati-form" class="mt-4" style="display: none;">
+                    <h3 class="text-center mb-3">Registrati</h3>
+                    <div class="form-group">
+                        <label for="registrati-tipo">Tipo di registrazione:</label>
+                        <select class="form-control" id="registrati-tipo">
+                            <option value="utente">Utente</option>
+                            <option value="azienda">Azienda-partner</option>
+                            <option value="amministratore">Amministratore</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-warning mt-3" id="registrati-submit" style="width: 100%;">Prosegui</button>
+
+                    <!--Prova form registrazione utente-->
+                    <div id="form-utente" class="mt-4" style="display: none;">
+                        <h3 class="text-center mb-3">Registrazione Utente</h3> 
+                        <div class="form-group"> 
+                            <label for="nome-utente">Nome completo:</label> 
+                            <input type="text" class="form-control" id="nome-utente" /> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label for="cognome-utente">Cognome:</label> 
+                            <input type="text" class="form-control" id="cognome-utente" /> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label for="email-utente">E-mail:</label> 
+                            <input type="email" class="form-control" id="email-utente" /> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label for="email-utente-conferma">Conferma E-mail:</label> 
+                            <input type="email-conferma" class="form-control" id="email-utente-conferma"/> 
+                        </div>
+                        <div class="form-group"> 
+                            <label for="password-utente">Password:</label> 
+                            <input type="password" class="form-control" id="password-utente" /> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label for="password-utente-conferma">Conferma Password:</label> 
+                            <input type="password-conferma" class="form-control" id="password-utente-conferma" /> 
+                        </div>
+                        <button class="btn btn-warning mt-3" id="registrati-utente-submit" style="width: 100%;">Registrati</button> 
+                    </div>
+                    <!--Prova form registrazione utente-->
+
+                    <!--Prova form registrazione azienda-->
+                    <div id="form-azienda" class="mt-4" style="display: none;">
+                        <h3 class="text-center mb-3">Registrazione Azienda-partner</h3>
+                        <div class="form-group">
+                            <label for="nome-azienda">Nome azienda:</label>
+                            <input type="text" class="form-control" id="nome-azienda" />
+                        </div>
+                        <div class="form-group">
+                            <label for="partita-iva">Partita IVA:</label>
+                            <input type="text" class="form-control" id="partita-iva" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email-azienda">Email:</label>
+                            <input type="email" class="form-control" id="email-azienda" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password-azienda">Password:</label>
+                            <input type="password" class="form-control" id="password-azienda" />
+                        </div>
+                        <button class="btn btn-warning mt-3" id="registrati-azienda-submit" style="width: 100%;">Registrati</button>
+                    </div>
+                    <!--Prova form registrazione azienda-->
+
+                </div>
+
+                <div id="accedi-form" class="mt-4" style="display: none;">
+                    <h3 class="text-center mb-3 gab">Accedi</h3>
+                    <div class="form-group">
+                        <label for="accedi-tipo">Tipo di accesso:</label>
+                        <select class="form-control" id="accedi-tipo">
+                            <option value="utente">Utente</option>
+                            <option value="azienda">Azienda-partner</option>
+                            <option value="amministratore">Amministratore</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-warning mt-3" id="accedi-submit" style="width: 100%;">Prosegui</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const btnRegistrati = document.getElementById('btn-registrati');
+        const btnAccedi = document.getElementById('btn-accedi');
+        const registratiForm = document.getElementById('registrati-form');
+        const registratiSubmit = document.getElementById('registrati-submit');
+        const registratiTipo = document.getElementById('registrati-tipo');
+        const formUtente = document.getElementById('form-utente');
+        const formAzienda = document.getElementById('form-azienda');
+        const registratiAziendaSubmit = document.getElementById('registrati-azienda-submit');
+        const accediForm = document.getElementById('accedi-form');
+
+        btnRegistrati.addEventListener('click', () => {
+            registratiForm.style.display = 'block';
+            accediForm.style.display = 'none';
+        });
+
+        btnAccedi.addEventListener('click', () => {
+            accediForm.style.display = 'block';
+            registratiForm.style.display = 'none';
+        });
+
+        //Prova form registrazione utente e azienda-partner
+        registratiSubmit.addEventListener('click', () => {
+        if (registratiTipo.value === 'utente') {
+            formUtente.style.display = 'block';
+        } else {
+            // Gestione per azienda-partner e amministratore da inserire
+            console.log('Registrazione per ' + registratiTipo.value);
+        }
+    });
+        //Prova form registrazione utente e azienda-partner
+
+    </script>
+
+    <script src="js/footer.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
