@@ -87,14 +87,19 @@ transition: 1s;
     border-radius: 0%;
 }
 .destBtn:hover {
-    background-color: #e59114;
+    background-color: #ec9616;
 }
 
 .form1 .card-header{
-    background-color: #e59114 !important;
+    background-color: #ec9616 !important;
+}
+
+.formAggio .card-header{
+  background-color: #ec9616 !important;
 }
 .form1 input {
     width: 100%;
+    margin-bottom: 5%;
     min-height: 70px !important;
 }
 .form1 input::-webkit-outer-spin-button,
@@ -150,10 +155,46 @@ input::-webkit-inner-spin-button {
     font-size: larger;
     text-align: center;
     color:#e59114;
-    text-shadow: 1px 1px 2px  #f0000080;;
+    text-shadow: 1px 1px 2px  #f0000080;
     
 }
 .infoContatti>span{
     font-weight: 400;
     text-shadow: none;
+  }
+  .tipoPack {
+    padding: 0px;
+    scale: 95%;
+    width: 33%;
+    transition: 0.3s;
+  }
+  .tipoPack:hover {
+    transition: 0.5s;
+    scale : 100%;
+    box-shadow: 2px 2px 20px black;
+  }
+  .tipoPack>ul>li {
+    transition: 0.3s;
+  }
+  .tipoPack>ul>li:hover {
+    color: #f0000080;
+    background-color: bisque;
+    transition: 0.3s;
+  }
+  #scegliPack:hover {
+    box-shadow: 1px 1px 6px 3px  #e59114
+    inset;
+    color: #f0000080;
+  }
+  .btn-outline-warning{
+    transition: 0.3s;
+  }
+  .btn-outline-warning:hover {
+    box-shadow: 1px 1px 6px 3px  #e59114
+    inset;
+    color: #f0000080 !important;
+    transition: 0.3s;
+  } 
+  .ridotto {
+    color: green;
   }

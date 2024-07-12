@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
@@ -8,32 +9,35 @@
     <link rel="stylesheet" href="Css/Style.css" />
     <link rel="stylesheet" href="Css/StyleGabriel.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <script src="js/header.js"></script>
-    <h1 class="text-center"> Preventivator</h1>
+    <h1 class="text-center mt-3" style="text-shadow: 1px 1px 20px #e59114;"> Personalizza il tuo Tour!!</h1>
     <div class="container-fluid">
-    <form id="step1" class="form-control-lg needs-validation form1" onsubmit="goToStep2(event)">
-        <div class="card">
-            <div class="card-header text-center">
-                Compila i campi dei tuoi dati di contatto!
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12 col-md-6 border-end form1">
-                        <div class="card-header text-center">
+        <form id="step1" class="form-control-lg needs-validation form1" onsubmit="goToStep2(event)">
+            <div class="card">
+                <div class="card-header text-center">
+                    Compila i campi dei tuoi dati di contatto!
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-6 border-end form1">
+                            <div class="card-header text-center">
                                 Dati personali
                             </div>
                             <div class="row mt-3 " style="margin-bottom: -5%">
                                 <div class="col-12 col-md-6 ">
-                                    <div class="form-floating" >
-                                        <input type="text" name="nome" class="form-control" placeholder="" id="nome" required> 
+                                    <div class="form-floating">
+                                        <input type="text" name="nome" class="form-control" placeholder="" id="nome"
+                                            required>
                                         <label for="nome">Nome</label><br>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 border-start">
                                     <div class="form-floating">
-                                        <input type="text" name="cognome" class="form-control" placeholder="" id="cognome" required>
+                                        <input type="text" name="cognome" class="form-control" placeholder=""
+                                            id="cognome" required>
                                         <label for="cognome">Cognome</label><br>
                                     </div>
                                 </div>
@@ -42,12 +46,14 @@
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="email" name="email"  id="email" required placeholder=" " class="form-control" >
+                                        <input type="email" name="email" id="email" required placeholder=" "
+                                            class="form-control">
                                         <label for="email">Inserisci la tua Email</label><br>
                                     </div>
                                     <div class="form-text ft1" style="margin-top: -8%">
                                         <small>
-                                            Riceverai qui l'email di verifica e conferma della prenotazione, controlla bene i dati!
+                                            Riceverai qui l'email di verifica e conferma della prenotazione, controlla
+                                            bene i dati!
                                         </small>
                                     </div>
                                 </div>
@@ -56,11 +62,12 @@
                                 <div class="col-12">
                                     <div class="">
                                         <label for="ddn">Data Di Nascita:</label>
-                                        <input type="date" name="ddn" id="ddn" class="form-control" placeholder=" " required>
+                                        <input type="date" name="ddn" id="ddn" class="form-control" placeholder=" "
+                                            required>
                                     </div>
                                 </div>
                             </div>
-                          
+
                         </div>
                         <div class="col-12 col-md-6 border-end form1">
                             <div class="card-header text-center">
@@ -69,152 +76,45 @@
                             <div class="row mt-3 " style="margin-bottom: -5%">
                                 <div class="col-12 col-md-6 ">
                                     <div class="form-floating">
-                                        <input type="text" name="citta" id="citta" required class="form-control" placeholder=""> 
+                                        <input type="text" name="citta" id="citta" required class="form-control"
+                                            placeholder="">
                                         <label for="citta">Città</label><br>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div class="col-12 col-md-6 border-start">
                                     <div class="form-floating">
-                                        <input type="number" name="cap" id="cap" maxlength="5" required class="form-control" placeholder=""> 
+                                        <input type="number" name="cap" id="cap" maxlength="5" required
+                                            class="form-control" placeholder="">
                                         <label for="cap">C.A.P.</label><br>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="row mt-3 " style="margin-bottom: -5%">
-                            
-                            <div class="col-12 mb-3">
+
+                                <div class="col-12 mb-3">
                                     <div class="form-floating">
-                                        <input type="text" name="indirizzo"  id="indirizzo" required class="form-control" placeholder=" ">
+                                        <input type="text" name="indirizzo" id="indirizzo" required class="form-control"
+                                            placeholder=" ">
                                         <label for="indirizzo">Inserisci il tuo indirizzo</label><br>
-                                        
+
                                     </div>
-                                        
+
                                 </div>
-                            </div> 
-                        
+                            </div>
+
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" name="cel" id="cel" maxlength="14" required class="form-control" placeholder=""> 
+                                        <input type="number" name="cel" id="cel" maxlength="14" required
+                                            class="form-control" placeholder="">
                                         <label for="cap">Cellulare</label><br>
                                     </div>
-                                      </div>
-                                      <div class="col-12 col-md-6">
-                                        <div class="form-floating">
-                                            <input type="number" name="tel" id="tel" maxlength="15" class="form-control" placeholder=""> 
-                                            <label for="cap">Telefono</label><br>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <button class="btn btn-outline-warning mb-5" id="stepSubmit"  style="width: 33%; margin-left: 33%;" >Avanti</button>
-                </div>
-            </div>
-        </form>
-    </div>
-<!-- aggiungere box shadow alle cose -->
-
-<div class="container-fluid">
-    <form id="step2" class=" form-control-lg needs-validation form1" onsubmit=" ">
-        <div class="card">
-            <div class="card-header text-center">
-             Componi il tuo Tour!!
-            </div>            <div class="card-body">
-                <div class="row">
-                    
-
-
-
-                    
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-6 border-end form1">
-                        <div class="card-header text-center">
-                            Dati personali
-                        </div>
-                        <div class="row mt-3 " style="margin-bottom: -5%">
-                            <div class="col-12 col-md-6 ">
-                                <div class="form-floating" >
-                                    <input type="text" name="nome" class="form-control" placeholder="" id="nome" required> 
-                                    <label for="nome">Nome</label><br>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 border-start">
-                                <div class="form-floating">
-                                    <input type="text" name="cognome" class="form-control" placeholder="" id="cognome" required>
-                                    <label for="cognome">Cognome</label><br>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <input type="email" name="email"  id="email" required placeholder=" " class="form-control" >
-                                    <label for="email">Inserisci la tua Email</label><br>
-                                </div>
-                                <div class="form-text ft1" style="margin-top: -8%">
-                                    <small>
-                                        Riceverai qui l'email di verifica e conferma della prenotazione, controlla bene i dati!
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="">
-                                    <label for="ddn">Data Di Nascita:</label>
-                                    <input type="date" name="ddn" id="ddn" class="form-control" placeholder=" " required>
-                                </div>
-                            </div>
-                        </div>
-                      
-                    </div>
-                    <div class="col-12 col-md-6 border-end form1">
-                        <div class="card-header text-center">
-                            Recapiti
-                        </div>
-                        <div class="row mt-3 " style="margin-bottom: -5%">
-                            <div class="col-12 col-md-6 ">
-                                <div class="form-floating">
-                                    <input type="text" name="citta" id="citta" required class="form-control" placeholder=""> 
-                                    <label for="citta">Città</label><br>
-                                </div> 
-                            </div>
-                            <div class="col-12 col-md-6 border-start">
-                                <div class="form-floating">
-                                    <input type="number" name="cap" id="cap" maxlength="5" required class="form-control" placeholder=""> 
-                                    <label for="cap">C.A.P.</label><br>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="row mt-3 " style="margin-bottom: -5%">
-                        
-                        <div class="col-12 mb-3">
-                                <div class="form-floating">
-                                    <input type="text" name="indirizzo"  id="indirizzo" required class="form-control" placeholder=" ">
-                                    <label for="indirizzo">Inserisci il tuo indirizzo</label><br>
-                                    
-                                </div>
-                                    
-                            </div>
-                        </div> 
-                    
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-floating">
-                                    <input type="number" name="cel" id="cel" maxlength="14" required class="form-control" placeholder=""> 
-                                    <label for="cap">Cellulare</label><br>
-                                </div>
-                                  </div>
-                                  <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" name="tel" id="tel" maxlength="15" class="form-control" placeholder=""> 
+                                        <input type="number" name="tel" id="tel" maxlength="15" class="form-control"
+                                            placeholder="">
                                         <label for="cap">Telefono</label><br>
                                     </div>
                                 </div>
@@ -223,46 +123,307 @@
                     </div>
 
                 </div>
-                <button class="btn btn-outline-warning mb-5" id="stepSubmit"  style="width: 33%; margin-left: 33%;" >Avanti</button>
+                <button class="btn btn-outline-warning mb-5" id="stepSubmit"
+                    style="width: 33%; margin-left: 33%;">Avanti</button>
             </div>
-        </div>
+    </div>
     </form>
-</div>
+    </div>
+    <!-- aggiungere box shadow alle cose -->
+    <!-- SECONDO STEP PREVENTIVO-->
+    <div class="container-fluid" id="salvaCard">
+        <form id="step2" class="nascosto form-control-lg formAggio">
+            <div class="card">
+                <div class="card-header text-center">
+                    Componi il tuo Tour!!
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4 card tipoPack" id="selection1">
+                            <div class="card-header text-center">
+                                BASIC
+                            </div>
+                            <img class="card-img-top imgPack" src="https://placehold.co/120" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text" style="height: 80px;">Per chi ama andare all'avventura!</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">&#9989 Camera con letti singoli</li>
+                                <li class="list-group-item">&#9989 Pranzo & Cena</li>
+                                <li class="list-group-item">&#9989 1 Attività al giorno</li>
+                            </ul>
+                            <div class="card-body">
+                                <button class="btn btn-outline-warning mb-5" id="scegliPack1"
+                                    onclick="goToStep3(event, 1)" style="width: 100%;">Seleziona</button>
+                            </div>
+                        </div>
 
-<script>
-    function goToStep2(event){
-        event.preventDefault();
-        if(datiStep1()){
-            document.getElementById("step1").classList.add('nascosto');
-            document.getElementById("step2").classList.remove('nascosto');
-            return true
+                        <div class="col-4  card tipoPack" id="selection2">
+                            <div class="card-header text-center">
+                                PREMIUM
+                            </div>
+                            <img class="card-img-top imgPack" src="https://placehold.co/120" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text" style="height: 80px;">Per chi cerca il comfort anche nella giungla
+                                    tropicale!</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">&#9989Camera con vista</li>
+                                <li class="list-group-item">&#9989 4 Pasti giornalieri</li>
+                                <li class="list-group-item">&#9989 3 Attività al giorno</li>
+                            </ul>
+                            <div class="card-body">
+                                <button class="btn btn-outline-warning mb-5" id="scegliPack2"
+                                    onclick="goToStep3(event, 2)" style="width: 100%;">Seleziona</button>
+                            </div>
+                        </div>
+
+                        <div class="card col-4 tipoPack" id="selection3">
+                            <div class="card-header text-center">
+                                ALL INCULSIVE
+                            </div>
+                            <img class="card-img-top imgPack" src="https://placehold.co/120" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text" style="height: 80px;">Per chi vuole stare senza pensieri! Metti il
+                                    braccialetto e rilassati!</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">&#9989 Suite Royal</li>
+                                <li class="list-group-item">&#9989 All You Can Eat & Drink</li>
+                                <li class="list-group-item">&#9989 Tutte le Attività</li>
+                            </ul>
+                            <div class="card-body">
+                                <button class="btn btn-outline-warning mb-5" id="scegliPack3"
+                                    onclick="goToStep3(event, 3)" style="width: 100%;">Seleziona</button>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+    </div>
+
+    <!-- TERZO STEP -->
+    <div class="container-fluid">
+        <form class="form-control-lg">
+            <div id="step3" class="card nascosto formAggio">
+                <div class="card-header text-center">
+                    Ci siamo quasi!!
+                </div>
+                <div class="card-body">
+                    <div class="row formAggio" id="cardGuest">
+                        <div class="card-header text-center">
+                            Ospiti
+                        </div>
+                        <div class="col-12 col-md-6 border-end form1">
+                            <div class="row mt-3 " style="margin-bottom: -5%">
+                                <div class="col-12 col-md-6 ">
+                                    <div class="form-floating">
+                                        <input type="text" name="nomeOspite" class="form-control" placeholder="" id="nomeOspite"
+                                            required>
+                                        <label for="nome">Nome</label><br>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" name="cognomeOspite" class="form-control" placeholder=""
+                                            id="cognomeOspite" required>
+                                        <label for="cognome">Cognome</label><br>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="email" name="email" id="emailOspite" required placeholder=" "
+                                            class="form-control">
+                                        <label for="email">Email</label><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-control-md">
+                                        <label for="ddn">Data Di Nascita:</label>
+                                        <input type="date" name="ddn" id="ddnOspite" class="form-control" placeholder=" "
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-outline-warning" id="addGuest" onclick="btnAddUser(event)"> Aggiungi Ospite</button>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-6 border-end">
+
+                            <div class="row mt-3" style="margin-bottom: -5%">
+                                <div class="col-12">
+                                    Lista Ospiti:
+                                    <div class="card container-fluid">
+                                        <div class="row" id="listaOspiti">
+                                    </div>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="btn btn-outline-warning mt-5" style="width: 33%; margin-left: 33%;" onclick="goToFinal(event)">Avanti</button>
+            </div>
+        </form>
+    </div>
+
+
+    </div>
+    </div>
+    </form>
+    </div>
+
+    <script>
+        function goToStep2(event) {
+            event.preventDefault();
+            if (datiStep1()) {
+                document.getElementById("step1").classList.add('nascosto');
+                document.getElementById("step2").classList.remove('nascosto');
+                return true
+            }
+            return false
         }
-        return false
-    }
 
-    function datiStep1(){
         const user = {}
-        user.nome = document.getElementById('nome').value
-        user.cognome = document.getElementById('cognome').value
-        user.mail = document.getElementById('email').value
-        user.indirizzo = document.getElementById('indirizzo').value
-        user.ddn = document.getElementById('ddn').value
-        user.cap = document.getElementById('cap').value
-        user.citta = document.getElementById('citta').value
-        user.numTel = document.getElementById('cel').value
-        if (user.nome!=0 && user.cognome!=0 && user.mail!=0 && user.indirizzo!=0 && user.citta!=0 && user.cap!=0 && user.numTel!=0 )
-        return true
-    else return false
+        function datiStep1() {
+            user.nome = document.getElementById('nome').value
+            user.cognome = document.getElementById('cognome').value
+            user.mail = document.getElementById('email').value
+            user.indirizzo = document.getElementById('indirizzo').value
+            user.ddn = document.getElementById('ddn').value
+            user.cap = document.getElementById('cap').value
+            user.citta = document.getElementById('citta').value
+            user.numTel = document.getElementById('cel').value
+            if (user.nome != 0 && user.cognome != 0 && user.mail != 0 && user.indirizzo != 0 && user.citta != 0 && user.cap != 0 && user.numTel != 0)
+                return true
+            else return false
+        }
+        function goToStep3(event, id) {
+            event.preventDefault();
+            selezionaPack(id);
+        }
+        function selezionaPack(id) {
+            user.pack = id;
+            document.getElementById("step2").classList.add('nascosto');
+            document.getElementById("step3").classList.remove('nascosto');
+        }
+
+        const guestList = [];
+        function btnAddUser(event) {
+            event.preventDefault();
+            aggiungiOspite();
+        }
+        let guestID = 0;
+        const listaOspiti = document.getElementById("listaOspiti")
+        function aggiungiOspite(){
+            let ospite = new Object();
+            ospite.nome = document.getElementById('nomeOspite').value
+            ospite.cognome = document.getElementById('cognomeOspite').value
+            ospite.email = document.getElementById('emailOspite').value
+            ospite.ddn = document.getElementById('ddnOspite').value
+            ospite.isMinore = getAge(ospite.ddn)
+            ospite.id = guestID
+            if (ospite.nome != 0 && ospite.cognome != 0 && ospite.email != 0 && ospite.ddn!=0)
+            {
+                guestList.push(ospite);
+                const newGuest = document.createElement('div')
+                newGuest.classList.add("card","col-6","col-lg-4","text-center", "p-0")
+                newGuest.id= "ospite"+guestID;
+                if(ospite.isMinore){
+
+                    newGuest.innerHTML = `<div class="card-header text-center">
+                            Ospite ${guestList.length}
+                        </div>
+                        <ul class="list-group list-group-flush">
+                              <li class="list-group-item">${ospite.nome} ${ospite.cognome}</li>
+                              <li class="list-group-item">${ospite.ddn}</li>
+                              <li class="list-group-item ridotto">&#9989 Ridotto</li>
+                              <li class="list-group-item text-center"><button class="btn btn-outline-danger" onclick="eliminaOspite(${guestID})"> Elimina</button></li>
+                        </ul>
+    `
+                } else {
+
+                    newGuest.innerHTML = `
+                     <div class="card-header text-center">
+                            Ospite ${guestList.length}
+                        </div>
+                        <ul class="list-group list-group-flush">
+                              <li class="list-group-item">${ospite.nome} ${ospite.cognome}</li>
+                              <li class="list-group-item">${ospite.ddn}</li>
+                              <li class="list-group-item">Adulto</li>
+                              <li class="list-group-item text-center"><button class="btn btn-outline-danger" onclick="eliminaOspite(${guestID})"> Elimina</button></li>
+                        </ul>
+    `
+                }
+                listaOspiti.appendChild(newGuest)
+                document.getElementById('nomeOspite').value = null
+                document.getElementById('cognomeOspite').value = null
+                document.getElementById('emailOspite').value = null
+                document.getElementById('ddnOspite').value = null
+                guestID++;
+                if(alertGuest)
+                document.getElementById('cardGuest').removeChild(errorGuest)
+            }
+        }
+        function eliminaOspite(id) {
+            guestCard = document.getElementById('ospite'+id)
+            for(let i=0; i<guestList.length; i++){
+                if(guestList[i].id === id) 
+                guestList.splice(i,1)
+        }
+        listaOspiti.removeChild(guestCard)
+        console.log(guestList)
+        }
+        function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
     }
-
-
-
-</script>
+    if (age>18)
+    return false;
+    else return true;
+}
+let alertGuest=false;
+let errorGuest = document.createElement('div')
+function goToFinal(event) {
+            event.preventDefault();
+            if (guestID>0) {
+                document.getElementById("step3").classList.add('nascosto');
+                document.getElementById("preventivo").classList.remove('nascosto');
+            } else if(!alertGuest && !guestID>0){ 
+                errorGuest.classList.add("alert", "alert-warning", "text-center", "mt-5")
+                errorGuest.innerHTML =`
+                Inserire almeno un ospite per continuare
+                `
+                    document.getElementById('cardGuest').appendChild(errorGuest);
+                    alertGuest =true
+                
+            }
+        }
+    </script>
     <script src="js/footer.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
