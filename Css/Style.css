@@ -10,20 +10,24 @@ body {
 .navbar {
 
     background-color: #efe1d2;
-    border-radius: 20%;
+    border-radius: 0px 0px 20px 20px ;
     padding: 0.25%;
    
     
 }
+.nav-link:hover {
+    color: #e59914 !important; 
+}
 .nav-item {
     padding: 10px;
     transition: .5s;
+    
 }
 
 .nav-item:hover {
     font-size: 130%;
 border: 4px;
-padding-left: 20px; padding-right: 20px;
+padding-left: 10px; padding-right: 10px;
 background-color: rgba(230, 211, 192, 0.8);
 border-radius: 28%;
 transition: 1s;
@@ -31,19 +35,22 @@ transition: 1s;
 .offers:hover {
     color: black;
     font-size: 150%;
-    background-color: rgba(240, 0, 0, 0.5);
+    background-color: #f0000080;
 }
 @media (min-width: 991px) {
 
     .destHead {
         margin-top: -2px;
+        text-shadow: 1px 0px 2px black !important;
         width: 350px;
         scale: 108%;
         border-radius: 8px 8px 0px 0px;
         
     }
-    .dest {
+    .destCont {
         width: 350px;
+            text-shadow: 1px 0px 3px #e59114;
+          
     }
 }
 @media (max-width: 991px) {
@@ -72,13 +79,122 @@ transition: 1s;
     font-size: xx-large;
     font-weight: bolder;
     color: #e59114;
-    margin-top: -20px;
-    margin-left: -1px;
-    scale: 107%;
-    width: 100%;
+    box-shadow: -0px 10px  12px lightblue;  
+      margin-top: -20px;
+ scale: 108%;
+ width: 100%;
     border: none;
     border-radius: 0%;
 }
 .destBtn:hover {
-    background-color: #e59114;
+    background-color: #ec9616;
 }
+
+.form1 .card-header{
+    background-color: #ec9616 !important;
+}
+
+.formAggio .card-header{
+  background-color: #ec9616 !important;
+}
+.form1 input {
+    width: 100%;
+    margin-bottom: 5%;
+    min-height: 70px !important;
+}
+.form1 input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form1 .form-control:focus {
+    font-size: smaller;
+    border-color: rgb(229, 145, 20);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(229, 145, 20, 0.6);
+  }
+  .form1 .btn-outline-warning {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(229, 145, 20, 0.6);
+    
+  }
+  .form1 .btn-outline-warning:hover {
+    color: antiquewhite;
+}
+.nascosto {
+    display: none;
+  }
+ 
+  .listaDest{
+    font-size: large;
+    list-style-type: none;
+  }
+  .listaDest>li>a {
+    text-decoration: none;
+    color: #e59114;
+    transition: 0.3s;
+  }
+  .listaDest>li>a:hover {
+    color: #f0000080;
+    max-width: 100%;
+    border-radius: 50%;
+    border: 4px;
+    padding-left: 16px; padding-right: 16px;
+    background-color: rgba(223, 146, 69, 0.4);
+    transition: 0.5s;
+  }
+  .statoDest {
+    transition: 0.3s;
+  }
+  .statoDest:hover {
+    color: #f0000080;
+    transition: 1s;
+    background-color: rgb(229, 145, 20, 0.5);
+    border-radius: 23%;
+  }
+  .infoContatti {
+
+    font-size: larger;
+    text-align: center;
+    color:#e59114;
+    text-shadow: 1px 1px 2px  #f0000080;
+    
+}
+.infoContatti>span{
+    font-weight: 400;
+    text-shadow: none;
+  }
+  .tipoPack {
+    padding: 0px;
+    scale: 95%;
+    width: 33%;
+    transition: 0.3s;
+  }
+  .tipoPack:hover {
+    transition: 0.5s;
+    scale : 100%;
+    box-shadow: 2px 2px 20px black;
+  }
+  .tipoPack>ul>li {
+    transition: 0.3s;
+  }
+  .tipoPack>ul>li:hover {
+    color: #f0000080;
+    background-color: bisque;
+    transition: 0.3s;
+  }
+  #scegliPack:hover {
+    box-shadow: 1px 1px 6px 3px  #e59114
+    inset;
+    color: #f0000080;
+  }
+  .btn-outline-warning{
+    transition: 0.3s;
+  }
+  .btn-outline-warning:hover {
+    box-shadow: 1px 1px 6px 3px  #e59114
+    inset;
+    color: #f0000080 !important;
+    transition: 0.3s;
+  } 
+  .ridotto {
+    color: green;
+  }
