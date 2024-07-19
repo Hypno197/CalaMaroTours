@@ -1,76 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Back to Top Button</title>
+    <title>Domande Frequenti</title>
+    <link rel="stylesheet" href="Css/StyleGabriel.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="Css/Style.css">
     <style>
-        #backToTopBtn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none;
-            /* Nasconde il pulsante di default */
-            z-index: 1000;
-            /* Assicura che il pulsante sia sempre sopra altri contenuti */
+        a {
+            color: inherit;
+            /* Usa il colore del testo del genitore */
+            text-decoration: none;
+            /* Rimuove la sottolineatura */
+        }
+
+        .faq-header {
+            background-color: #E59114;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .faq-item {
+            border: 1px solid;
+            background-color: #E6D3C0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-item:hover {
+            background-color: #e9ecef;
+        }
+
+        .faq-item .plus-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+        }
+
+        .faq-content {
+            border: 1px solid #E59114;
+            background-color: #E59114;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: -10px;
+            /* Overlap with the item border */
+            margin-bottom: 10px;
+        }
+
+        .sidebar {
+            padding-top: 20px;
+            height: calc(100vh - 40px);
+        }
+
+        .sidebar a {
+            background-color: #E59114;
+            display: block;
+            padding: 10px;
+            color: black;
+            text-decoration: none;
+            border: 1px solid #dee2e6;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .sidebar a:hover {
+            background-color: #e9ecef;
         }
     </style>
 </head>
 
 <body>
+    <script src="js/header.js"></script>
 
-    <!-- Contenuto della pagina -->
-    <div class="container mt-5">
-        <h1>l videogioco è ambientato in un mondo in cui la magia è ritenuta scomparsa in seguito a una guerra tra
-            creature leggendarie denominate Esper, avvenuta mille anni prima dell'inizio del gioco. Il perfido Impero
-            Gestahliano intende però riesumare i poteri delle creature per creare dei soldati magicamente potenziati ed
-            espandere il proprio dominio su tutto il mondo. La trama segue le avventure di un manipolo di quattordici
-            ribelli della Resistenza che cercano di ostacolare l'Impero.
-
-            Il gioco era conosciuto in Nord America con il titolo Final Fantasy III, per mantenere la continuità con il
-            precedente capitolo pubblicato nel paese, ovvero Final Fantasy IV, che era stato rinominato Final Fantasy
-            II. È stato il primo gioco della serie in cui Hironobu Sakaguchi, storico direttore della saga, non ha
-            ricoperto il ruolo di regista, che è stato invece assegnato a Yoshinori Kitase e Hiroyuki Itō. Yoshitaka
-            Amano si è occupato del design dei personaggi, mentre Nobuo Uematsu ha composto la colonna sonora,
-            pubblicata poi in vari album.
-
-            Final Fantasy VI ha goduto di un vasto successo di pubblico e di critica; costituisce uno dei titoli più
-            apprezzati della serie, ed è considerato uno dei giochi di ruolo, e in generale uno dei videogiochi,
-            migliori in assoluto. Le versioni Super Nintendo Entertainment System e PlayStation hanno venduto più di
-            3,48 milioni di copie in tutto il mondo, con 2,62 milioni nel solo Giappone, rendendolo uno dei videogiochi
-            più venduti in territorio nipponico. Final Fantasy VI ha segnato inoltre uno dei primi esempi di narrazione
-            videoludica complessa e matura, e per la sua influenza in molte opere successive è ritenuto un titolo di
-            riferimento dell'intero genere.</h1>
-        <p>...</p>
-        <!-- Aggiungi altro contenuto qui per creare una pagina scrollabile -->
+    <div class="faq-header">
+        <h2>Domande frequenti</h2>
     </div>
 
-    <!-- Pulsante per tornare in cima -->
-    <button id="backToTopBtn" class="btn btn-primary">Torna in cima</button>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Contenuto principale -->
+            <div class="col-md-8">
+                <div class="container mt-4">
+                    <div class="faq-item" data-toggle="collapse" data-target="#faq1">
+                        <h5>Siete una agenzia di viaggio?</h5>
+                        <div class="plus-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="faq1" class="collapse faq-content">
+                        <p>Non proprio, siamo un Tour Operator. Volendo semplificare: noi creiamo, organizziamo e
+                            commercializziamo pacchetti vacanze e viaggi. L'Agenzia di Viaggio è un intermediario a cui
+                            puoi rivolgerti per acquistarli.</p>
+                    </div>
+                    <div class="faq-item" data-toggle="collapse" data-target="#faq2">
+                        <h5>Che tipo di vacanze/viaggi organizzate e vendete?</h5>
+                        <div class="plus-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="faq2" class="collapse faq-content">
+                        <p>Siamo il tour operator italiano leader del mercato per i villaggi turistici. Con noi puoi
+                            prenotare la tua vacanza balneare in uno degli oltre 50 Veraclub e Experience Veraclub
+                            presenti nelle location di mare più suggestive del mondo. I nostri villaggi Veraclub sono
+                            caratterizzati dai servizi di cucina, animazione e assistenza italiana erogati dal nostro
+                            personale presente in loco. Gli Experience Veraclub sono hotel e resort di gamma selezionati
+                            da Veratour per chi desidera trascorrere la vacanza in un ambiente internazionale, e
+                            prevedono la presenza di un assistente Veratour a disposizione dei nostri Ospiti, alcuni
+                            nostri animatori che si integrano con lo staff locale nelle attività di intrattenimento e la
+                            nostra supervisione sui menu e la gastronomia.
 
-    <script>
-        // Mostra il pulsante quando l'utente scrolla verso il basso di 100px
-        window.onscroll = function () {
-            scrollFunction();
-        };
+                            Ma con noi puoi prenotare anche viaggi itineranti alla scoperta di mete lontane con i voli
+                            di linea delle migliori compagnie aeree, organizzati con il supporto operativo di una rete
+                            dei migliori corrispondenti presenti in ogni destinazione. I Viaggi Veratour comprendono
+                            Tour di gruppo, viaggi individuali e Self Drive per muoversi in totale autonomia e senza
+                            obblighi di orari, City Break per visitare le metropoli più iconiche e la formula delle
+                            Vacanze Mix. Alcuni programmi, o parti di essi, possono essere personalizzati sulla base dei
+                            tuoi desideri e completati con soggiorni nei villaggi Veraclub e nelle località di mare più
+                            suggestive del pianeta.</p>
+                    </div>
+                    <div class="faq-item" data-toggle="collapse" data-target="#faq3">
+                        <h5>Domanda: Come posso prenotare un viaggio con voi?</h5>
+                        <div class="plus-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="faq3" class="collapse faq-content">
+                        <p> Puoi prenotare tramite il nostro sito web, contattando il nostro servizio clienti o
+                            visitando una delle nostre agenzie fisiche. Siamo qui per rendere la prenotazione del tuo
+                            viaggio il più semplice possibile.</p>
+                    </div>
+                    <div class="faq-item" data-toggle="collapse" data-target="#faq4">
+                        <h5>Quali sono le politiche di cancellazione e modifica delle prenotazioni?</h5>
+                        <div class="plus-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="faq4" class="collapse faq-content">
+                        <p>Le politiche di cancellazione e modifica variano a seconda del pacchetto e della
+                            destinazione. Ti consigliamo di controllare le condizioni specifiche al momento della
+                            prenotazione o di contattare il nostro team per dettagli aggiornati.</p>
+                    </div>
+                    <div class="faq-item" data-toggle="collapse" data-target="#faq5">
+                        <h5>Che tipo di attività e escursioni organizzate offrite durante i viaggi?</h5>
+                        <div class="plus-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="faq5" class="collapse faq-content">
+                        <p>Organizziamo una varietà di attività e escursioni per soddisfare i gusti di ogni viaggiatore,
+                            che includono visite culturali, avventure all'aria aperta, esperienze gastronomiche e molto
+                            altro ancora.</p>
+                    </div>
+                    <div class="faq-item" data-toggle="collapse" data-target="#faq6">
+                        <h5> Quali servizi sono inclusi nei pacchetti di viaggio?</h5>
+                        <div class="plus-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="faq6" class="collapse faq-content">
+                        <p> I nostri pacchetti di viaggio possono includere voli, trasferimenti aeroportuali, alloggio
+                            in hotel, pasti, escursioni guidate e altre esperienze specifiche della destinazione. Le
+                            inclusionsi esatte variano a seconda del pacchetto scelto.</p>
+                    </div>
+                    <div class="faq-item" data-toggle="collapse" data-target="#faq7">
+                        <h5>Come gestite le emergenze durante i viaggi?</h5>
+                        <div class="plus-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="faq7" class="collapse faq-content">
+                        <p>Abbiamo un team dedicato di supporto che è disponibile 24 ore su 24 per assistere in caso di
+                            emergenze. Oltre a ciò, forniamo ai nostri clienti contatti locali e informazioni utili per
+                            affrontare qualsiasi situazione imprevista.</p>
+                    </div>
+                    <div class="faq-item" data-toggle="collapse" data-target="#faq8">
+                        <h5>Posso personalizzare il mio viaggio con aggiunte o modifiche al pacchetto standard?</h5>
+                        <div class="plus-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="faq8" class="collapse faq-content">
+                        <p>Sì, offriamo opzioni di personalizzazione per adattare il viaggio alle tue preferenze
+                            specifiche. Parla con uno dei nostri consulenti di viaggio per aggiungere esperienze extra,
+                            estendere il soggiorno o altro.</p>
+                    </div>
+                    <div class="faq-item" data-toggle="collapse" data-target="#faq9">
+                        <h5>Quali sono le opzioni di pagamento disponibili per prenotare un viaggio?</h5>
+                        <div class="plus-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="faq9" class="collapse faq-content">
+                        <p>Accettiamo pagamenti tramite carta di credito, bonifico bancario e altre modalità di
+                            pagamento sicure e convenienti. I dettagli esatti sono forniti al momento della
+                            prenotazione.</p>
+                    </div>
+                    <div class="faq-item" data-toggle="collapse" data-target="#faq11">
+                        <h5>Qual è il periodo consigliato per prenotare in anticipo?</h5>
+                        <div class="plus-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="faq11" class="collapse faq-content">
+                        <p>Consigliamo di prenotare il più presto possibile per garantire la disponibilità dei migliori
+                            hotel e tariffe aeree. Alcuni dei nostri pacchetti hanno anche sconti speciali per
+                            prenotazioni anticipate.</p>
+                    </div>
+                    <div class="faq-item" data-toggle="collapse" data-target="#faq12">
+                        <h5>Cosa devo sapere riguardo ai requisiti di visto e documenti di viaggio?</h5>
+                        <div class="plus-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="faq12" class="collapse faq-content">
+                        <p>Forniamo consulenza sulle procedure di visto e sui requisiti di documentazione necessari per
+                            ciascuna destinazione. Ti consigliamo di controllare i requisiti specifici del paese che
+                            intendi visitare e di assicurarti di avere tutti i documenti necessari prima della partenza.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Sidebar -->
+            <div class="col-md-4">
+                <div class="sidebar">
+                    <a href="FAQ.html">FAQ</a>
+                    <a href="CondizioniGenerali.html">CONDIZIONI GENERALI</a>
+                    <a href="Assicurazioni.html">ASSICURAZIONI</a>
+                    <a href="Disabilità.html">PERSONE CON DISABILITA'</a>
+                    <a href="Animali.html">AMMISSIONE ANIMALI DOMESTICI</a>
+                    <a href="Informazioni.html">INFORMAZIONI AI VIAGGIATORI</a>
+                    <a href="Rimborso.html">RIMBORSO</a>
+                    <a href="Scontistica.html">SCONTISTICA</a>
+                    <a href="Minorenni.html">MINORENNI IN VIAGGIO</a>
+                    <a href="PrePartenza.html">INFORMAZIONI PRE-PARTENZA</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        function scrollFunction() {
-            const backToTopBtn = document.getElementById("backToTopBtn");
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                backToTopBtn.style.display = "block";
-            } else {
-                backToTopBtn.style.display = "none";
-            }
-        }
+    <script src="js/footer.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
 
-        // Quando l'utente clicca sul pulsante, torna in cima alla pagina
-        document.getElementById("backToTopBtn").onclick = function () {
-            document.body.scrollTop = 0; // Per Safari
-            document.documentElement.scrollTop = 0; // Per Chrome, Firefox, IE e Opera
-        };
-    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

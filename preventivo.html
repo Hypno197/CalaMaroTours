@@ -15,7 +15,7 @@
     <script src="js/header.js"></script>
     <h1 class="text-center mt-3" style="text-shadow: 1px 1px 20px #e59114;"> Personalizza il tuo Tour!!</h1>
     <div class="container-fluid">
-        <form id="step1" class="form-control-lg needs-validation form1" onsubmit="goToStep2(event)">
+        <form id="step1" class="nascosto form-control-lg needs-validation form1" onsubmit="goToStep2(event)">
             <div class="card">
                 <div class="card-header text-center">
                     Compila i campi dei tuoi dati di contatto!
@@ -282,14 +282,148 @@
             </div>
         </form>
     </div>
+    <div class="container-fluid">
 
+    <form class="form1 stepFinal formAggio form-control">
+        <div class="card">
+            <div class="card-header text-center">
+              Dove andiamo?
+            </div>
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-12 col-lg-3">
+                        <div class="form-floating">
+                            <select id="continentSelect" class="form-select" name="continentSel" onfocus="populateSelectWithArray(continentiArr, 'continentSelect'), svuota()">
+                            </select>
+                            <label for="continentSel">Seleziona Continente:</label>
+                        </div>
+                        <br>
+                        <div  class="form-floating">
+                            <select id="categorySelect"  class="form-select" name="categorySel" onfocus="filtraCategory()">
+                            </select>
+                            <label for="categorySel">Seleziona Stato:</label>
+                        </div>
+                        <br>
+                        <div  class="form-floating">
+                            <select id="destinationSelect" class="form-select" name="destinationSel" onfocus="filtraDest()">
+                            </select>
+                            <label for="destinationSel">Seleziona Destinazione:</label>
+                        </div>
+                        <br>
+                        <div  class="form-floating">
+                            <select id="departureSelect" class="form-select" name="departureSel" onfocus="popolaPartenze()">
+                            </select>
+                            <label for="departureSel">Seleziona Partenza:</label>
+                    </div>
+                    </div>
+                    <div class="col-9 border-start">
+asxcasdasdasda
+                    </div>
 
-    </div>
-    </div>
+                </div>
+            </div>
+          </div>
     </form>
-    </div>
-
+        
+</div>
     <script>
+        const continentiArr=[];
+        const categoryArr=[];
+        const destinazioniArr=[]
+      
+        document.addEventListener('DOMContentLoaded', popolaContinente());
+
+        document.getElementById('continentSelect').addEventListener('change', popolaCategory())
+        document.getElementById('categorySelect').addEventListener('change', popolaDest())
+        document.getElementById('destinationSelect').addEventListener('change', popolaPartenze())
+
+
+        function popolaContinente(){
+            fetch('http://localhost:8080/continente')
+    .then(res => res.json())
+    .then(json => {
+        for (let i = 0; i < json.length; i++) {
+            continentiArr.push(json[i])
+        }
+})
+}
+function svuota(){
+    let cat = document.getElementById('categorySelect').value = 0
+document.getElementById('destinationSelect').value = 0
+document.getElementById('departureSelect').value = 0
+}
+function popolaCategory(){
+    categoryArr.length=0;
+    fetch('http://localhost:8080/categories')
+    .then(res => res.json())
+    .then(json => {
+        for (let i = 0; i < json.length; i++) {
+            categoryArr.push(json[i])
+        }
+})
+}
+function popolaDest(){
+    categoryArr.length=0;
+    fetch('http://localhost:8080/destinazioni')
+    .then(res => res.json())
+    .then(json => {
+        for (let i = 0; i < json.length; i++) {
+            destinazioniArr.push(json[i])
+        }
+})
+}
+function popolaPartenze(){
+    const destSelezionata = document.getElementById('destinationSelect')
+    let partenzeArr=[]
+    destinazioniArr.forEach(dest =>{
+        if(dest.id == destSelezionata.value){
+            partenzeArr=dest.departures
+        }
+    })
+    populateSelectWithArray(partenzeArr, 'departureSelect')
+}
+
+
+function filtraCategory(){
+    const contSelezionato = document.getElementById('continentSelect')
+document.getElementById('categorySelect').value = 0
+document.getElementById('destinationSelect').value = 0
+document.getElementById('departureSelect').value = 0
+    const filteredCat=[]
+    for(i=0; i<categoryArr.length; i++) {
+        if(categoryArr[i].continente.id == contSelezionato.value)
+        filteredCat.push(categoryArr[i]);
+    }
+    populateSelectWithArray(filteredCat, 'categorySelect')
+}
+
+function filtraDest(){
+document.getElementById('destinationSelect').value = 0
+document.getElementById('departureSelect').value = 0
+    const statoSelezionato = document.getElementById('categorySelect')
+    console.log(statoSelezionato.value)
+    const filteredDest=[]
+    for(i=0; i<destinazioniArr.length; i++) {
+        if(destinazioniArr[i].category.id == statoSelezionato.value)
+        filteredDest.push(destinazioniArr[i]);
+    }
+    console.log(filteredDest)
+    populateSelectWithArray(filteredDest, 'destinationSelect')
+}
+
+
+
+function populateSelectWithArray(array, selectElementId) {
+    const selectElement = document.getElementById(selectElementId);
+    selectElement.innerHTML = '';
+    array.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.id; 
+        option.textContent = item.name; 
+        selectElement.appendChild(option); 
+    })
+}
+
         function goToStep2(event) {
             event.preventDefault();
             if (datiStep1()) {
