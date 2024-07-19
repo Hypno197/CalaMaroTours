@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inserimento destinazione</title>
+  <link rel="stylesheet" href="Css/bootstrap.min.css" />
+  <link rel="stylesheet" href="Css/Style.css" />
+  <link rel="stylesheet" href="Css/StyleGabriel.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+  <script src="js/header.js"></script>
+  
+  <div id="formDestinazioni">
+    <!-- Elementi iniziali delle select e del pulsante -->
+    <select id="continentiSelect" class="form-select form-select-lg mb-3" aria-label="Large select example" onchange="trovaPaesi(this.value)">
+      <option selected>Scegli il continente</option>
+    </select>
+    <select id="paesiSelect" class="form-select form-select-lg mb-3" aria-label="Large select example" onchange="trovaCitta(this.value)">
+      <option selected>Scegli il paese</option>
+    </select>
+    <select id="cittaSelect" class="form-select form-select-lg mb-3" aria-label="Large select example" onchange="gestisciCitta(this.value)">
+      <option selected>Scegli la città</option>
+    </select>
+    <button type="button" class="btn btn-primary" onclick="mostraNuovaCittaModal()">Aggiungi Nuova Città</button>
+  </div>
+
+  <!-- Modal per aggiungere una nuova città -->
+  <div class="modal fade" id="newCityModal" tabindex="-1" aria-labelledby="newCityModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newCityModalLabel">Aggiungi Nuova Città</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="newCityForm">
+            <div class="mb-3">
+              <label for="cityName" class="form-label">Nome della Città</label>
+              <input type="text" class="form-control" id="cityName" required>
+            </div>
+            <div class="mb-3">
+              <label for="cityImgUrl" class="form-label">URL Immagine della Città</label>
+              <input type="text" class="form-control" id="cityImgUrl" required>
+            </div>
+            <div class="mb-3">
+              <label for="cityDescription" class="form-label">Descrizione della Città</label>
+              <textarea class="form-control" id="cityDescription" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="departures" class="form-label">Partenze (JSON Array)</label>
+              <textarea class="form-control" id="departures" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="activities" class="form-label">Attività (JSON Array)</label>
+              <textarea class="form-control" id="activities" rows="3" required></textarea>
+            </div>
+            <input type="hidden" id="cityId">
+            <button type="submit" class="btn btn-primary">Aggiungi</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal per modificare e cancellare una città -->
+  <div class="modal fade" id="editCityModal" tabindex="-1" aria-labelledby="editCityModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editCityModalLabel">Modifica Città</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editCityForm">
+            <div class="mb-3">
+              <label for="editCityName" class="form-label">Nome della Città</label>
+              <input type="text" class="form-control" id="editCityName" required>
+            </div>
+            <div class="mb-3">
+              <label for="editCityImgUrl" class="form-label">URL Immagine della Città</label>
+              <input type="text" class="form-control" id="editCityImgUrl" required>
+            </div>
+            <div class="mb-3">
+              <label for="editCityDescription" class="form-label">Descrizione della Città</label>
+              <textarea class="form-control" id="editCityDescription" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="editDepartures" class="form-label">Partenze (JSON Array)</label>
+              <textarea class="form-control" id="editDepartures" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="editActivities" class="form-label">Attività (JSON Array)</label>
+              <textarea class="form-control" id="editActivities" rows="3" required></textarea>
+            </div>
+            <input type="hidden" id="editCityId">
+            <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+            <button type="button" id="deleteCityButton" class="btn btn-danger">Elimina Città</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="path/to/bootstrap.bundle.min.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const containerForm = document.getElementById('formDestinazioni');
+      const continentiSelect = document.getElementById('continentiSelect');
+      const paesiSelect = document.getElementById('paesiSelect');
+      const cittaSelect = document.getElementById('cittaSelect');
+
+      let continentiAggiunti = []; // Array per tenere traccia dei continenti già aggiunti
+
+      // Funzione per caricare i continenti
+      const caricaContinenti = () => {
+        fetch('http://localhost:8080/categories')
+          .then(res => res.json())
+          .then(json => {
+            json.forEach(category => {
+              if (!continentiAggiunti.includes(category.continente.id)) {
+                continentiAggiunti.push(category.continente.id);
+                continentiSelect.innerHTML += `<option value="${category.continente.id}">${category.continente.name}</option>`;
+              }
+            });
+          });
+      };
+
+      caricaContinenti();
+
+      // Funzione per trovare i paesi in base al continente selezionato
+      window.trovaPaesi = function(continenteId) {
+        paesiSelect.innerHTML = '<option selected>Scegli il paese</option>';
+        cittaSelect.innerHTML = '<option selected>Scegli la città</option>';
+        fetch('http://localhost:8080/categories')
+          .then(res => res.json())
+          .then(json => {
+            json.forEach(category => {
+              if (continenteId == category.continente.id) {
+                paesiSelect.innerHTML += `<option value="${category.id}">${category.name}</option>`;
+              }
+            });
+          });
+      };
+
+      // Funzione per trovare le città in base al paese selezionato
+      window.trovaCitta = function(paeseId) {
+        cittaSelect.innerHTML = '<option selected>Scegli la città</option>';
+        fetch('http://localhost:8080/destinazioni')
+          .then(res => res.json())
+          .then(json => {
+            json.forEach(destinazione => {
+              if (paeseId == destinazione.category.id) {
+                cittaSelect.innerHTML += `<option value="${destinazione.id}">${destinazione.name}</option>`;
+              }
+            });
+          });
+      };
+
+      // Funzione per gestire la città selezionata
+      window.gestisciCitta = function(value) {
+        if (value === 'new') {
+          mostraNuovaCittaModal();
+        } else {
+          fetch(`http://localhost:8080/destinazioni/${value}`)
+            .then(res => res.json())
+            .then(city => {
+              document.getElementById('editCityName').value = city.name;
+              document.getElementById('editCityImgUrl').value = city.imgUrl;
+              document.getElementById('editCityDescription').value = city.description;
+              document.getElementById('editDepartures').value = JSON.stringify(city.departures, null, 2);
+              document.getElementById('editActivities').value = JSON.stringify(city.activities, null, 2);
+              document.getElementById('editCityId').value = city.id;
+
+              const editCityModal = new bootstrap.Modal(document.getElementById('editCityModal'));
+              editCityModal.show();
+            });
+        }
+      };
+
+      // Mostra il modale per aggiungere una nuova città
+      window.mostraNuovaCittaModal = function() {
+        const newCityModal = new bootstrap.Modal(document.getElementById('newCityModal'));
+        newCityModal.show();
+      };
+
+      // Aggiungi una nuova città
+      document.getElementById('newCityForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('cityName').value;
+        const imgUrl = document.getElementById('cityImgUrl').value;
+        const description = document.getElementById('cityDescription').value;
+        const departures = JSON.parse(document.getElementById('departures').value);
+        const activities = JSON.parse(document.getElementById('activities').value);
+        const categoryId = document.getElementById('categorySelect').value;
+
+        fetch('http://localhost:8080/destinazioni', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name,
+            imgUrl,
+            description,
+            departures,
+            activities,
+            category: {
+              id: categoryId
+            }
+          })
+        })
+          .then(res => {
+            if (!res.ok) {
+              throw new Error('Errore nella richiesta');
+            }
+            return res.json();
+          })
+          .then(() => {
+            alert('Città aggiunta con successo');
+            const newCityModal = bootstrap.Modal.getInstance(document.getElementById('newCityModal'));
+            newCityModal.hide();
+            trovaCitta(paesiSelect.value);
+          })
+          .catch(err => {
+            alert('Errore durante l\'aggiunta della città: ' + err.message);
+          });
+      });
+
+      // Modifica una città esistente
+      document.getElementById('editCityForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const id = document.getElementById('editCityId').value;
+        const name = document.getElementById('editCityName').value;
+        const imgUrl = document.getElementById('editCityImgUrl').value;
+        const description = document.getElementById('editCityDescription').value;
+        const departures = JSON.parse(document.getElementById('editDepartures').value);
+        const activities = JSON.parse(document.getElementById('editActivities').value);
+
+        fetch(`http://localhost:8080/destinazioni/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name,
+            imgUrl,
+            description,
+            departures,
+            activities
+          })
+        })
+          .then(res => {
+            if (!res.ok) {
+              throw new Error('Errore nella richiesta');
+            }
+            return res.json();
+          })
+          .then(() => {
+            alert('Città modificata con successo');
+            const editCityModal = bootstrap.Modal.getInstance(document.getElementById('editCityModal'));
+            editCityModal.hide();
+            trovaCitta(paesiSelect.value);
+          })
+          .catch(err => {
+            alert('Errore durante la modifica della città: ' + err.message);
+          });
+      });
+
+      // Elimina una città esistente
+      document.getElementById('deleteCityButton').addEventListener('click', function() {
+        const id = document.getElementById('editCityId').value;
+
+        fetch(`http://localhost:8080/destinazioni/${id}`, {
+          method: 'DELETE'
+        })
+          .then(res => {
+            if (!res.ok) {
+              throw new Error('Errore nella richiesta');
+            }
+            return res.json();
+          })
+          .then(() => {
+            alert('Città eliminata con successo');
+            const editCityModal = bootstrap.Modal.getInstance(document.getElementById('editCityModal'));
+            editCityModal.hide();
+            trovaCitta(paesiSelect.value);
+          })
+          .catch(err => {
+            alert('Errore durante l\'eliminazione della città: ' + err.message);
+          });
+      });
+    });
+  </script>
+</body>
+
+</html>
