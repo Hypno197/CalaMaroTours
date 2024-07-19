@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card con Carosello</title>
+    <title>Calamaro Tour - Destinazioni</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="Css/Style.css">
     <link rel="stylesheet" href="Css/StyleGabriel.css">
@@ -117,7 +117,9 @@
             --bs-btn-border-color: #bc1304;
             --bs-btn-hover-border-color: #650a01;
         }
-
+        a.btn.btn-primary {
+            
+            margin-bottom: 20px;        }
         .popUp {
             max-height: 400px;
         }
@@ -708,7 +710,14 @@
     </div>
     </div>
 
-
+    <!-- <div class="container text-center">
+        <br>
+        <h1 style="font-size: xx-large;">Dove vuoi andare?</h1>
+        <br>
+    </div>
+    <div class="container text-center card-destinazioni">
+        <div id="destinazioni" class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-4"></div>
+    </div> -->
     <div class="container" id="destinazioni">
         <div class="row" id="dettagliDestinazione">
 
@@ -723,759 +732,197 @@
 
     <script src="js/bootstrap.bundle.js"></script>
     <script>
-        const destinazioniHome = `    
-            <div class="container text-center">
-        <br>
-        <h1 style="font-size: xx-large;">Dove vuoi andare?</h1>
-        <br>
-        </div>    
-            <div class="container text-center card-destinazioni">
-                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2  row-cols-lg-4 row-cols-xl-4">
-                    <div class="col ">
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card">
-                                        <img src="img/colosseo.jpg" class="card-img-top" alt="immagine">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Italia</h5>
-                                            <p class="card-text">L'Italia, famosa per la sua storia, arte e cucina, è
-                                                una meta affascinante.</p>
 
+let destinazioniGlobali = [];
 
-                                        </div>
+document.addEventListener('DOMContentLoaded', () => {
+    const containerDestinazioni = document.getElementById('dettagliDestinazione');
+    fetch('http://localhost:8080/categories')
+        .then(res => res.json())
+        .then(json => {
+            const destinazioniHome = json.map(paese => `
+                <div class="col">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card">
+                                    <img src="${paese.imgUrl}" class="card-img-top" alt="immagine">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${paese.name.replace("'", "\\'")}</h5>
+                                        <p class="card-text">${paese.shortDesc.replace("'", "\\'")}</p>
                                     </div>
                                 </div>
-                                <div class="flip-card-back">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">L'Italia</h5>
-                                            <p class="card-text">L'Italia, con la sua storia millenaria, l'arte
-                                                rinascimentale, i pittoreschi paesaggi e la cucina deliziosa, offre
-                                                un'esperienza culturale e gastronomica unica, attirando visitatori da
-                                                tutto il mondo.</p>
-                                            <a href="#destinazioni" class="btn btn-primary"
-                                                onclick="scopriDiPiu('italia')">Scopri di più</a>
-                                        </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${paese.name.replace("'", "\\'")}</h5>
+                                        <p class="card-text">${paese.longDesc.replace("'", "\\'")}</p>
+                                        <a href="#destinazioni" class="btn btn-primary"
+                                            onclick="scopriDiPiu('${paese.name.replace("'", "\\'")}')">Scopri di più</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col ">
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card">
-                                        <img src="img/croazia-1.jpg" class="card-img-top" alt="immagine">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Croazia</h5>
-                                            <p class="card-text">La Croazia è nota per le sue bellissime coste e il mare
-                                                cristallino.</p>
+                </div>
+            `).join('');
+            containerDestinazioni.innerHTML = `
+                <div class="container text-center">
+                    <br>
+                    <h1 style="font-size: xx-large;">Dove vuoi andare?</h1>
+                    <br>
+                </div>    
+                <div class="container text-center card-destinazioni">
+                    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-4">
+                        ${destinazioniHome}
+                    </div>
+                </div>`;
+        })
+        .catch(err => {
+            console.error('Errore durante il fetch delle categorie:', err);
+        });
+});
 
+function scopriDiPiu(paisName) {
+    const containerDestinazioni = document.getElementById('dettagliDestinazione');
+    let listaCitta = ''; // Inizializzazione della stringa per la lista delle città
 
+    fetch('http://localhost:8080/categories')
+    .then(res => res.json())
+    .then(json => {
+        let citta = []; // Inizializzazione dell'array per le città del paese selezionato
+        for (let i = 0; i < json.length; i++) {
+            if (json[i].name === paisName) {
+                const paese = json[i];
+                
+                fetch('http://localhost:8080/destinazioni')
+                    .then(res => res.json())
+                    .then(destinazioni => {
+                        destinazioniGlobali = destinazioni; // Aggiorna la variabile globale
+                        destinazioni.forEach(dest => {
+                            if (dest.category.name === paisName) { // Check if the destination's category matches the selected country
+                                citta.push(dest); // Add the city to the array of cities
+                                listaCitta += `<option value="${dest.id}">${dest.name}</option>`; // Construct options for the dropdown menu
+                            }
+                        });
+
+                        containerDestinazioni.innerHTML = `
+                            <!-- Contenuto della destinazione -->
+                            <section class="about_section padding">
+                                <div class="container">
+                                    <div class="row justify-content-center align-items-center mb-20">
+                                        <div class="col-12" style="width:90%">
+                                            <a href="destinazioni.html" class="btn btn-primary" onclick="tornaIndietro()">Torna indietro</a>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center align-items-center">
+                                        <div class="content col-12 col-lg-5 p-4 m-3">
+                                            <div class="text-center">
+                                                <h1 class="titolo-pagina-singola" style="font-size: xx-large;">${paese.name.replace("'", "\\'")}</h1>
+                                                <p class="descr-pagina-singola mb-5" style="font-size: x-large;">${paese.longDesc.replace("'", "\\'")}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            <div class="about_img">
+                                                <img src="${paese.imgUrl.replace("'", "\\'")}" alt="${paese.name.replace("'", "\\'")}" class="about_img_1">
+                                                <img src="${paese.imgUrl.replace("'", "\\'")}" alt="${paese.name.replace("'", "\\'")}" class="about_img_2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center align-items-center mb-20">
+                                        <div class="col-12" style="width:90%">
+                                            <a href="preventivo.html" class="btn btn-primary" onclick="">Fai un preventivo personalizzato</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flip-card-back">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Croazia</h5>
-                                            <p class="card-text">Con le sue incantevoli città costiere, isole
-                                                pittoresche e acque cristalline, la Croazia è un paradiso per gli amanti
-                                                del mare e della natura.</p>
-                                            <a href="#destinazioni" class="btn btn-primary"
-                                                onclick="scopriDiPiu('croazia')">Scopri di più</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col ">
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card">
-                                        <img src="img/immagine.jpg" class="card-img-top" alt="immagine">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Maldive</h5>
-                                            <p class="card-text">Le Maldive offrono acque cristalline, spiagge bianche e
-                                                resort di lusso.</p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flip-card-back">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Maldive</h5>
-                                            <p class="card-text">Le Maldive, con le loro spiagge bianche, acque
-                                                cristalline e resort di lusso, sono la destinazione perfetta per una
-                                                vacanza di relax e lusso nel cuore dell'Oceano Indiano.</p>
-                                            <a href="#destinazioni" class="btn btn-primary"
-                                                onclick="scopriDiPiu('maldive')">Scopri di più</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col ">
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card">
-                                        <img src="img/egitto.jpg" class="card-img-top " alt="immagine">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Egitto</h5>
-                                            <p class="card-text">L'Egitto è famoso per le sue antiche piramidi e la
-                                                storia affascinante.</p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flip-card-back">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Egitto</h5>
-                                            <p class="card-text">L'Egitto, con le sue maestose piramidi, antichi templi
-                                                e la ricca storia faraonica, è una destinazione affascinante per gli
-                                                amanti dell'archeologia e della storia.</p>
-                                            <a href="#destinazioni" class="btn btn-primary"
-                                                onclick="scopriDiPiu('egitto')">Scopri di più</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-        <div class="flip-card">
-         <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="card">
-                    <img src="img/francia-1.jpg" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Francia</h5>
-                        <p class="card-text">La Francia è famosa per la sua cultura, cucina e meraviglie architettoniche.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card-back">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Francia</h5>
-                        <p class="card-text">Con le sue incantevoli città come Parigi e i suoi affascinanti villaggi, la Francia è una destinazione da sogno per gli amanti della storia e della cultura.</p>
-                        <a href="#destinazioni" class="btn btn-primary" onclick="scopriDiPiu('francia')">Scopri di più</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col">
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="card">
-                    <img src="img/grecia-1.jpg" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Grecia</h5>
-                        <p class="card-text">La Grecia è rinomata per le sue isole affascinanti e la sua storia antica.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card-back">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Grecia</h5>
-                        <p class="card-text">Con le sue antiche rovine e le sue spiagge mozzafiato, la Grecia è una meta ideale per chi cerca cultura e bellezze naturali.</p>
-                        <a href="#destinazioni" class="btn btn-primary" onclick="scopriDiPiu('grecia')">Scopri di più</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col">
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="card">
-                    <img src="img/spagna-1.jpg" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Spagna</h5>
-                        <p class="card-text">La Spagna offre una vibrante vita notturna e splendide spiagge.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card-back">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Spagna</h5>
-                        <p class="card-text">Con le sue affascinanti città come Barcellona e Madrid, e le sue coste sabbiose, la Spagna è perfetta per chi ama il divertimento e il relax.</p>
-                        <a href="#destinazioni" class="btn btn-primary" onclick="scopriDiPiu('spagna')">Scopri di più</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col">
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="card">
-                    <img src="img/thailandia-1.jpg" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Thailandia</h5>
-                        <p class="card-text">La Thailandia è conosciuta per i suoi templi magnifici e le sue spiagge tropicali.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card-back">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Thailandia</h5>
-                        <p class="card-text">Con i suoi mercati vivaci, la cucina deliziosa e le spiagge paradisiache, la Thailandia è una destinazione imperdibile per gli avventurieri.</p>
-                        <a href="#destinazioni" class="btn btn-primary" onclick="scopriDiPiu('thailandia')">Scopri di più</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col">
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="card">
-                    <img src="img/australia-1.jpg" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Australia</h5>
-                        <p class="card-text">L'Australia è celebre per i suoi paesaggi unici e la sua fauna selvatica.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card-back">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Australia</h5>
-                        <p class="card-text">Con la sua Grande Barriera Corallina e i suoi vasti deserti, l'Australia è una destinazione che offre avventure indimenticabili.</p>
-                        <a href="#destinazioni" class="btn btn-primary" onclick="scopriDiPiu('australia')">Scopri di più</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col">
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="card">
-                    <img src="img/messico-1.jpg" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Messico</h5>
-                        <p class="card-text">Il Messico è famoso per le sue spiagge meravigliose e la sua ricca storia culturale.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card-back">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Messico</h5>
-                        <p class="card-text">Con i suoi antichi siti maya e le sue coste affascinanti, il Messico è una destinazione perfetta per chi cerca avventura e relax.</p>
-                        <a href="#destinazioni" class="btn btn-primary" onclick="scopriDiPiu('messico')">Scopri di più</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col">
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="card">
-                    <img src="img/canada-1.jpg" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Canada</h5>
-                        <p class="card-text">Il Canada è noto per i suoi spettacolari paesaggi naturali e le sue città vibranti.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card-back">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Canada</h5>
-                        <p class="card-text">Con le sue montagne maestose e i suoi laghi cristallini, il Canada è una meta ideale per gli amanti della natura.</p>
-                        <a href="#destinazioni" class="btn btn-primary" onclick="scopriDiPiu('canada')">Scopri di più</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col">
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="card">
-                    <img src="img/giappone-1.jpg" class="card-img-top" alt="immagine">
-                    <div class="card-body">
-                        <h5 class="card-title">Giappone</h5>
-                        <p class="card-text">Il Giappone è famoso per la sua tecnologia avanzata e la sua cultura tradizionale.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card-back">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Giappone</h5>
-                        <p class="card-text">Con i suoi templi antichi e le sue città ultramoderne, il Giappone offre un mix unico di passato e futuro.</p>
-                        <a href="#destinazioni" class="btn btn-primary" onclick="scopriDiPiu('giappone')">Scopri di più</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-                </div>
-
-            </div>
-
-
-            <!-- Qui verranno mostrati i dettagli della destinazione selezionata -->
-        `;
-        dettagliDestinazione.innerHTML = destinazioniHome;
-        const destinazioni = {
-            italia: {
-                titolo: "Italia",
-                immagine: "img/colosseo.jpg",
-                descrizione: "L'Italia, con la sua storia millenaria, l'arte rinascimentale, i pittoreschi paesaggi e la cucina deliziosa, offre un'esperienza culturale e gastronomica unica, attirando visitatori da tutto il mondo.",
-                citta: {
-                    roma: {
-                        titolo: "Roma",
-                        descrizione: "Roma è famosa per il Colosseo, il Pantheon e la Città del Vaticano.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare il Colosseo", "Esplorare il Pantheon", "Visita ai Musei Vaticani"]
-                    },
-                    firenze: {
-                        titolo: "Firenze",
-                        descrizione: "Firenze è celebre per il Duomo, la Galleria degli Uffizi e il Ponte Vecchio.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Ammirare il Duomo di Santa Maria del Fiore", "Visitare la Galleria degli Uffizi", "Attraversare il Ponte Vecchio"]
-                    },
-                    venezia: {
-                        titolo: "Venezia",
-                        descrizione: "Venezia è conosciuta per i suoi canali, Piazza San Marco e il Ponte di Rialto.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Giro in gondola sui canali", "Visita a Piazza San Marco", "Attraversare il Ponte di Rialto"]
-                    }
-                }
-            },
-            croazia: {
-                titolo: "Croazia",
-                immagine: "img/croazia-1.jpg",
-                descrizione: "Con le sue incantevoli città costiere, isole pittoresche e acque cristalline, la Croazia è un paradiso per gli amanti del mare e della natura.",
-                citta: {
-                    dubrovnik: {
-                        titolo: "Dubrovnik",
-                        descrizione: "Dubrovnik è famosa per le sue mura medievali, il Forte Lovrijenac e il centro storico.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Camminare sulle mura di Dubrovnik", "Visitare il Forte Lovrijenac", "Esplorare il centro storico"]
-                    },
-                    split: {
-                        titolo: "Split",
-                        descrizione: "Split è nota per il Palazzo di Diocleziano, la Cattedrale di San Domnius e le spiagge locali.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Esplorare il Palazzo di Diocleziano", "Visita alla Cattedrale di San Domnius", "Rilassarsi sulle spiagge locali"]
-                    },
-                    hvar: {
-                        titolo: "Hvar",
-                        descrizione: "Hvar è celebre per le sue spiagge di sabbia, il centro storico e la fortezza.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Rilassarsi sulle spiagge di Hvar", "Esplorare il centro storico", "Visita alla Fortezza di Hvar"]
-                    }
-                }
-            },
-            maldive: {
-                titolo: "Maldive",
-                immagine: "img/immagine.jpg",
-                descrizione: "Le Maldive, con le loro spiagge bianche, acque cristalline e resort di lusso, sono la destinazione perfetta per una vacanza di relax e lusso nel cuore dell'Oceano Indiano.",
-                citta: {
-                    male: {
-                        titolo: "Malé",
-                        descrizione: "Malé è la capitale delle Maldive, famosa per i suoi mercati, le moschee e i musei.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Esplorare il mercato di Malé", "Visita alla Moschea di Malé", "Museo Nazionale delle Maldive"]
-                    },
-                    hulhumale: {
-                        titolo: "Hulhumalé",
-                        descrizione: "Hulhumalé è un'isola artificiale vicino a Malé, con spiagge incontaminate e resort di lusso.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Rilassarsi sulle spiagge di Hulhumalé", "Attività acquatiche come snorkeling e immersioni", "Visita ai resort di lusso"]
-                    }
-                }
-            },
-            egitto: {
-                titolo: "Egitto",
-                immagine: "img/egitto.jpg",
-                descrizione: "L'Egitto, con le sue maestose piramidi, antichi templi e la ricca storia faraonica, è una destinazione affascinante per gli amanti dell'archeologia e della storia.",
-                citta: {
-                    cairo: {
-                        titolo: "Il Cairo",
-                        descrizione: "Il Cairo è famoso per le piramidi di Giza, il Museo Egizio e il mercato di Khan El Khalili.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visita alle Piramidi di Giza", "Esplorare il Museo Egizio", "Shopping al mercato di Khan El Khalili"]
-                    },
-                    luxor: {
-                        titolo: "Luxor",
-                        descrizione: "Luxor è celebre per i templi di Karnak e Luxor, la Valle dei Re e la reggia di Hatshepsut.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visita ai Templi di Karnak e Luxor", "Esplorare la Valle dei Re", "Visita alla reggia di Hatshepsut"]
-                    },
-                    sharm_el_sheikh: {
-                        titolo: "Sharm el-Sheikh",
-                        descrizione: "Sharm el-Sheikh è rinomata per le sue spiagge, i resort di lusso e i siti di snorkeling e immersioni.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Rilassarsi sulle spiagge di Sharm el-Sheikh", "Snorkeling e immersioni nei siti locali", "Esplorare il Parco Nazionale di Ras Mohammed"]
-                    }
-                }
-            },
-            francia: {
-                titolo: "Francia",
-                immagine: "img/francia-1.jpg",
-                descrizione: "La Francia è famosa per la sua cultura, cucina e meraviglie architettoniche. Con le sue incantevoli città come Parigi e i suoi affascinanti villaggi, è una destinazione da sogno per gli amanti della storia e della cultura.",
-                citta: {
-                    parigi: {
-                        titolo: "Parigi",
-                        descrizione: "Parigi è celebre per la Torre Eiffel, il Louvre e la Cattedrale di Notre-Dame.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visita alla Torre Eiffel", "Esplorare il Louvre", "Ammirare la Cattedrale di Notre-Dame"]
-                    },
-                    marsiglia: {
-                        titolo: "Marsiglia",
-                        descrizione: "Marsiglia è famosa per il Porto Vecchio, la Basilica di Notre-Dame de la Garde e il Vieux-Port.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Esplorare il Porto Vecchio", "Visita alla Basilica di Notre-Dame de la Garde", "Giro in barca sul Vieux-Port"]
-                    },
-                    nizza: {
-                        titolo: "Nizza",
-                        descrizione: "Nizza è conosciuta per la Promenade des Anglais, il Parco Colline du Château e la sua cultura vivace.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Passeggiata lungo la Promenade des Anglais", "Esplorare il Parco Colline du Château", "Visita ai musei locali"]
-                    }
-                }
-            },
-            grecia: {
-                titolo: "Grecia",
-                immagine: "img/grecia-1.jpg",
-                descrizione: "La Grecia è rinomata per le sue isole affascinanti e la sua storia antica. Con le sue antiche rovine e le sue spiagge mozzafiato, è una meta ideale per chi cerca cultura e bellezze naturali.",
-                citta: {
-                    atene: {
-                        titolo: "Atene",
-                        descrizione: "Atene è famosa per l'Acropoli, il Partenone e il Museo dell'Acropoli.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visita all'Acropoli e al Partenone", "Esplorare il Museo dell'Acropoli", "Passeggiata nel quartiere di Plaka"]
-                    },
-                    santorini: {
-                        titolo: "Santorini",
-                        descrizione: "Santorini è famosa per i suoi tramonti spettacolari, le case bianche con cupole blu e le spiagge di sabbia vulcanica.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Ammirare il tramonto a Oia", "Esplorare le rovine di Akrotiri", "Visitare la spiaggia di Perissa"]
-                    },
-                    mykonos: {
-                        titolo: "Mykonos",
-                        descrizione: "Mykonos è famosa per la sua vita notturna vivace, le spiagge bellissime e i mulini a vento.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Ballare nei club di Mykonos", "Visitare i mulini a vento di Kato Mili", "Rilassarsi sulla spiaggia di Paradise"]
-                    }
-                }
-            },
-            spagna: {
-                titolo: "Spagna",
-                immagine: "img/spagna-1.jpg",
-                descrizione: "La Spagna offre una vibrante vita notturna e splendide spiagge. Con le sue affascinanti città come Barcellona e Madrid, e le sue coste sabbiose, è perfetta per chi ama il divertimento e il relax.",
-                citta: {
-                    madrid: {
-                        titolo: "Madrid",
-                        descrizione: "Madrid, la capitale della Spagna, è famosa per il Museo del Prado, il Palazzo Reale e il parco del Retiro.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare il Museo del Prado", "Esplorare il Palazzo Reale", "Passeggiare nel Parco del Retiro"]
-                    },
-                    barcellona: {
-                        titolo: "Barcellona",
-                        descrizione: "Barcellona è conosciuta per l'architettura di Gaudí, inclusa la Sagrada Familia, il Park Güell e Casa Batlló.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare la Sagrada Familia", "Passeggiare per La Rambla", "Esplorare il Park Güell"]
-                    },
-                    siviglia: {
-                        titolo: "Siviglia",
-                        descrizione: "Siviglia è famosa per la sua cattedrale, l'Alcázar e la Plaza de España.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare la Cattedrale di Siviglia", "Esplorare l'Alcázar", "Passeggiare per Plaza de España"]
-                    }
-                }
-            },
-            thailandia: {
-                titolo: "Thailandia",
-                immagine: "img/thailandia-1.jpg",
-                descrizione: "La Thailandia è conosciuta per i suoi templi magnifici e le sue spiagge tropicali. Con i suoi mercati vivaci, la cucina deliziosa e le spiagge paradisiache, è una destinazione imperdibile per gli avventurieri.",
-                citta: {
-                    bangkok: {
-                        titolo: "Bangkok",
-                        descrizione: "Bangkok, la capitale della Thailandia, è famosa per i suoi templi riccamente decorati, i mercati galleggianti e il Palazzo Reale.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare il Palazzo Reale", "Esplorare il tempio del Wat Arun", "Fare shopping al mercato di Chatuchak"]
-                    },
-                    chiang_mai: {
-                        titolo: "Chiang Mai",
-                        descrizione: "Chiang Mai è nota per i suoi templi antichi, i mercati notturni e le montagne circostanti.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare il tempio Wat Phra That Doi Suthep", "Passeggiare per il mercato notturno di Chiang Mai", "Fare trekking nelle montagne circostanti"]
-                    },
-                    phuket: {
-                        titolo: "Phuket",
-                        descrizione: "Phuket è famosa per le sue spiagge tropicali, la vivace vita notturna e i resort di lusso.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Rilassarsi sulla spiaggia di Patong", "Esplorare l'isola di Phi Phi", "Visitare il Grande Buddha di Phuket"]
-                    }
-                }
-            },
-            australia: {
-                titolo: "Australia",
-                immagine: "img/australia-1.jpg",
-                descrizione: "L'Australia è celebre per i suoi paesaggi unici e la sua fauna selvatica. Con la sua Grande Barriera Corallina e i suoi vasti deserti, è una destinazione che offre avventure indimenticabili.",
-                citta: {
-                    sydney: {
-                        titolo: "Sydney",
-                        descrizione: "Sydney è famosa per l'Opera House, il Sydney Harbour Bridge e le sue splendide spiagge come Bondi Beach.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare l'Opera House", "Camminare sul Sydney Harbour Bridge", "Rilassarsi a Bondi Beach"]
-                    },
-                    melbourne: {
-                        titolo: "Melbourne",
-                        descrizione: "Melbourne è conosciuta per la sua vivace scena culturale, i suoi giardini botanici e i suoi caffè alla moda.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Esplorare i Giardini Botanici Reali", "Visitare la National Gallery of Victoria", "Passeggiare per il quartiere di Fitzroy"]
-                    },
-                    brisbane: {
-                        titolo: "Brisbane",
-                        descrizione: "Brisbane offre una combinazione di vita cittadina e spazi verdi, con il South Bank Parklands e il Lone Pine Koala Sanctuary.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare il Lone Pine Koala Sanctuary", "Esplorare il South Bank Parklands", "Passeggiare lungo il Brisbane Riverwalk"]
-                    }
-                }
-            },
-            messico: {
-                titolo: "Messico",
-                immagine: "img/messico-1.jpg",
-                descrizione: "Il Messico è famoso per le sue spiagge meravigliose e la sua ricca storia culturale. Con i suoi antichi siti maya e le sue coste affascinanti, è una destinazione perfetta per chi cerca avventura e relax.",
-                citta: {
-                    citta_del_messico: {
-                        titolo: "Città del Messico",
-                        descrizione: "Città del Messico è conosciuta per il suo centro storico, il Zócalo, e per il Museo Nazionale di Antropologia.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare il Zócalo", "Esplorare il Palazzo delle Belle Arti", "Visita al Museo Frida Kahlo"]
-                    },
-                    cancun: {
-                        titolo: "Cancún",
-                        descrizione: "Cancún è famosa per le sue spiagge di sabbia bianca, i resort di lusso e le attività acquatiche.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Rilassarsi sulle spiagge di Cancún", "Snorkeling nella barriera corallina", "Visita alla città antica di Tulum"]
-                    },
-                    playa_del_carmen: {
-                        titolo: "Playa del Carmen",
-                        descrizione: "Playa del Carmen è conosciuta per la sua Quinta Avenida, i resort di lusso e le acque cristalline del Mar dei Caraibi.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Shopping lungo la Quinta Avenida", "Rilassarsi sulle spiagge di Playacar", "Snorkeling nelle vicinanze di Cozumel"]
-                    }
-                }
-            },
-            canada: {
-                titolo: "Canada",
-                immagine: "img/canada-1.jpg",
-                descrizione: "Il Canada è noto per i suoi spettacolari paesaggi naturali e le sue città vibranti. Con le sue montagne maestose e i suoi laghi cristallini, è una meta ideale per gli amanti della natura.",
-                citta: {
-                    toronto: {
-                        titolo: "Toronto",
-                        descrizione: "Toronto è famosa per la CN Tower, il Royal Ontario Museum e il Distillery District.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Ammirare la vista dalla CN Tower", "Esplorare il Royal Ontario Museum", "Visita al Distillery District"]
-                    },
-                    vancouver: {
-                        titolo: "Vancouver",
-                        descrizione: "Vancouver è conosciuta per Stanley Park, il Granville Island Public Market e le montagne circostanti.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Esplorare Stanley Park", "Visita al Granville Island Public Market", "Escursioni nelle montagne circostanti"]
-                    },
-                    montreal: {
-                        titolo: "Montreal",
-                        descrizione: "Montreal è famosa per la sua vivace scena culturale, la Basilica di Notre-Dame e il Quartiere dei Festival.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare la Basilica di Notre-Dame", "Esplorare il Quartiere dei Festival", "Gustare la cucina locale nei ristoranti del Plateau"]
-                    }
-                }
-            },
-            giappone: {
-                titolo: "Giappone",
-                immagine: "img/giappone-1.jpg",
-                descrizione: "Il Giappone è famoso per la sua tecnologia avanzata e la sua cultura tradizionale. Con i suoi templi antichi e le sue città ultramoderne, offre un mix unico di passato e futuro.",
-                citta: {
-                    tokyo: {
-                        titolo: "Tokyo",
-                        descrizione: "Tokyo, la capitale del Giappone, è conosciuta per i suoi grattacieli futuristici, i templi antichi e la vivace vita notturna.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare il Tempio di Sensoji", "Esplorare il quartiere di Shibuya", "Ammirare la vista dalla Tokyo Skytree"]
-                    },
-                    kyoto: {
-                        titolo: "Kyoto",
-                        descrizione: "Kyoto è famosa per i suoi templi buddisti, i giardini zen e le tradizionali case da tè.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare il Tempio di Kinkaku-ji", "Esplorare il quartiere di Gion", "Passeggiare lungo il Sentiero del Filosofo"]
-                    },
-                    osaka: {
-                        titolo: "Osaka",
-                        descrizione: "Osaka è conosciuta per il suo moderno skyline, il castello di Osaka e la vivace area di Dotonbori.",
-                        immagini: ["img/immagine-citta1.jpg", "img/immagine-citta2.jpg"],
-                        attivita: ["Visitare il Castello di Osaka", "Esplorare l'area di Dotonbori", "Assaggiare il cibo di strada locale"]
-                    }
-                }
+                            </section>
+                            <!-- Menu a discesa delle città -->
+                            <select class="form-select form-select-lg mb-3" aria-label="Large select example" onchange="selezionaCitta(this.value, '${paisName}')">
+                                <option selected>Scegli la città</option>
+                                ${listaCitta}
+                            </select>`;
+                    })
+                    .catch(err => {
+                        console.error('Errore durante il fetch delle destinazioni:', err);
+                    });
+                break;
             }
-        };
-
-
-        function scopriDiPiu(destinazione) {
-    const destinazioneInfo = destinazioni[destinazione];
-    const citta = destinazioneInfo.citta;
-    const dettagliDestinazione = document.getElementById("dettagliDestinazione");
-
-    let listaCitta = '';
-
-    // Genera le opzioni per il menu a discesa delle città
-    Object.keys(citta).forEach((nomeCitta, index) => {
-        listaCitta += `<option value="${index}">${citta[nomeCitta].titolo}</option>`;
+        }
+    })
+    .catch(err => {
+        console.error('Errore durante il fetch delle categorie:', err);
     });
 
-    // Aggiungi le opzioni al menu a discesa e aggiorna i dettagli della destinazione
-    dettagliDestinazione.innerHTML = `
-        <!-- Contenuto della destinazione -->
-        <section class="about_section padding">
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
-                    <a href="destinazioni.html" class="btn btn-primary" onclick="tornaIndietro()">Torna indietro</a>
-                </div>
-                <div class="row justify-content-center align-items-center">
-                    <div class="content col-12 col-lg-5 p-4 m-3">
-                        <div class="text-center">
-                            <h1 class="titolo-pagina-singola" style="font-size: xx-large;">${destinazioneInfo.titolo}</h1>
-                            <p class="descr-pagina-singola mb-5" style="font-size: x-large;">${destinazioneInfo.descrizione}</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                        <div class="about_img">
-                            <img src="${destinazioneInfo.immagine}" alt="${destinazioneInfo.titolo}" class="about_img_1 ">
-                            <img src="${destinazioneInfo.immagine}" alt="${destinazioneInfo.titolo}" class="about_img_2">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Menu a discesa delle città -->
-        <select class="form-select" aria-label="Default select example" onchange="selezionaCitta(this.value, '${destinazione}')">
-              <option selected>Scegli la città</option>
-
-            ${listaCitta}
-        </select>
-    `;
 }
 
-// Funzione chiamata quando l'utente seleziona una città dal menu dropdown
-function selezionaCitta(index, destinazione) {
-    // Converti l'indice da stringa a numero intero
-    const selectedIndex = parseInt(index);
+function selezionaCitta(cityId, paisName) {
     const dettagliCitta = document.getElementById("dettagliCitta");
+    const selectedCity = destinazioniGlobali.find(dest => dest.id == cityId && dest.category.name === paisName);
 
-    // Ottieni le informazioni sulla destinazione e sulla città selezionata
-    const destinazioneInfo = destinazioni[destinazione];
-    const citta = Object.values(destinazioneInfo.citta);
-    const cittaSelezionata = citta[selectedIndex];
-    
-    // Costruisci l'HTML per i dettagli della città selezionata
-    const dettagliCittaHTML = `
+    if (selectedCity) {
+        // Controlla se ci sono partenze e ottieni il prezzo della prima partenza
+        let prezzoPartenza = 'N/A'; // Valore di default se non ci sono partenze
+        if (selectedCity.departures && selectedCity.departures.length > 0) {
+            prezzoPartenza = selectedCity.departures[0].prezzo;
+        }
 
-        <section class="about_section padding">
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
-                    <a href="destinazioni.html" class="btn btn-primary" onclick="tornaIndietro()">Torna indietro</a>
-                </div>
-                <div class="row justify-content-center align-items-center">
-                    <div class="content col-12 col-lg-5 p-4 m-3">
-                        <div class="text-center">
-                            <h1 class="titolo-pagina-singola" style="font-size: xx-large;">${cittaSelezionata.titolo}</h1>
-                            <p class="descr-pagina-singola mb-5" style="font-size: x-large;">${cittaSelezionata.descrizione}}</p>
-                             <p class="attivita-pagina-singola">Attività principali:</p>
-                     <ul>
-                        ${cittaSelezionata.attivita.map(attivita => `<li>${attivita}</li>`).join('')}
-                    </ul> 
+        const dettagliCittaHTML = `
+            <section class="about_section padding">
+                <div class="container">
+                    <div class="row justify-content-center align-items-center mb-20">
+                        <div class="content col-12 col-lg-5 p-4 m-3">
+                            <div class="text-center">
+                                <h1 class="titolo-pagina-singola" style="font-size: xx-large;">${selectedCity.name}</h1>
+                                <p class="descr-pagina-singola mb-5" style="font-size: x-large;">${selectedCity.description}</p>
+                                <p class="descr-pagina-singola mb-5" style="font-size: x-large;">Prezzi a partire da €${prezzoPartenza}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                        <div class="about_img">
-                            <img src="${cittaSelezionata.immagini[0]}" alt="${cittaSelezionata.titolo}" class="about_img_1 ">
-                            <img src="${cittaSelezionata.immagini[1]}" alt="${cittaSelezionata.titolo}" class="about_img_2">
+                        <div class="col-12 col-lg-6">
+                            <div class="about_img">
+                                <img src="${selectedCity.imgUrl}" alt="${selectedCity.name}" class="about_img_1">
+                                <img src="${selectedCity.imgUrl}" alt="${selectedCity.name}" class="about_img_2">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-
-
-        <!--<div class="row justify-content-center align-items-center">
-            <div class="content col-12 col-lg-5 p-4 m-3">
-                <div class="text-center">
-                    <h1 class="titolo-pagina-singola" style="font-size: xx-large;">${cittaSelezionata.titolo}</h1>
-                    <p class="descr-pagina-singola mb-5" style="font-size: x-large;">${cittaSelezionata.descrizione}</p>
-                    <p class="attivita-pagina-singola">Attività principali:</p>
-                     <ul>
-                        ${cittaSelezionata.attivita.map(attivita => `<li>${attivita}</li>`).join('')}
-                    </ul> 
+            </section>
+            <section class="about_section padding">
+                <div class="container">
+                    <div class="row justify-content-center align-items-center mb-20">
+                        <div class="content col-12 col-lg-5 p-4 m-3">
+                            <div class="text-center">
+                                <h1 class="titolo-pagina-singola" style="font-size: xx-large;">Attività principali</h1>
+                                <div>
+                                    ${selectedCity.activities.map(activity => `<p>${activity.name}: ${activity.description}</p>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="about_img">
+                                <img src="${selectedCity.imgUrl}" alt="${selectedCity.name}" class="about_img_1">
+                                <img src="${selectedCity.imgUrl}" alt="${selectedCity.name}" class="about_img_2">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 col-lg-6">
-                <div class="about_img">
-                    <img src="${cittaSelezionata.immagini[0]}" alt="${cittaSelezionata.titolo}" class="about_img_1">
-                    <img src="${cittaSelezionata.immagini[1]}" alt="${cittaSelezionata.titolo}" class="about_img_2">
-                </div>
-            </div>
-        </div>-->
-    `;
-    
-    // Aggiorna il contenuto dell'elemento con i dettagli della città selezionata
-    const dettagliDestinazione = document.getElementById("dettagliDestinazione");
-    dettagliCitta.innerHTML = dettagliCittaHTML;
+            </section>
+        `;
+
+        dettagliCitta.innerHTML = dettagliCittaHTML;
+    }
 }
 
 
-                
-        function tornaIndietro() {
-                    dettagliDestinazione.innerHTML = destinazioniHome;
-                }
-    </script>
+
+
+
+
+
+
+
+   
+   </script>
 </body>
 
 </html>

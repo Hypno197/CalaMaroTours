@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="Css/bootstrap.min.css" />
+  <link rel="stylesheet" href="Css/Style.css" />
+  <link rel="stylesheet" href="Css/StyleGabriel.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+  <script src="js/header.js"></script>
+  <div class="container" id="destinazioni">
+    <div class="row" id="formDestinazioni">
+
+    </div>
+  </div>
+  <script src="js/footer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const containerForm = document.getElementById('formDestinazioni');
+
+  let listaContinenti = ''; // Inizializzazione della stringa per la lista dei continenti
+  let continentiAggiunti = []; // Array per tenere traccia dei continenti già aggiunti
+
+  fetch('http://localhost:8080/categories')
+    .then(res => res.json())
+    .then(json => {
+      json.forEach(category => {
+        if (!continentiAggiunti.includes(category.continente.id)) {
+          continentiAggiunti.push(category.continente.id);
+          listaContinenti += `<option value="${category.continente.id}">${category.continente.name}</option>`;
+        }
+      });
+
+      containerForm.innerHTML = `
+        <select id="continentiSelect" class="form-select form-select-lg mb-3" aria-label="Large select example" onchange="trovaPaesi(this.value)">
+          <option selected>Scegli il continente</option>
+          ${listaContinenti}
+        </select>
+      `;
+    });
+
+  // Definizione della funzione trovaPaesi all'esterno della promessa fetch
+  window.trovaPaesi = function(continenteId) {
+    let listaPaesi = ''; // Inizializzazione della stringa per la lista dei paesi
+    fetch('http://localhost:8080/categories')
+      .then(res => res.json())
+      .then(json => {
+        json.forEach(category => {
+          if (continenteId == category.continente.id) {
+            listaPaesi += `<option value="${category.id}">${category.name}</option>`;
+          }
+        });
+
+        // Sovrascrivi completamente il contenuto di containerForm per mostrare continenti e paesi
+        containerForm.innerHTML = `
+          <select id="continentiSelect" class="form-select form-select-lg mb-3" aria-label="Large select example" onchange="trovaPaesi(this.value)">
+            <option selected>Scegli il continente</option>
+            ${listaContinenti}
+          </select>
+          <select id="paesiSelect" class="form-select form-select-lg mb-3" aria-label="Large select example" onchange="trovaCitta(this.value)">
+            <option selected>Scegli il paese</option>
+            ${listaPaesi}
+          </select>
+        `;
+      });
+  };
+
+  window.trovaCitta = function(paeseId) {
+    let listaCitta = ''; // Inizializzazione della stringa per la lista delle città
+    fetch('http://localhost:8080/destinazioni')
+      .then(res => res.json())
+      .then(json => {
+        json.forEach(destinazione => {
+          if (paeseId == destinazione.category.id) {
+            listaCitta += `<option value="${destinazione.id}">${destinazione.name}</option>`;
+          }
+        });
+
+        // Aggiungi la lista delle città senza sovrascrivere il resto del form
+        const cittaSelect = document.getElementById('cittaSelect');
+        if (cittaSelect) {
+          cittaSelect.innerHTML = `
+            <option selected>Scegli la città</option>
+            ${listaCitta}
+          `;
+        } else {
+          containerForm.innerHTML += `
+            <select id="cittaSelect" class="form-select form-select-lg mb-3" aria-label="Large select example">
+              <option selected>Scegli la città</option>
+              ${listaCitta}
+            </select>
+          `;
+        }
+      });
+  };
+});
+
+
+    
+    
+    
+    
+    
+    
+  
+
+  </script>
+</body>
+
+</html>
