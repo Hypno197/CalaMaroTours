@@ -8,46 +8,367 @@
     <link rel="stylesheet" href="Css/Style.css" />
     <link rel="stylesheet" href="Css/StyleGabriel.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <style>
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+section {
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+input[type="text"], input[type="email"], textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="submit"] {
+  background: #333;
+  color: #fff;
+  border: 0;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 350px;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+}
+
+.image-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+.overlay p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+.card h1,
+.card p {
+  margin-top: 0;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+#portfolio {
+  background-color: #0fbfbf; 
+  padding: 15px;
+  border-radius: 0.5%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.project {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ccc;
+  margin: 10px;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+
+.project img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.project .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project:hover img {
+  opacity: 0.7;
+}
+
+.project:hover .overlay {
+  opacity: 1;
+}
+
+#contact {
+  background-color: #ffbc4b; 
+  padding: 15px;
+  border-radius: 0.5%;
+  text-align: center;
+}
+
+.td-btn {
+  padding: 12px 36px;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #0fbfbf;
+}
+
+    </style>
   </head>
 
   <body>
-
     <script src="js/header.js"></script>
 
-    <main class="container container-gabr mt-4">
-        <section id="profilo-personale">
-          <h2>Profilo Personale</h2>
-          
-          <form id="form-profilo">
-            
-            <div class="mb-3">
-              <label for="nome" class="form-label">Nome</label>
-              <input type="text" class="form-control" id="nome" name="nome" required>
-            </div>
-            <div class="mb-3">
-              <label for="cognome" class="form-label">Cognome</label>
-              <input type="text" class="form-control" id="cognome" name="cognome" required>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Salva</button>
+    <div class="container my-5">
+      <div class="row rowSG align-items-start">
+        <div class="col-md-6">
+
+    <h2 style="text-align:center">Profilo personale</h2>
+
+    <div class="card mb-4">
+      <div class="image-container">
+      <img src="img Partner/profilo.jpg" alt="Cambia immagine" id="uploadImage" style="width:100%; height:100%; cursor: pointer;">
+      <div class="overlay" id="overlay">
+      <p>Cambia immagine</p>
+      <input type="file" id="fileInput" style="display: none;" accept="image/*">
+    </div>
+  </div>
+      <h1>Nome Cognome</h1>
+      <p class="title">20 anni</p>
+      <p>Amo viaggiare e condividere esperienze</p><br>
+      <p><strong>I miei Social:</strong></p>
+      <div style="margin: 1px 0;">
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a> 
+        <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      </div>
+      <p><button>Contact</button></p>
+    </div>
+        
+        <section class="align-items-start">
+          <h2>Contatti</h2>
+          <p>Email: <a href="mailto:" id="emailLink">utente@gmail.com</a></p>
+          <p>Cellulare: <span id="cellulare">+39 123 456 7890</span></p>
+          <p>Indirizzo: <span id="indirizzo">Via Esempio 123, Città/Paese, CAP</span></p>
+        </section>
+        
+        <section class="align-items-start">
+          <h2>Social Media</h2>
+          <p><a href="#" id="facebookLink">Facebook</a> | <a href="#" id="twitterLink">Twitter</a> | <a href="#" id="linkedinLink">LinkedIn</a> | <a href="#" id="instagramLink">Instagram</a></p>
+        </section>
+      </div>
+  
+      <div class="col-md-6">
+        <section>
+          <h2>Esperienze di Viaggio</h2>
+          <p id="esperienzeViaggio">Descrizione delle esperienze di viaggio e dei tour organizzati in passato.</p>
+        </section>
+        
+        <section class="align-items-start">
+          <h2>Servizi Offerti</h2>
+          <ul id="serviziOfferti">
+            <li>Tour Guidati</li>
+            <li>Pacchetti Vacanza</li>
+            <li>Organizzazione Eventi</li>
+            <li>Consulenza Viaggi</li>
+          </ul>
+        </section>
+        
+        <section class="align-items-start">
+          <h2>Recensioni dei Clienti</h2>
+          <p id="recensioniClienti">Recensioni e testimonianze di clienti soddisfatti.</p>
+        </section>
+        
+        <section class="align-items-start">
+          <h2>Prossimi Tour</h2>
+          <p id="prossimiTour">Informazioni sui prossimi tour in programma.</p>
+        </section>
+        
+        <section class="align-items-start">
+          <h2>Contattami</h2>
+          <form id="contactForm">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <label for="message">Messaggio:</label>
+            <textarea id="message" name="message"></textarea>
+            <input type="submit" value="Invia">
           </form>
         </section>
+      </div>
+    </div>
+    </div>
 
+    <main>
+      <section id="portfolio">
+        <h2>~ I miei preferiti ~</h2>
+        <div class="project" id="project1">
+          <img src="img/egitto.jpg" alt="Project 1">
+          <div class="overlay">
+            <p>EGITTO</p>
+          </div>
+        </div>
+        <div class="project" id="project2">
+          <img src="img/spagna-1.jpg" alt="Project 2">
+          <div class="overlay">
+            <p>SPAGNA</p>
+          </div>
+        </div>
+        <div class="project" id="project3">
+          <img src="img/giappone.jpg" alt="Project 3">
+          <div class="overlay">
+            <p>GIAPPONE</p>
+          </div>
+        </div>
+        <div class="project" id="project4">
+          <img src="img/messico-1.jpg" alt="Project 4">
+          <div class="overlay">
+            <p>MESSICO</p>
+          </div>
+        </div>        
+      </section>
+      <section id="contact">
+        <h2>~ Viaggi terminati ~</h2>
+        <div class="project" id="project1">
+          <img src="img/canada-1.jpg" alt="Project 1">
+          <div class="overlay">
+            <p>CANADA</p>
+          </div>
+        </div>
+        <div class="project" id="project2">
+          <img src="img/croazia-1.jpg" alt="Project 2">
+          <div class="overlay">
+            <p>CROAZIA</p>
+          </div>
+        </div>
+        <div class="project" id="project3">
+          <img src="img/francia-1.jpg" alt="Project 3">
+          <div class="overlay">
+            <p>FRANCIA</p>
+          </div>
+        </div>
+        <div class="project" id="project4">
+          <img src="img/grecia-1.jpg" alt="Project 4">
+          <div class="overlay">
+            <p>GRECIA</p>
+          </div>
+        </div>     
+      </section>
+    </main>
 
-
-
-
-
-    <script src="js/footer.js"></script>
+    <script src="js/JSGabriel.js"></script>
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM fully loaded and parsed");
+    const overlay = document.getElementById("overlay");
+    const fileInput = document.getElementById("fileInput");
+    const uploadImage = document.getElementById("uploadImage");
 
+    if (!overlay || !fileInput || !uploadImage) {
+        console.error("Element not found:", { overlay, fileInput, uploadImage });
+        return;
+    }
+
+    overlay.addEventListener("click", function() {
+        console.log("Overlay clicked");
+        fileInput.click();
+    });
+
+    fileInput.addEventListener("change", function(event) {
+        console.log("File input changed");
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                console.log("File loaded");
+                uploadImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+});
+    </script>
+    
+    <script src="js/footer.js"></script>
   </body>
 </html>
