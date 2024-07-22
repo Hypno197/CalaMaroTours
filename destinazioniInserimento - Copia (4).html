@@ -150,7 +150,7 @@
       // Funzione per trovare i paesi in base al continente selezionato
       window.trovaPaesi = function (continenteId) {
         paesiSelect.innerHTML = '<option selected>Scegli il paese</option>';
-        cittaSelect.innerHTML = '<option selected>Scegli la città da modificare o eleminare</option>';
+        cittaSelect.innerHTML = '<option selected>Scegli la città</option>';
         let paesiAggiunti = [];
         fetch('http://localhost:8080/categories')
           .then(res => res.json())
@@ -172,103 +172,128 @@
           .then(json => {
             json.forEach(destinazione => {
               if (paeseId == destinazione.category.id) {
-                listaCitta += `<option value="${destinazione.name}">${destinazione.name}</option>`;
+                listaCitta += `<option value="${destinazione.id}">${destinazione.name}</option>`;
               }
             });
-            cittaSelect.innerHTML = `<option selected>Scegli la città da modificare o eleminare</option>
+            cittaSelect.innerHTML = `<option selected>Scegli la città</option>
               ${listaCitta}
               <option>Nuova città</option>`;
           });
       };
 
-      // Funzione per gestire la città selezionata
-      window.gestisciCitta = function(nomeCitta) {
-        if (nomeCitta === "Nuova città") {
+      // Funzione per gestire la selezione della città
+      window.gestisciCitta = function(cittaId) {
+        if (cittaId == "Nuova città") {
           const modal = new bootstrap.Modal(document.getElementById('newCityModal'));
           modal.show();
         } else {
           const modal = new bootstrap.Modal(document.getElementById('editCityModal'));
-          fetch('http://localhost:8080/destinazioni')
+          fetch(`http://localhost:8080/destinazioni/${cittaId}`)
             .then(res => res.json())
             .then(json => {
-              const city = json.find(destinazione => destinazione.name === nomeCitta);
-              if (city) {
-                document.getElementById('editCityName').value = city.name;
-                document.getElementById('editCityImgUrl').value = city.imgUrl;
-                document.getElementById('editCityDescription').value = city.description;
-                document.getElementById('editCityId').value = city.id;
-                modal.show();
+              document.getElementById('editCityName').value = json.name;
+              document.getElementById('editCityImgUrl').value = json.img;
+              document.getElementById('editCityDescription').value = json.description;
+              document.getElementById('editCityId').value = json.id;
+              modal.show();
 
-                // Popola le partenze esistenti
-                const departuresContainer = document.getElementById('editCityDepartures');
-                departuresContainer.innerHTML = `
-                  <label class="form-label">Partenze</label>
-                  <button type="button" class="btn btn-sm btn-success mb-2" onclick="aggiungiPartenza('editCity')">Aggiungi Partenza</button>
+              // Popola le partenze esistenti
+              const departuresContainer = document.getElementById('editCityDepartures');
+              departuresContainer.innerHTML = `
+                <label class="form-label">Partenze</label>
+                <button type="button" class="btn btn-sm btn-success mb-2" onclick="aggiungiPartenza('editCity')">Aggiungi Partenza</button>
+              `;
+              json.departures.forEach(departure => {
+                const departureItem = document.createElement('div');
+                departureItem.className = 'departure-item mb-3';
+                departureItem.innerHTML = `
+                  <input type="text" class="form-control mb-1" placeholder="Nome della Partenza" value="${departure.name}">
+                  <input type="number" class="form-control mb-1" placeholder="Prezzo" value="${departure.price}">
+                  <button type="button" class="btn btn-sm btn-danger" onclick="rimuoviElemento(this)">Rimuovi</button>
                 `;
-                city.departures.forEach(departure => {
-                  const departureItem = document.createElement('div');
-                  departureItem.className = 'departure-item mb-3';
-                  departureItem.innerHTML = `
-                    <input type="text" class="form-control mb-1" placeholder="Nome della Partenza" value="${departure.name}">
-                    <input type="number" class="form-control mb-1" placeholder="Prezzo" value="${departure.prezzo}">
-                    <button type="button" class="btn btn-sm btn-danger" onclick="rimuoviElemento(this)">Rimuovi</button>
-                  `;
-                  departuresContainer.appendChild(departureItem);
-                });
+                departuresContainer.appendChild(departureItem);
+              });
 
-                // Popola le attività esistenti
-                const activitiesContainer = document.getElementById('editCityActivities');
-                activitiesContainer.innerHTML = `
-                  <label class="form-label">Attività</label>
-                  <button type="button" class="btn btn-sm btn-success mb-2" onclick="aggiungiAttivita('editCity')">Aggiungi Attività</button>
+              // Popola le attività esistenti
+              const activitiesContainer = document.getElementById('editCityActivities');
+              activitiesContainer.innerHTML = `
+                <label class="form-label">Attività</label>
+                <button type="button" class="btn btn-sm btn-success mb-2" onclick="aggiungiAttivita('editCity')">Aggiungi Attività</button>
+              `;
+              json.activities.forEach(activity => {
+                const activityItem = document.createElement('div');
+                activityItem.className = 'activity-item mb-3';
+                activityItem.innerHTML = `
+                  <input type="text" class="form-control mb-1" placeholder="Nome dell'Attività" value="${activity.name}">
+                  <textarea class="form-control mb-1" rows="2" placeholder="Descrizione dell'Attività">${activity.description}</textarea>
+                  <button type="button" class="btn btn-sm btn-danger" onclick="rimuoviElemento(this)">Rimuovi</button>
                 `;
-                city.activities.forEach(activity => {
-                  const activityItem = document.createElement('div');
-                  activityItem.className = 'activity-item mb-3';
-                  activityItem.innerHTML = `
-                    <input type="text" class="form-control mb-1" placeholder="Nome dell'Attività" value="${activity.name}">
-                    <textarea class="form-control mb-1" rows="2" placeholder="Descrizione dell'Attività">${activity.description}</textarea>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="rimuoviElemento(this)">Rimuovi</button>
-                  `;
-                  activitiesContainer.appendChild(activityItem);
-                });
-              }
+                activitiesContainer.appendChild(activityItem);
+              });
             });
         }
       };
 
-      // Funzione per aggiungere una partenza
-      window.aggiungiPartenza = function(modalPrefix) {
-        const container = document.getElementById(`${modalPrefix}Departures`);
-        const departureItem = document.createElement('div');
-        departureItem.className = 'departure-item mb-3';
-        departureItem.innerHTML = `
-          <input type="text" class="form-control mb-1" placeholder="Nome della Partenza">
-          <input type="number" class="form-control mb-1" placeholder="Prezzo">
-          <button type="button" class="btn btn-sm btn-danger" onclick="rimuoviElemento(this)">Rimuovi</button>
-        `;
-        container.appendChild(departureItem);
-      };
+      // Gestione del salvataggio delle modifiche
+      document.getElementById('editCityForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const cittaId = document.getElementById('editCityId').value;
+        const nome = document.getElementById('editCityName').value;
+        const img = document.getElementById('editCityImgUrl').value;
+        const descrizione = document.getElementById('editCityDescription').value;
 
-      // Funzione per aggiungere un'attività
-      window.aggiungiAttivita = function(modalPrefix) {
-        const container = document.getElementById(`${modalPrefix}Activities`);
-        const activityItem = document.createElement('div');
-        activityItem.className = 'activity-item mb-3';
-        activityItem.innerHTML = `
-          <input type="text" class="form-control mb-1" placeholder="Nome dell'Attività">
-          <textarea class="form-control mb-1" rows="2" placeholder="Descrizione dell'Attività"></textarea>
-          <button type="button" class="btn btn-sm btn-danger" onclick="rimuoviElemento(this)">Rimuovi</button>
-        `;
-        container.appendChild(activityItem);
-      };
+        const partenze = [];
+        document.querySelectorAll('#editCityDepartures .departure-item').forEach(item => {
+          const name = item.querySelector('input[type="text"]').value;
+          const price = item.querySelector('input[type="number"]').value;
+          partenze.push({ name, price });
+        });
 
-      // Funzione per rimuovere un elemento
-      window.rimuoviElemento = function(button) {
-        button.parentElement.remove();
-      };
+        const attivita = [];
+        document.querySelectorAll('#editCityActivities .activity-item').forEach(item => {
+          const name = item.querySelector('input[type="text"]').value;
+          const description = item.querySelector('textarea').value;
+          attivita.push({ name, description });
+        });
 
-      // Gestire la creazione di una nuova città
+        fetch(`http://localhost:8080/destinazioni/${cittaId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: nome,
+            img: img,
+            description: descrizione,
+            departures: partenze,
+            activities: attivita
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          // Nasconde il modal e aggiorna la lista delle città
+          bootstrap.Modal.getInstance(document.getElementById('editCityModal')).hide();
+          trovaCitta(document.getElementById('paesiSelect').value);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+
+      // Gestione della cancellazione della città
+      document.getElementById('deleteCityButton').addEventListener('click', function() {
+        const cittaId = document.getElementById('editCityId').value;
+        fetch(`http://localhost:8080/destinazioni/${cittaId}`, { method: 'DELETE' })
+          .then(() => {
+            // Nasconde il modal e aggiorna la lista delle città
+            bootstrap.Modal.getInstance(document.getElementById('editCityModal')).hide();
+            trovaCitta(document.getElementById('paesiSelect').value);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      });
+
+      // Gestione dell'aggiunta di una nuova città
       document.getElementById('newCityForm').addEventListener('submit', function(event) {
         event.preventDefault();
         const nome = document.getElementById('cityName').value;
@@ -314,70 +339,37 @@
         });
       });
 
-      // Gestire la modifica di una città
-      document.getElementById('editCityForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const nome = document.getElementById('editCityName').value;
-        const img = document.getElementById('editCityImgUrl').value;
-        const descrizione = document.getElementById('editCityDescription').value;
-        const cityId = document.getElementById('editCityId').value;
+      // Funzione per aggiungere una nuova partenza
+      window.aggiungiPartenza = function(modalId) {
+        const container = document.getElementById(modalId + 'Departures');
+        const item = document.createElement('div');
+        item.className = 'departure-item mb-3';
+        item.innerHTML = `
+          <input type="text" class="form-control mb-1" placeholder="Nome della Partenza">
+          <input type="number" class="form-control mb-1" placeholder="Prezzo">
+          <button type="button" class="btn btn-sm btn-danger" onclick="rimuoviElemento(this)">Rimuovi</button>
+        `;
+        container.appendChild(item);
+      };
 
-        const partenze = [];
-        document.querySelectorAll('#editCityDepartures .departure-item').forEach(item => {
-          const name = item.querySelector('input[type="text"]').value;
-          const price = item.querySelector('input[type="number"]').value;
-          partenze.push({ name, price });
-        });
+      // Funzione per aggiungere una nuova attività
+      window.aggiungiAttivita = function(modalId) {
+        const container = document.getElementById(modalId + 'Activities');
+        const item = document.createElement('div');
+        item.className = 'activity-item mb-3';
+        item.innerHTML = `
+          <input type="text" class="form-control mb-1" placeholder="Nome dell'Attività">
+          <textarea class="form-control mb-1" rows="2" placeholder="Descrizione dell'Attività"></textarea>
+          <button type="button" class="btn btn-sm btn-danger" onclick="rimuoviElemento(this)">Rimuovi</button>
+        `;
+        container.appendChild(item);
+      };
 
-        const attivita = [];
-        document.querySelectorAll('#editCityActivities .activity-item').forEach(item => {
-          const name = item.querySelector('input[type="text"]').value;
-          const description = item.querySelector('textarea').value;
-          attivita.push({ name, description });
-        });
-
-        fetch(`http://localhost:8080/destinazioni/${cityId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: nome,
-            img: img,
-            description: descrizione,
-            departures: partenze,
-            activities: attivita
-          })
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-          // Nasconde il modal e aggiorna la lista delle città
-          bootstrap.Modal.getInstance(document.getElementById('editCityModal')).hide();
-          trovaCitta(document.getElementById('paesiSelect').value);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          
-        });
-      });
-
-      // Gestire l'eliminazione di una città
-      document.getElementById('deleteCityButton').addEventListener('click', function() {
-        const cityId = document.getElementById('editCityId').value;
-
-        fetch(`http://localhost:8080/destinazioni/${cityId}`, {
-          method: 'DELETE'
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-          // Nasconde il modal e aggiorna la lista delle città
-          bootstrap.Modal.getInstance(document.getElementById('editCityModal')).hide();
-          trovaCitta(document.getElementById('paesiSelect').value);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-      });
+      // Funzione per rimuovere un elemento
+      window.rimuoviElemento = function(button) {
+        const item = button.parentElement;
+        item.parentElement.removeChild(item);
+      };
     });
   </script>
 </body>
