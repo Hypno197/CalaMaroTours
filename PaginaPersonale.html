@@ -192,144 +192,134 @@ button:hover, a:hover {
   <body>
     <script src="js/header.js"></script>
 
-    <div class="container my-5">
+    <h1>User Profile</h1>
+    <pre id="userData"></pre>
+    <p id="message"></p>
+
+    <div class="container containerSG my-5">
       <div class="row rowSG align-items-start">
         <div class="col-md-6">
-
-    <h2 style="text-align:center">Profilo personale</h2>
-
-    <div class="card mb-4">
-      <div class="image-container">
-      <img src="img Partner/profilo.jpg" alt="Cambia immagine" id="uploadImage" style="width:100%; height:100%; cursor: pointer;">
-      <div class="overlay" id="overlay">
-      <p>Cambia immagine</p>
-      <input type="file" id="fileInput" style="display: none;" accept="image/*">
-    </div>
-  </div>
-      <h1>Nome Cognome</h1>
-      <p class="title">20 anni</p>
-      <p>Amo viaggiare e condividere esperienze</p><br>
-      <p><strong>I miei Social:</strong></p>
-      <div style="margin: 1px 0;">
-        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a> 
-        <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-      </div>
-      <p><button>Contact</button></p>
-    </div>
-        
-        <section class="align-items-start">
-          <h2>Contatti</h2>
-          <p>Email: <a href="mailto:" id="emailLink">utente@gmail.com</a></p>
-          <p>Cellulare: <span id="cellulare">+39 123 456 7890</span></p>
-          <p>Indirizzo: <span id="indirizzo">Via Esempio 123, Città/Paese, CAP</span></p>
-        </section>
-        
-        <section class="align-items-start">
-          <h2>Social Media</h2>
-          <p><a href="#" id="facebookLink">Facebook</a> | <a href="#" id="twitterLink">Twitter</a> | <a href="#" id="linkedinLink">LinkedIn</a> | <a href="#" id="instagramLink">Instagram</a></p>
-        </section>
-      </div>
-  
-      <div class="col-md-6">
-        <section>
-          <h2>Esperienze di Viaggio</h2>
-          <p id="esperienzeViaggio">Descrizione delle esperienze di viaggio e dei tour organizzati in passato.</p>
-        </section>
-        
-        <section class="align-items-start">
-          <h2>Servizi Offerti</h2>
-          <ul id="serviziOfferti">
-            <li>Tour Guidati</li>
-            <li>Pacchetti Vacanza</li>
-            <li>Organizzazione Eventi</li>
-            <li>Consulenza Viaggi</li>
-          </ul>
-        </section>
-        
-        <section class="align-items-start">
-          <h2>Recensioni dei Clienti</h2>
-          <p id="recensioniClienti">Recensioni e testimonianze di clienti soddisfatti.</p>
-        </section>
-        
-        <section class="align-items-start">
-          <h2>Prossimi Tour</h2>
-          <p id="prossimiTour">Informazioni sui prossimi tour in programma.</p>
-        </section>
-        
-        <section class="align-items-start">
-          <h2>Contattami</h2>
-          <form id="contactForm">
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
-            <label for="message">Messaggio:</label>
-            <textarea id="message" name="message"></textarea>
-            <input type="submit" value="Invia">
-          </form>
-        </section>
+          <h2 style="text-align:center">Profilo personale</h2>
+          <div class="card mb-4">
+            <div class="image-container">
+              <img src="img Partner/profilo.jpg" alt="Cambia immagine" id="uploadImage" style="width:100%; height:100%; cursor: pointer;">
+              <div class="overlay" id="overlay">
+                <p>Cambia immagine</p>
+                <input type="file" id="fileInput" style="display: none;" accept="image/*">
+              </div>
+            </div>
+            <h1 id="userName">Nome Cognome</h1>
+            <p class="title" id="userAge">20 anni</p>
+            <p id="userDescription">Amo viaggiare e condividere esperienze</p>
+            <br>
+            <button id="editProfileButton">Modifica</button>
+            <button id="saveProfileButton" style="display: none;">Salva</button>
+            <p><strong>I miei Social:</strong></p>
+            <div style="margin: 1px 0;">
+              <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+              <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+          <section class="align-items-start">
+            <h2>Contatti personali</h2>
+            <p>Email: <a href="mailto:" id="emailLink">utente@gmail.com</a></p>
+            <p>Cellulare: <span id="cellulare">+39 123 456 7890</span></p>
+            <p>Indirizzo: <span id="indirizzo">Via Esempio 123, Città/Paese, CAP</span></p>
+            <button id="editContactButton">Modifica</button>
+            <button id="saveContactButton" style="display: none;">Salva</button>
+          </section>
+        </div>
+        <div class="col-md-6">
+          <section>
+            <h2>Esperienze di Viaggio</h2>
+            <p id="esperienzeViaggio">Descrizione delle esperienze di viaggio e dei tour completati.</p>
+            <button id="editExperiencesButton">Modifica</button>
+            <button id="saveExperiencesButton" style="display: none;">Salva</button>
+          </section>
+          <section class="align-items-start">
+            <h2>Le mie recensioni</h2>
+            <p id="recensioniClienti">Recensioni e testimonianze.</p>
+            <button id="editReviewsButton">Modifica</button>
+            <button id="saveReviewsButton" style="display: none;">Salva</button>
+          </section>
+          <section class="align-items-start">
+            <h2>Prossimi Tour (selezionati)</h2>
+            <p id="prossimiTour">PROMEMORIA<br>Lista viaggi in programma</p>
+            <button id="editToursButton">Modifica</button>
+            <button id="saveToursButton" style="display: none;">Salva</button>
+          </section>
+          <section class="align-items-start">
+            <h2>Invia un messaggio</h2>
+            <form id="contactForm">
+              <label for="name">Nome:</label>
+              <input type="text" id="name" name="name">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email">
+              <label for="message">Messaggio:</label>
+              <textarea id="message" name="message"></textarea>
+              <input type="submit" value="Invia">
+            </form>
+          </section>
+        </div>
       </div>
     </div>
-    </div>
-
     <main>
       <section id="portfolio">
         <h2>~ I miei preferiti ~</h2>
         <div class="project" id="project1">
           <img src="img/egitto.jpg" alt="Project 1">
           <div class="overlay">
-            <p>EGITTO</p>
+            <p contenteditable="true">EGITTO</p>
           </div>
         </div>
         <div class="project" id="project2">
           <img src="img/spagna-1.jpg" alt="Project 2">
           <div class="overlay">
-            <p>SPAGNA</p>
+            <p contenteditable="true">SPAGNA</p>
           </div>
         </div>
         <div class="project" id="project3">
           <img src="img/giappone.jpg" alt="Project 3">
           <div class="overlay">
-            <p>GIAPPONE</p>
+            <p contenteditable="true">GIAPPONE</p>
           </div>
         </div>
         <div class="project" id="project4">
           <img src="img/messico-1.jpg" alt="Project 4">
           <div class="overlay">
-            <p>MESSICO</p>
+            <p contenteditable="true">MESSICO</p>
           </div>
-        </div>        
+        </div>
       </section>
       <section id="contact">
         <h2>~ Viaggi terminati ~</h2>
         <div class="project" id="project1">
           <img src="img/canada-1.jpg" alt="Project 1">
           <div class="overlay">
-            <p>CANADA</p>
+            <p contenteditable="true">CANADA</p>
           </div>
         </div>
         <div class="project" id="project2">
           <img src="img/croazia-1.jpg" alt="Project 2">
           <div class="overlay">
-            <p>CROAZIA</p>
+            <p contenteditable="true">CROAZIA</p>
           </div>
         </div>
         <div class="project" id="project3">
           <img src="img/francia-1.jpg" alt="Project 3">
           <div class="overlay">
-            <p>FRANCIA</p>
+            <p contenteditable="true">FRANCIA</p>
           </div>
         </div>
         <div class="project" id="project4">
           <img src="img/grecia-1.jpg" alt="Project 4">
           <div class="overlay">
-            <p>GRECIA</p>
+            <p contenteditable="true">GRECIA</p>
           </div>
-        </div>     
+        </div>
       </section>
     </main>
-
     <script src="js/JSGabriel.js"></script>
     
     <script
@@ -339,34 +329,88 @@ button:hover, a:hover {
     ></script>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-    console.log("DOM fully loaded and parsed");
-    const overlay = document.getElementById("overlay");
-    const fileInput = document.getElementById("fileInput");
-    const uploadImage = document.getElementById("uploadImage");
+      const overlay = document.getElementById("overlay");
+      const fileInput = document.getElementById("fileInput");
+      const uploadImage = document.getElementById("uploadImage");
 
-    if (!overlay || !fileInput || !uploadImage) {
+      if (!overlay || !fileInput || !uploadImage) {
         console.error("Element not found:", { overlay, fileInput, uploadImage });
         return;
-    }
+      }
 
-    overlay.addEventListener("click", function() {
-        console.log("Overlay clicked");
+      overlay.addEventListener("click", function() {
         fileInput.click();
-    });
+      });
 
-    fileInput.addEventListener("change", function(event) {
-        console.log("File input changed");
+      fileInput.addEventListener("change", function(event) {
         const file = event.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                console.log("File loaded");
-                uploadImage.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            uploadImage.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
         }
+      });
+
+      function enableEditing(sectionId, buttonEditId, buttonSaveId) {
+        const section = document.getElementById(sectionId);
+        const editButton = document.getElementById(buttonEditId);
+        const saveButton = document.getElementById(buttonSaveId);
+
+        editButton.addEventListener("click", () => {
+          section.setAttribute("contenteditable", "true");
+          editButton.style.display = "none";
+          saveButton.style.display = "inline-block";
+        });
+
+        saveButton.addEventListener("click", () => {
+          section.setAttribute("contenteditable", "false");
+          editButton.style.display = "inline-block";
+          saveButton.style.display = "none";
+        });
+      }
+
+      enableEditing("userName", "editProfileButton", "saveProfileButton");
+      enableEditing("userAge", "editProfileButton", "saveProfileButton");
+      enableEditing("userDescription", "editProfileButton", "saveProfileButton");
+      enableEditing("emailLink", "editContactButton", "saveContactButton");
+      enableEditing("cellulare", "editContactButton", "saveContactButton");
+      enableEditing("indirizzo", "editContactButton", "saveContactButton");
+      enableEditing("esperienzeViaggio", "editExperiencesButton", "saveExperiencesButton");
+      enableEditing("recensioniClienti", "editReviewsButton", "saveReviewsButton");
+      enableEditing("prossimiTour", "editToursButton", "saveToursButton");
     });
-});
+    
+
+    async function getUserData() {
+            const token = localStorage.getItem('authToken');
+            const messageElement = document.getElementById('message');
+            console.log("MY TOKEN:",token);
+            try {
+                const response = await fetch('http://localhost:8080/api/me', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `${token}`
+                    }
+                });
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    document.getElementById('userData').textContent = JSON.stringify(data, null, 2);
+                } else {
+                    messageElement.textContent = 'Failed to get user data';
+                    messageElement.style.color = 'red';
+                }
+            } catch (error) {
+                console.error('Error during fetching user data:', error);
+                messageElement.textContent = 'Error during fetching user data';
+                messageElement.style.color = 'red';
+            }
+        }
+
+        window.onload = getUserData;
+
     </script>
     
     <script src="js/footer.js"></script>

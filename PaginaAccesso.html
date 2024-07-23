@@ -23,7 +23,7 @@
 
     .main {
       width: 350px;
-      height: 700px;
+      height: 750px;
       overflow: hidden;
       background-color: linear-gradient(to bottom, #E59114, #C35A42, #C35A42);
       border-radius: 10px;
@@ -52,16 +52,16 @@
     }
 
     input, select {
-      width: 60%;
-      height: 40px;
+      width: 70%;
+      height: 50px;
       background: #e0dede;
       justify-content: center;
       display: flex;
-      margin: 15px auto;
+      margin: 25px auto;
       padding: 12px;
       border: none;
       outline: none;
-      border-radius: 5px;
+      border-radius: 30px;
       font-size: 1em;
     }
 
@@ -100,24 +100,26 @@
     }
 
     .login {
-      height: 610px;
+      height: 670px;
       background: #eee;
       border-radius: 60% / 10%;
-      transform: translateY(-180px);
+      transform: translateY(-170px);
       transition: .8s ease-in-out;
     }
 
     .login label {
       color: #573b8a;
       transform: scale(.6);
+      margin-bottom: -30px;
     }
 
     #chk:checked ~ .login {
-      transform: translateY(-550px);
+      transform: translateY(-700px);
+      
     }
 
     #chk:checked ~ .login label {
-      transform: scale(1);
+      transform: scale(.6);
     }
 
     #chk:checked ~ .signup label {
@@ -127,6 +129,18 @@
     .hidden {
       display: none;
     }
+
+    .login-form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: -10px; 
+  margin-top: -50px !important;
+}
+
+.login-form-group label {
+  margin-bottom: 1px;
+}
 
   </style>
 </head>
@@ -146,30 +160,34 @@
             <option value="azienda">Azienda</option>
           </select>
           <div id="utente-fields" class="hidden">
-            <input type="text" name="nome" placeholder="Nome" required="">
-            <input type="text" name="cognome" placeholder="Cognome" required="">
-            <input type="email" name="email" placeholder="Email" required="">
-            <input type="email" name="confirm_email" placeholder="Conferma Email" required="">
-            <input type="password" name="pswd" placeholder="Password" required="">
-            <input type="password" name="confirm_pswd" placeholder="Conferma Password" required="">
+            <input type="text" name="nome" id="nomeReg" placeholder="Nome" required="">
+            <input type="text" name="cognome" id="cognomeReg" placeholder="Cognome" required="">
+            <input type="email" name="email" id="emailReg" placeholder="Email" required="">
+            <input type="password" name="password" id="passwordReg" placeholder="Password" required="">
+            <input type="password" name="confirm_pswd" id="password2Reg" placeholder="Conferma Password" required="">
           </div>
           <div id="azienda-fields" class="hidden">
-            <input type="text" name="nome_azienda" placeholder="Nome Azienda" required="">
-            <input type="text" name="partita_iva" placeholder="Partita IVA" required="">
-            <input type="email" name="email" placeholder="Email" required="">
-            <input type="email" name="confirm_email" placeholder="Conferma Email" required="">
-            <input type="password" name="pswd" placeholder="Password" required="">
-            <input type="password" name="confirm_pswd" placeholder="Conferma Password" required="">
+            <input type="text" name="nome_azienda" id="nomeRegAzienda" placeholder="Nome Azienda" required="">
+            <input type="text" name="partita_iva" id="pivaRegAzienda" placeholder="Partita IVA" required="">
+            <input type="email" name="email" id="emailRegAzienda" placeholder="Email" required="">
+            <input type="password" name="password" id="passwordRegAzienda" placeholder="Password" required="">
+            <input type="password" name="confirm_pswd" id="password2RegAzienda" placeholder="Conferma Password" required="">
           </div>
-          <button>Registrati</button>
+          <button onclick="register()">Registrati</button>
         </form>
       </div>
 
       <div class="login">
-        <form id="loginForm" method="POST">
+        <form id="loginForm" method="POST" onsubmit="login(event)">
           <label for="chk" aria-hidden="true">Accedi</label>
-          <input type="email" name="email" placeholder="Email" required="">
-          <input type="password" name="pswd" placeholder="Password" required="">
+          <div class="login-form-group">
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" placeholder="Email" required="">
+          </div>
+          <div class="login-form-group">
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" placeholder="Password" required="">
+          </div>
           <select name="tipo_accesso" required="">
             <option value="" disabled selected>Seleziona tipo di accesso</option>
             <option value="utente">Utente</option>
@@ -179,6 +197,10 @@
           <button type="submit" id="myAccediButton">Accedi</button>
           <p id="errorMessage" class="error"></p>
         </form>
+        <form id="logoutForm" onsubmit="logout(event)">
+          <button type="submit">Logout</button>
+        </form>
+        <p id="message"></p>
       </div>
     </div>
   </div>
@@ -186,6 +208,163 @@
   <script src="js/footer.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   <script src="js/JSGabriel.js"></script>
+
+<script>
+ async function login(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageElement = document.getElementById('message');
+
+            try {
+                console.log("OK");
+                const response = await fetch('http://localhost:8080/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    const token = data.token;
+                    localStorage.setItem('authToken', token);
+                    messageElement.textContent = 'Login successful';
+                    messageElement.style.color = 'green';
+                    window.location.href = 'PaginaPersonale.html';
+                } else {
+                    messageElement.textContent = 'Invalid credentials';
+                    messageElement.style.color = 'red';
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                messageElement.textContent = 'Error during login';
+                messageElement.style.color = 'red';
+            }
+        }
+
+        async function logout(event) {
+            event.preventDefault();
+            const token = localStorage.getItem('authToken');
+            const messageElement = document.getElementById('message');
+
+            try {
+                const response = await fetch('http://localhost:8080/auth/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `${token}`
+                    }
+                });
+
+                if (response.status === 200) {
+                    localStorage.removeItem('authToken');
+                    messageElement.textContent = 'Logout successful';
+                    messageElement.style.color = 'green';
+                } else {
+                    messageElement.textContent = 'Error during logout';
+                    messageElement.style.color = 'red';
+                }
+            } catch (error) {
+                console.error('Error during logout:', error);
+                messageElement.textContent = 'Error during logout';
+                messageElement.style.color = 'red';
+            }
+        }
+
+
+
+
+
+        async function registerUser() {
+            const nomeReg = document.getElementById('nomeReg').value;
+            const cognomeReg = document.getElementById('cognomeReg').value;
+            const emailReg = document.getElementById('emailReg').value;
+            const passwordReg = document.getElementById('passwordReg').value;
+            const messageElement = document.getElementById('message');
+
+            try {
+                console.log("OK");
+                const response = await fetch('http://localhost:8080/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nomeReg, cognomeReg, emailReg, passwordReg })
+                });
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    const token = data.token;
+                    localStorage.setItem('authToken', token);
+                    messageElement.textContent = 'Register successful';
+                    messageElement.style.color = 'green';
+                    window.location.href = 'PaginaPersonale.html';
+                } else {
+                    messageElement.textContent = 'Invalid credentials';
+                    messageElement.style.color = 'red';
+                }
+            } catch (error) {
+                console.error('Error during register:', error);
+                messageElement.textContent = 'Error during register';
+                messageElement.style.color = 'red';
+            }
+        }
+
+
+
+
+        async function registerAzienda() {
+            
+            const nomeRegAzienda = document.getElementById('nomeAzienda').value;
+            const pivaRegAzienda = document.getElementById('pivaAzienda').value;
+            const emailRegAzienda = document.getElementById('emailAzienda').value;
+            const passwordRegAzienda = document.getElementById('passwordAzienda').value;
+            const messageElement = document.getElementById('message');
+
+            try {
+                console.log("OK");
+                const response = await fetch('http://localhost:8080/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nomeRegAzienda, pivaRegAzienda, emailRegAzienda, passwordRegAzienda })
+                });
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    const token = data.token;
+                    localStorage.setItem('authToken', token);
+                    messageElement.textContent = 'Register successful';
+                    messageElement.style.color = 'green';
+                    window.location.href = 'PaginaPersonale.html';
+                } else {
+                    messageElement.textContent = 'Invalid credentials';
+                    messageElement.style.color = 'red';
+                }
+            } catch (error) {
+                console.error('Error during register:', error);
+                messageElement.textContent = 'Error during register';
+                messageElement.style.color = 'red';
+            }
+        }
+        
+        function register() {
+          check = document.getElementById("tipo_utente").value
+          if (check === "utente") 
+          registerUser();
+          else
+          registerAzienda();
+
+          
+        }
+
+
+
+
+
+</script>
 
 </body>
 </html>
