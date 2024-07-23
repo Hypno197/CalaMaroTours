@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="Css/bootstrap.min.css" />
+    <link rel="stylesheet" href="Css/Style.css" />
+    <link rel="stylesheet" href="Css/StyleGabriel.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-md-6 {
+    flex: 1;
+    padding: 15px;
+}
+
+section {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+#userTableContainer {
+    overflow-x: auto; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background: #f1f1f1;
+    white-space: nowrap;
+}
+
+.input-group {
+    margin-top: 20px;
+}
+
+.input-group input[type="text"], 
+.input-group input[type="email"], 
+.input-group textarea {
+    width: 100%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.input-group button {
+    margin-top: 0;
+}
+
+.project img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .col-md-6 {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    table th, table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .input-group input[type="text"], 
+    .input-group input[type="email"], 
+    .input-group textarea {
+        padding: 8px;
+    }
+}
+    </style>
+  </head>
+
+  <body>
+    <script src="js/header.js"></script>
+    <div class="container">
+        <div class="row">
+            <!-- Colonna Sinistra -->
+            <div class="col-md-6">
+                <!-- Gestione Utenti -->
+                <section id="userManagement">
+                    <h2>Gestione Utenti</h2>
+                    <button id="viewUsersButton">Visualizza Utenti</button>
+                    <button id="addUserButton">Aggiungi Utente</button>
+                    <button id="deleteUserButton">Elimina Utente</button>
+                    <div id="userTableContainer">
+                        <h3>Elenco Utenti</h3>
+                        <table id="userTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dati dinamici -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Statistiche di Sistema -->
+                <section id="systemStats">
+                    <h2>Statistiche di Sistema</h2>
+                    <p>Numero di Utenti: <span id="userCount">100</span></p>
+                    <p>Numero di Tour: <span id="tourCount">50</span></p>
+                    <p>Feedback Utenti: <span id="feedbackCount">200</span></p>
+                </section>
+
+                <!-- Attività Recenti -->
+                <section id="recentActivities">
+                    <h2>Attività Recenti</h2>
+                    <ul>
+                        <li>Utente Mario Rossi ha aggiunto un nuovo tour il 20/07/2024.</li>
+                        <li>Feedback positivo da Luigi Bianchi il 21/07/2024.</li>
+                        <li>Caricamento di una nuova immagine nel portfolio il 22/07/2024.</li>
+                    </ul>
+                </section>
+
+                <!-- Gestione Contenuti -->
+                <section id="contentManagement">
+                    <h2>Gestione Contenuti</h2>
+                    <div class="input-group">
+                        <textarea id="textEditor" placeholder="Modifica il testo qui..."></textarea>
+                    </div>
+                    <button id="saveContentButton">Salva Modifiche</button>
+                    <div class="input-group">
+                        <input type="file" id="imageUpload" accept="image/*">
+                        <button id="uploadImageButton">Carica Immagine</button>
+                    </div>
+                </section>
+
+                <!-- Gestione Feedback -->
+                <section id="feedbackManagement">
+                    <h2>Gestione Feedback</h2>
+                    <div id="feedbackTableContainer">
+                        <h3>Feedback Recenti</h3>
+                        <table id="feedbackTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Utente</th>
+                                    <th>Feedback</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dati dinamici -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Colonna Destra -->
+            <div class="col-md-6">
+                <!-- Visualizzazione Progetti -->
+                <section id="portfolio">
+                    <h2>~ Progetti Recenti ~</h2>
+                    <div class="project">
+                        <img src="img/egitto.jpg" alt="Project 1">
+                        <p>EGITTO</p>
+                    </div>
+                    <div class="project">
+                        <img src="img/spagna-1.jpg" alt="Project 2">
+                        <p>SPAGNA</p>
+                    </div>
+                    <div class="project">
+                        <img src="img/giappone.jpg" alt="Project 3">
+                        <p>GIAPPONE</p>
+                    </div>
+                    <div class="project">
+                        <img src="img/messico-1.jpg" alt="Project 4">
+                        <p>MESSICO</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="js/JSGabriel.js"></script>
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+            // Dati dinamici di esempio
+            const users = [
+                { id: 1, name: 'Mario Rossi', email: 'mario.rossi@example.com' },
+                { id: 2, name: 'Luigi Bianchi', email: 'luigi.bianchi@example.com' }
+            ];
+
+            const feedbacks = [
+                { id: 1, user: 'Mario Rossi', feedback: 'Ottimo servizio!', date: '2024-07-20' },
+                { id: 2, user: 'Luigi Bianchi', feedback: 'Esperienza fantastica!', date: '2024-07-21' }
+            ];
+
+            // Aggiornamento tabella utenti
+            const userTableBody = document.querySelector("#userTable tbody");
+            users.forEach(user => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td><button class="btn btn-sm btn-primary">Dettagli</button></td>
+                `;
+                userTableBody.appendChild(row);
+            });
+
+            // Aggiornamento tabella feedback
+            const feedbackTableBody = document.querySelector("#feedbackTable tbody");
+            feedbacks.forEach(feedback => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${feedback.id}</td>
+                    <td>${feedback.user}</td>
+                    <td>${feedback.feedback}</td>
+                    <td>${feedback.date}</td>
+                `;
+                feedbackTableBody.appendChild(row);
+            });
+
+            // Gestione upload immagine
+            document.getElementById('uploadImageButton').addEventListener('click', function() {
+                const fileInput = document.getElementById('imageUpload');
+                const file = fileInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement("img");
+                        img.src = e.target.result;
+                        img.style.maxWidth = '250px'; // Dimensione ridotta per le immagini
+                        document.querySelector("#portfolio").appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>
+    
+    <script src="js/footer.js"></script>
+  </body>
+</html>

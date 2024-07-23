@@ -1,218 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Document</title>
-    <link rel="stylesheet" href="Css/bootstrap.min.css" />
-    <link rel="stylesheet" href="Css/Style.css" />
-    <link rel="stylesheet" href="Css/StyleGabriel.css" />
+    <link rel="stylesheet" href="Css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="Css/Style.css"/>
+    <link rel="stylesheet" href="Css/StyleGabriel.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-      .gallery {
-        --s: 150px; /* the image size */
-        display: grid;
-        transform-style: preserve-3d;
-        animation: r 15s linear infinite;
-        position: relative;
-        margin-bottom: 20px;
-        z-index: 1; /* Ensure it stays above the overlay */
-      }
+        .gallery {
+            --s: 150px; /* dimensione delle immagini per dispositivi mobili */
+            display: grid;
+            transform-style: preserve-3d;
+            animation: r 15s linear infinite;
+            position: relative;
+            margin-bottom: 20px;
+            z-index: 1;
+        }
 
-      @keyframes r {
-        0% {transform: perspective(450px) rotateX(-100deg) rotate(0deg)}
-        to {transform: perspective(450px) rotateX(-100deg) rotate(-360deg)}
-      }
+        @keyframes r {
+            0% {
+                transform: perspective(450px) rotateX(-100deg) rotate(0deg)
+            }
+            to {
+                transform: perspective(450px) rotateX(-100deg) rotate(-360deg)
+            }
+        }
 
-      .gallery > img {
-        grid-area: 1/1;
-        width: var(--s);
-        aspect-ratio: 1;
-        object-fit: cover;
-        border-radius: 10px 10px 0 0;
-        transform: rotate(var(--_a)) translateY(120%) rotateX(90deg) scaleX(-1);
-      }
+        .gallery > img {
+            grid-area: 1/1;
+            width: var(--s);
+            height: var(--s);
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+            transform: rotate(var(--_a)) translateY(120%) rotateX(90deg) scaleX(-1);
+        }
 
-      .gallery > img:nth-child(1) {--_a: 0deg}
-      .gallery > img:nth-child(2) {--_a: 60deg}
-      .gallery > img:nth-child(3) {--_a: 120deg}
-      .gallery > img:nth-child(4) {--_a: 180deg}
-      .gallery > img:nth-child(5) {--_a: 240deg}
-      .gallery > img:nth-child(6) {--_a: 300deg}
+        .gallery > img:nth-child(1) {
+            --_a: 0deg
+        }
 
-      .gallery::before {
-        content: "";
-        position: absolute;
-        inset: -100%;
-        clip-path: polygon(50% 0,calc(50% + .866*50%) 25%,calc(50% + .866*50%) 75%,50% 100%,calc(50% - .866*50%) 75%,calc(50% - .866*50%) 25%);
-        background: #99B2B7;
-        transform: translateZ(calc(var(--s)/2)) rotate(90deg);
-      }
+        .gallery > img:nth-child(2) {
+            --_a: 60deg
+        }
 
-      .display-area {
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-content: center;
-        background: url(img\ Partner/Summer.jpg);
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        padding-top: 20px;
-      }
+        .gallery > img:nth-child(3) {
+            --_a: 120deg
+        }
 
-      .display-area::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background: rgba(255, 255, 255, 0.7); /* White overlay with opacity */
-        z-index: 0; /* Ensure it stays below the gallery */
-      }
+        .gallery > img:nth-child(4) {
+            --_a: 180deg
+        }
 
-      .title {
-        font-size: 3rem;
-        font-weight: bold;
-        text-align: center;
-        margin: 20px 0;
-        color: #333;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        position: relative;
-        z-index: 2; /* Ensure it stays above the overlay */
-      }
+        .gallery > img:nth-child(5) {
+            --_a: 240deg
+        }
 
-      .title::after {
-        content: "";
-        display: block;
-        width: 100px;
-        height: 4px;
-        background-color: #333;
-        margin: 10px auto 0;
-      }
+        .gallery > img:nth-child(6) {
+            --_a: 300deg
+        }
 
-      .partner-info {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 20px;
-        background-color: #99cbff;
-      }
+        .gallery::before {
+            content: "";
+            position: absolute;
+            inset: -100%;
+            clip-path: polygon(50% 0, calc(50% + .866*50%) 25%, calc(50% + .866*50%) 75%, 50% 100%, calc(50% - .866*50%) 75%, calc(50% - .866*50%) 25%);
+            background: #99B2B7;
+            transform: translateZ(calc(var(--s) / 2)) rotate(90deg);
+        }
 
-      .partner-info .col {
-        margin: 10px;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
+        .display-area {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-content: center;
+            background: url(img\ Partner/Summer.jpg);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding-top: 20px;
+        }
 
-      .partner-info h3 {
-        margin-top: 0;
-      }
+        .display-area::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(255, 255, 255, 0.7);
+            z-index: 0;
+        }
 
-      .card-custom {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 2;
+        }
 
-      .card-img-custom {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-      }
+        .title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: #333;
+            margin: 10px auto 0;
+        }
 
-      .card-img-top {
-        height: 300px;
-      }
+        .partner-info {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            background-color: #99cbff;
+        }
 
-      .container-mich {
-        padding-bottom: 20px;
-      }
+        .partner-info .col {
+            margin: 10px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .partner-info h3 {
+            margin-top: 0;
+        }
+
+        .card-custom {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-img-custom {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .container-mich {
+            padding-bottom: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .card {
+    flex: 1 1 calc(100% - 20px); /* Larghezza completa per dispositivi mobili */
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 20px; /* spazio tra le card */
+    max-width: 500px; /* Limita la larghezza massima */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Altezza uguale per tutte le card */
+}
+
+        .card img {
+            width: 100%;
+            height: 200px; /* Altezza fissa per tutte le immagini */
+            object-fit: contain;
+    background-color: #fff;
+        }
+
+        .card-content {
+            padding: 10px;
+            flex-grow: 1;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-content p {
+            flex-grow: 1;
+        }
+
+        .card-title {
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .card {
+                flex: 1 1 calc(50% - 40px);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .card {
+                flex: 1 1 calc(33.333% - 40px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .gallery {
+                --s: 100px;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .partner-info .col {
+                padding: 10px;
+            }
+
+            .card img {
+                height: 150px;
+            }
+        }
+
+        .card-container {
+    margin-bottom: 20px;
+}
+
+        .card {
+            margin-bottom: 20px;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <script src="js/header.js"></script>
-    <div class="title">Aziende-partner</div>
-    <div class="display-area">
-      <div class="gallery">
+        <div class="main-container">
+            <div class="title">Aziende-partner</div>
+<div class="display-area">
+    <div class="gallery">
         <img src="img Partner/MSC Cruises.jpg" alt="MSC Cruises">
         <img src="img Partner/axa_logo_solid_rgb.png" alt="AXA Assistance">
         <img src="img Partner/Affirm-American-Airlines.jpg" alt="Affirm-American-Airlines">
         <img src="img Partner/IHG.jpg" alt="IHG">
         <img src="img Partner/Viator.png" alt="Viator">
         <img src="img Partner/Booking3.jpg" alt="Booking">
-      </div>
     </div>
+</div>
 
-    <div class="container-fluid container-fluid-mich mt-5">
-      <div class="row row-mich">
-        <div class="col-md-4">
-          <div class="card">
-            <img src="img Partner/MSC Cruises.jpg" class="card-img-top" alt="MSC Cruises">
-            <div class="card-body">
-              <h5 class="card-title">MSC Cruises</h5>
-              <p class="card-text">MSC Cruises, una delle principali compagnie di crociere a livello mondiale, è una delle nostre aziende-partner. Con una vasta flotta di navi moderne e innovative, MSC offre itinerari in tutto il mondo, comprese destinazioni esotiche come i Caraibi, il Mediterraneo e l'Asia. Sono rinomati per il loro servizio di alta qualità, l'intrattenimento a bordo e le esperienze culinarie di livello mondiale, elementi che arricchiscono le offerte del nostro tour operator.</p>
+<div class="container-fluid container-mich mt-5">
+    <div class="row row-mich card-container">
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <img src="img Partner/MSC Cruises.jpg" class="card-img-top" alt="MSC Cruises">
+                <div class="card-body card-content">
+                    <h5 class="card-title">MSC Cruises</h5>
+                    <p class="card-text">MSC Cruises, una delle principali compagnie di crociere a livello mondiale, è una
+                        delle nostre aziende-partner. Con una vasta flotta di navi moderne e innovative, MSC offre itinerari
+                        in tutto il mondo, comprese destinazioni esotiche come i Caraibi, il Mediterraneo e l'Asia. Sono
+                        rinomati per il loro servizio di alta qualità, l'intrattenimento a bordo e le esperienze culinarie di
+                        livello mondiale, elementi che arricchiscono le offerte del nostro tour operator.</p>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="img Partner/axa_logo_solid_rgb.png" class="card-img-top" alt="AXA Assistance">
-            <div class="card-body">
-              <h5 class="card-title">AXA Assistance</h5>
-              <p class="card-text">Siamo lieti di collaborare con AXA Assistance, una divisione del gruppo assicurativo AXA, specializzata in servizi di assistenza e assicurazione viaggio. Offrono un'ampia gamma di coperture assicurative per i viaggiatori, inclusi assistenza medica, assicurazione bagagli e copertura per cancellazioni. La loro rete globale garantisce che i nostri clienti ricevano supporto e protezione ovunque si trovino nel mondo, migliorando la sicurezza e la tranquillità dei loro viaggi.</p>
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <img src="img Partner/axa_logo_solid_rgb.png" class="card-img-top" alt="AXA Assistance">
+                <div class="card-body card-content">
+                    <h5 class="card-title">AXA Assistance</h5>
+                    <p class="card-text">Siamo lieti di collaborare con AXA Assistance, una divisione del gruppo assicurativo
+                        AXA, specializzata in servizi di assistenza e assicurazione viaggio. Offrono un'ampia gamma di
+                        coperture assicurative per i viaggiatori, inclusi assistenza medica, cancellazione del viaggio e
+                        protezione del bagaglio. Questa partnership ci permette di garantire ai nostri clienti sicurezza e
+                        tranquillità durante i loro viaggi, aggiungendo un valore significativo ai nostri pacchetti
+                        turistici.</p>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="img Partner/Affirm-American-Airlines.jpg" class="card-img-top" alt="Affirm-American Airlines">
-            <div class="card-body">
-              <h5 class="card-title">Affirm-American Airlines</h5>
-              <p class="card-text">Affirm-American Airlines, una collaborazione tra Affirm, una società di finanziamento che permette ai clienti di pagare i loro acquisti in rate mensili, e American Airlines, una delle più grandi compagnie aeree del mondo, è uno dei nostri partner. Questa partnership permette ai nostri clienti di finanziare i loro biglietti aerei, rendendo i viaggi più accessibili e flessibili dal punto di vista finanziario, facilitando così la pianificazione delle loro vacanze.</p>
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <img src="img Partner/Affirm-American-Airlines.jpg" class="card-img-top" alt="Affirm-American-Airlines">
+                <div class="card-body card-content">
+                    <h5 class="card-title">Affirm-American-Airlines</h5>
+                    <p class="card-text">In collaborazione con American Airlines, una delle principali compagnie aeree a
+                        livello globale, e Affirm, una piattaforma di pagamento che offre opzioni di finanziamento flessibili,
+                        il nostro tour operator offre un'esperienza di viaggio ancora più accessibile. Grazie a questa
+                        partnership, i clienti possono prenotare voli con American Airlines e scegliere di pagare in comode
+                        rate mensili attraverso Affirm, rendendo i viaggi aerei più gestibili e finanziariamente accessibili
+                        per tutti i nostri clienti.</p>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="row mt-4">
-        <div class="col-md-4">
-          <div class="card">
-            <img src="img Partner/IHG.jpg" class="card-img-top" alt="IHG">
-            <div class="card-body">
-              <h5 class="card-title">IHG</h5>
-              <p class="card-text">IHG, una delle più grandi catene alberghiere al mondo, è tra le nostre aziende-partner. Con oltre 5.900 hotel in quasi 100 paesi, tra i loro marchi ci sono InterContinental, Crowne Plaza, Holiday Inn, e molti altri. IHG è conosciuta per il suo impegno verso l'eccellenza del servizio e la varietà di opzioni di alloggio, che soddisfano sia i viaggiatori di affari che di piacere. La partnership con IHG ci consente di offrire ai nostri clienti una vasta gamma di soluzioni di alloggio di alta qualità.</p>
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <img src="img Partner/IHG.jpg" class="card-img-top" alt="IHG">
+                <div class="card-body card-content">
+                    <h5 class="card-title">IHG</h5>
+                    <p class="card-text">La nostra partnership con InterContinental Hotels Group (IHG), uno dei principali
+                        gruppi alberghieri al mondo, ci consente di offrire ai nostri clienti un'ampia gamma di opzioni di
+                        alloggio di alta qualità. Con marchi rinomati come InterContinental, Crowne Plaza e Holiday Inn, IHG
+                        offre soluzioni di alloggio che soddisfano diverse esigenze e preferenze di viaggio. Che si tratti di
+                        viaggi d'affari o di piacere, i nostri clienti possono contare su comfort, servizio eccellente e
+                        strutture moderne grazie alla collaborazione con IHG.</p>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="img Partner/Viator.png" class="card-img-top" alt="Viator">
-            <div class="card-body">
-              <h5 class="card-title">Viator</h5>
-              <p class="card-text">Viator, una piattaforma leader per la prenotazione di tour e attività turistiche, è una delle nostre aziende-partner. Offrono una vasta gamma di esperienze in tutto il mondo, dai tour guidati ai biglietti per attrazioni, escursioni giornaliere e attività speciali. La piattaforma di Viator permette ai nostri clienti di scoprire e prenotare facilmente le migliori esperienze nella loro destinazione, arricchendo ulteriormente le loro avventure con noi.</p>
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <img src="img Partner/Viator.png" class="card-img-top" alt="Viator">
+                <div class="card-body card-content">
+                    <h5 class="card-title">Viator</h5>
+                    <p class="card-text">Viator, una delle principali piattaforme di prenotazione di tour e attività nel
+                        mondo, è uno dei nostri partner chiave. Questa collaborazione ci permette di offrire ai nostri clienti
+                        un'ampia selezione di esperienze uniche e indimenticabili in varie destinazioni. Dai tour guidati ai
+                        biglietti per attrazioni, Viator arricchisce il nostro portafoglio di servizi, garantendo che i nostri
+                        clienti possano vivere al meglio ogni destinazione, con attività attentamente selezionate e prenotabili
+                        in anticipo.</p>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="img Partner/Booking3.jpg" class="card-img-top" alt="Booking">
-            <div class="card-body">
-              <h5 class="card-title">Booking</h5>
-              <p class="card-text">Booking.com, una delle piattaforme di prenotazione viaggi più popolari e complete al mondo, è un nostro partner strategico. Offrono un'ampia gamma di alloggi, inclusi hotel, appartamenti, case vacanza e B&B, oltre a servizi aggiuntivi come voli, noleggio auto e pacchetti vacanze. Booking.com è conosciuta per la sua facilità d'uso, la vasta scelta di opzioni e le recensioni dettagliate dei clienti, caratteristiche che migliorano l'esperienza di prenotazione per i nostri clienti.</p>
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <img src="img Partner/Booking3.jpg" class="card-img-top" alt="Booking">
+                <div class="card-body card-content">
+                    <h5 class="card-title">Booking</h5>
+                    <p class="card-text">Siamo orgogliosi di collaborare con Booking.com, una delle più grandi piattaforme di
+                        prenotazione online al mondo. Grazie a questa partnership, i nostri clienti hanno accesso a milioni di
+                        strutture ricettive in tutto il mondo, dai lussuosi resort agli accoglienti bed & breakfast. La
+                        collaborazione con Booking.com ci consente di offrire ai nostri clienti tariffe competitive, opzioni
+                        flessibili di prenotazione e recensioni verificate, garantendo così una scelta informata e sicura per
+                        il loro soggiorno.</p>
+                </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-
     <script src="js/footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>
